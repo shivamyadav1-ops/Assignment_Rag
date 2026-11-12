@@ -1,0 +1,43 @@
+{
+  "started_at": "2026-11-12T09:38:16.869527+00:00",
+  "finished_at": "2026-11-12T09:38:18.604802+00:00",
+  "elapsed_seconds": 1.74,
+  "policies": {
+    "chunks_file": "/home/unthinkable-lap/Project_Rag/data/processed/chunks.jsonl",
+    "total_chunks": 427,
+    "chunks_by_source": {
+      "account_security_privacy.md": 39,
+      "ftc_mail_order_rule_16cfr435.xml": 13,
+      "gift_cards_promotions.md": 37,
+      "international_shipping.html": 19,
+      "membership_terms.html": 11,
+      "order_management_faq.html": 7,
+      "payment_billing_policy.md": 30,
+      "price_match_policy.pdf": 27,
+      "product_category_guide.pdf": 43,
+      "return_policy.pdf": 37,
+      "seasonal_holiday_policy.md": 29,
+      "shipping_faq.html": 18,
+      "store_services.md": 36,
+      "troubleshooting_guide.pdf": 41,
+      "warranty_terms.md": 40
+    },
+    "chunks_by_type": {
+      "text": 161,
+      "table": 37,
+      "table_row": 229
+    },
+    "table_chunks": 266,
+    "total_tokens": 46519,
+    "avg_tokens_per_chunk": 108,
+    "min_tokens": 32,
+    "max_tokens": 587
+  },
+  "operational": {
+    "db_path": "postgresql+psycopg://***@localhost:5434/retail_support_agent",
+    "customers": 50,
+    "orders": 200,
+    "returns": 35,
+    "warnings": []
+  }
+}

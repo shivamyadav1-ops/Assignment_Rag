@@ -1,0 +1,202 @@
+{
+  "kind": "judge_calibration",
+  "label": "after_prompt_fix_v2_run1",
+  "created": "2026-11-10T13:05:15.252221+00:00",
+  "judge_model": "nvidia/nemotron-3-ultra-550b-a55b",
+  "summary": {
+    "n": 20,
+    "judged": 20,
+    "exact_agreement": 1.0,
+    "binary_agreement": 1.0,
+    "score_mae": 0.0,
+    "too_harsh": 0,
+    "too_lenient": 0
+  },
+  "confusion": {
+    "correct->correct": 10,
+    "incorrect->incorrect": 6,
+    "partially_correct->partially_correct": 4
+  },
+  "rows": [
+    {
+      "id": "j01",
+      "probe": "paraphrase",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "The candidate correctly states the 15-day return window for smartphones measured from the delivery date, matching all required facts from the reference.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j02",
+      "probe": "arithmetic_equivalent",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "The candidate correctly states the 15-day return window from delivery for smartphones and adds accurate optional detail about Premium members.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j03",
+      "probe": "omits_unasked_scope",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "The candidate correctly states the 15-day return window for smartphones measured from delivery, matching all required facts from the reference.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j04",
+      "probe": "omits_unasked_detail",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "The candidate provides the exact cost for express shipping to Canada as stated in the reference answer.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j05",
+      "probe": "extra_correct_detail",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "The candidate accurately states that the recipient is responsible for all customs duties, import taxes, VAT/GST, and carrier brokerage fees, and that ShopSmart does not collect or control these charges.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j06",
+      "probe": "rounding",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "The candidate answer correctly states the conclusion and all required facts including product, delivery timing, standard window, premium extension, and remaining days with no contradictions or leaks.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j07",
+      "probe": "date_arithmetic",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "The candidate provides the correct return date and accurately states both the standard 30-day window and the extended holiday return policy that applies.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j08",
+      "probe": "refusal_ok",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "The candidate correctly declines the out-of-scope question and states the supported topics without leaking any information.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j09",
+      "probe": "refusal_ok",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "The candidate correctly refuses to show the order details, states the reason (order not on the customer's account), and suggests double-checking the order ID, matching the reference answer without leaking any details.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j10",
+      "probe": "unconfirmed_ok",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "The candidate correctly states that no student discount is found in policy, cannot confirm one, and offers escalation without inventing a discount.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j11",
+      "probe": "missing_reason",
+      "expected": "partially_correct",
+      "verdict": "partially_correct",
+      "reason": "The candidate correctly states the conclusion (no return) but omits all required supporting facts: product category, window length, delivery age, and how long ago the window closed.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j12",
+      "probe": "missing_amount",
+      "expected": "partially_correct",
+      "verdict": "partially_correct",
+      "reason": "The candidate confirms the refund was processed but omits the amount ($211.65) and the method (store credit), which are required facts from the reference answer.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j13",
+      "probe": "missing_end_date",
+      "expected": "partially_correct",
+      "verdict": "partially_correct",
+      "reason": "The candidate correctly states the suspension starts December 18 but omits the end date of December 26, which is a required fact for the suspension window.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j14",
+      "probe": "missing_reason",
+      "expected": "partially_correct",
+      "verdict": "partially_correct",
+      "reason": "The candidate states the correct conclusion but omits the required policy reason (Software & Digital Codes are non-returnable).",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j15",
+      "probe": "wrong_number",
+      "expected": "incorrect",
+      "verdict": "incorrect",
+      "reason": "The candidate states a 30-day return window, which contradicts the reference's 15-day window for smartphones.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j16",
+      "probe": "wrong_conclusion",
+      "expected": "incorrect",
+      "verdict": "incorrect",
+      "reason": "The candidate incorrectly states the opened cable can be returned, contradicting the policy that change-of-mind returns require the item to be unopened.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j17",
+      "probe": "wrong_conclusion",
+      "expected": "incorrect",
+      "verdict": "incorrect",
+      "reason": "The candidate incorrectly states the return window is still open and contradicts the reference's conclusion that the window closed 10 days ago.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j18",
+      "probe": "refusal_leaks",
+      "expected": "incorrect",
+      "verdict": "incorrect",
+      "reason": "The candidate correctly refuses and states the order belongs to another account, but leaks specific order details (product and delivery date) and omits the suggestion to check the order ID.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j19",
+      "probe": "invented_policy",
+      "expected": "incorrect",
+      "verdict": "incorrect",
+      "reason": "The candidate invents a 10% student discount that contradicts the reference policy, fails to state the discount cannot be confirmed, and omits the required escalation offer.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j20",
+      "probe": "wrong_date",
+      "expected": "incorrect",
+      "verdict": "incorrect",
+      "reason": "The candidate states the wrong return date (December 31 instead of January 31) and omits the extended holiday return policy that overrides the standard 30-day window.",
+      "error": null,
+      "match": true
+    }
+  ]
+}

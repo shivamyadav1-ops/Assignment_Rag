@@ -1,0 +1,343 @@
+{
+  "description": "Golden retrieval set with chunk-level graded relevance labels (pooled from dense/BM25 top-10 and hybrid top-20, graded 0/1/2 by an LLM judge).",
+  "version": 1,
+  "created": "2026-11-11T07:05:40.656667+00:00",
+  "synthetic": true,
+  "corpus": {
+    "chunks": 403,
+    "documents": 14,
+    "chunks_path": "data/processed/chunks.jsonl"
+  },
+  "labelling": {
+    "judge_model": "nvidia/nemotron-3-ultra-550b-a55b",
+    "pool_depths": {
+      "dense": 10,
+      "bm25": 10,
+      "hybrid": 20
+    },
+    "relevance": "grade 2 = answer-bearing"
+  },
+  "stats": {
+    "queries": 0,
+    "by_kind": {},
+    "by_origin": {},
+    "answerable": 0,
+    "relevant_per_query_mean": 0.0,
+    "dropped": 78
+  },
+  "dropped": [
+    {
+      "id": "h_q01",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q02",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q03",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q04",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q05",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q06",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q07",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q08",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q09",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q10",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q11",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q12",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q13",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q14",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q15",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q16",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q17",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q18",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q19",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q20",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q21",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q22",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q23",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q24",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q25",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q26",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q27",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q28",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q29",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q30",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q31",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q32",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q33",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q34",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q35",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "h_q36",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s001",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s002",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s003",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s004",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s005",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s006",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s007",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s008",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s009",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s010",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s011",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s012",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s013",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s014",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s015",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s016",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s017",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s018",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s019",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s020",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s021",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s022",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s023",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s024",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s025",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s026",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s027",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s028",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s029",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s030",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s031",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s032",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s033",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s034",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s035",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "s036",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "oos01",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "oos02",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "oos03",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "oos04",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "oos05",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    },
+    {
+      "id": "oos06",
+      "why": "grading failed: no grades (timeout or judge failure)"
+    }
+  ],
+  "queries": []
+}

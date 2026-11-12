@@ -1,0 +1,860 @@
+{
+  "label": "cap20",
+  "created": "2026-11-10T12:30:08.691140+00:00",
+  "k": 7,
+  "config": {
+    "dense_model": "BAAI/bge-small-en-v1.5",
+    "sparse_model": "Qdrant/bm25",
+    "reranker_model": "BAAI/bge-reranker-base",
+    "rrf_k": 60,
+    "retrieval_top_k": 20,
+    "rrf_limit": 15,
+    "max_rerank_candidates": 20,
+    "indexed_points": 321
+  },
+  "modes": {
+    "full": {
+      "summary": {
+        "n": 36,
+        "doc_hit@1": 0.861,
+        "doc_hit@3": 1.0,
+        "doc_hit@7": 1.0,
+        "doc_mrr": 0.921,
+        "doc_ndcg@7": 0.941,
+        "evidence_n": 17,
+        "latency_ms_mean": 12844.0,
+        "latency_ms_p95": 14754.7,
+        "evidence_hit@1": 0.882,
+        "evidence_hit@7": 1.0,
+        "evidence_mrr": 0.926
+      },
+      "by_kind": {
+        "aggregate": {
+          "n": 1,
+          "doc_hit@1": 1.0,
+          "doc_hit@3": 1.0,
+          "doc_hit@7": 1.0,
+          "doc_mrr": 1.0,
+          "doc_ndcg@7": 1.0,
+          "evidence_n": 1,
+          "latency_ms_mean": 12298.5,
+          "latency_ms_p95": 12298.5,
+          "evidence_hit@1": 0.0,
+          "evidence_hit@7": 1.0,
+          "evidence_mrr": 0.5
+        },
+        "paraphrase": {
+          "n": 5,
+          "doc_hit@1": 1.0,
+          "doc_hit@3": 1.0,
+          "doc_hit@7": 1.0,
+          "doc_mrr": 1.0,
+          "doc_ndcg@7": 1.0,
+          "evidence_n": 5,
+          "latency_ms_mean": 12873.2,
+          "latency_ms_p95": 13645.8,
+          "evidence_hit@1": 1.0,
+          "evidence_hit@7": 1.0,
+          "evidence_mrr": 1.0
+        },
+        "prose": {
+          "n": 23,
+          "doc_hit@1": 0.783,
+          "doc_hit@3": 1.0,
+          "doc_hit@7": 1.0,
+          "doc_mrr": 0.877,
+          "doc_ndcg@7": 0.908,
+          "evidence_n": 4,
+          "latency_ms_mean": 13082.9,
+          "latency_ms_p95": 14612.1,
+          "evidence_hit@1": 1.0,
+          "evidence_hit@7": 1.0,
+          "evidence_mrr": 1.0
+        },
+        "table": {
+          "n": 7,
+          "doc_hit@1": 1.0,
+          "doc_hit@3": 1.0,
+          "doc_hit@7": 1.0,
+          "doc_mrr": 1.0,
+          "doc_ndcg@7": 1.0,
+          "evidence_n": 7,
+          "latency_ms_mean": 12116.0,
+          "latency_ms_p95": 14754.7,
+          "evidence_hit@1": 0.857,
+          "evidence_hit@7": 1.0,
+          "evidence_mrr": 0.893
+        }
+      },
+      "questions": [
+        {
+          "id": "q01",
+          "kind": "prose",
+          "query": "What happens if the recipient refuses to pay customs duties?",
+          "expected_sources": [
+            "international_shipping.html"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": 1,
+          "evidence_labelled": true,
+          "latency_ms": 16150.9,
+          "top": [
+            "international_shipping.html#0:text",
+            "shipping_faq.html#2:text",
+            "return_policy.pdf#2:text",
+            "international_shipping.html#14:table_row",
+            "membership_terms.html#3:text",
+            "international_shipping.html#1:text",
+            "international_shipping.html#10:table"
+          ]
+        },
+        {
+          "id": "q02",
+          "kind": "prose",
+          "query": "How do international returns work?",
+          "expected_sources": [
+            "international_shipping.html"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": 1,
+          "evidence_labelled": true,
+          "latency_ms": 14452.9,
+          "top": [
+            "international_shipping.html#1:text",
+            "international_shipping.html#9:table_row",
+            "return_policy.pdf#2:text",
+            "international_shipping.html#2:text",
+            "international_shipping.html#14:table_row",
+            "international_shipping.html#11:table_row",
+            "international_shipping.html#12:table_row"
+          ]
+        },
+        {
+          "id": "q03",
+          "kind": "prose",
+          "query": "My order arrived damaged. What do I do?",
+          "expected_sources": [
+            "shipping_faq.html"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": null,
+          "evidence_labelled": false,
+          "latency_ms": 13813.4,
+          "top": [
+            "shipping_faq.html#2:text",
+            "shipping_faq.html#1:text",
+            "order_management_faq.html#3:text",
+            "troubleshooting_guide.pdf#5:table",
+            "order_management_faq.html#2:text",
+            "troubleshooting_guide.pdf#8:table_row",
+            "return_policy.pdf#1:text"
+          ]
+        },
+        {
+          "id": "q04",
+          "kind": "prose",
+          "query": "Can I change or cancel my order after placing it?",
+          "expected_sources": [
+            "shipping_faq.html"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": null,
+          "evidence_labelled": false,
+          "latency_ms": 12728.9,
+          "top": [
+            "shipping_faq.html#0:text",
+            "order_management_faq.html#1:text",
+            "order_management_faq.html#0:text",
+            "shipping_faq.html#1:text",
+            "shipping_faq.html#2:text",
+            "order_management_faq.html#4:text",
+            "order_management_faq.html#3:text"
+          ]
+        },
+        {
+          "id": "q05",
+          "kind": "prose",
+          "query": "Why was my order cancelled without my request?",
+          "expected_sources": [
+            "order_management_faq.html"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": null,
+          "evidence_labelled": false,
+          "latency_ms": 13759.3,
+          "top": [
+            "order_management_faq.html#0:text",
+            "shipping_faq.html#1:text",
+            "seasonal_holiday_policy.md#3:text",
+            "shipping_faq.html#0:text",
+            "order_management_faq.html#2:text",
+            "order_management_faq.html#1:text",
+            "seasonal_holiday_policy.md#2:text"
+          ]
+        },
+        {
+          "id": "q06",
+          "kind": "prose",
+          "query": "What is a backorder?",
+          "expected_sources": [
+            "order_management_faq.html"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": null,
+          "evidence_labelled": false,
+          "latency_ms": 13007.8,
+          "top": [
+            "order_management_faq.html#1:text",
+            "order_management_faq.html#2:text",
+            "seasonal_holiday_policy.md#2:text",
+            "seasonal_holiday_policy.md#1:text",
+            "seasonal_holiday_policy.md#3:text",
+            "order_management_faq.html#3:text",
+            "shipping_faq.html#1:text"
+          ]
+        },
+        {
+          "id": "q07",
+          "kind": "prose",
+          "query": "One box arrived but the other is missing. What should I do?",
+          "expected_sources": [
+            "order_management_faq.html"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": null,
+          "evidence_labelled": false,
+          "latency_ms": 11810.9,
+          "top": [
+            "order_management_faq.html#3:text",
+            "shipping_faq.html#1:text",
+            "shipping_faq.html#2:text",
+            "order_management_faq.html#2:text",
+            "troubleshooting_guide.pdf#6:table_row",
+            "troubleshooting_guide.pdf#5:table",
+            "return_policy.pdf#1:text"
+          ]
+        },
+        {
+          "id": "q08",
+          "kind": "prose",
+          "query": "What extended return window do Premium members get?",
+          "expected_sources": [
+            "membership_terms.html",
+            "return_policy.pdf"
+          ],
+          "doc_rank": 2,
+          "evidence_rank": null,
+          "evidence_labelled": false,
+          "latency_ms": 12698.6,
+          "top": [
+            "seasonal_holiday_policy.md#0:text",
+            "membership_terms.html#0:text",
+            "membership_terms.html#1:text",
+            "membership_terms.html#3:text",
+            "return_policy.pdf#0:text",
+            "seasonal_holiday_policy.md#1:text",
+            "membership_terms.html#2:text"
+          ]
+        },
+        {
+          "id": "q09",
+          "kind": "prose",
+          "query": "How long does a refund take to appear on my statement?",
+          "expected_sources": [
+            "payment_billing_policy.md"
+          ],
+          "doc_rank": 3,
+          "evidence_rank": null,
+          "evidence_labelled": false,
+          "latency_ms": 14521.6,
+          "top": [
+            "return_policy.pdf#24:table_row",
+            "order_management_faq.html#3:text",
+            "payment_billing_policy.md#0:text",
+            "return_policy.pdf#19:table_row",
+            "return_policy.pdf#20:table_row",
+            "troubleshooting_guide.pdf#5:table",
+            "order_management_faq.html#0:text"
+          ]
+        },
+        {
+          "id": "q10",
+          "kind": "prose",
+          "query": "What deductions apply to a partial refund?",
+          "expected_sources": [
+            "payment_billing_policy.md"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": null,
+          "evidence_labelled": false,
+          "latency_ms": 11929.1,
+          "top": [
+            "payment_billing_policy.md#1:text",
+            "gift_cards_promotions.md#1:text",
+            "return_policy.pdf#0:text",
+            "international_shipping.html#0:text",
+            "payment_billing_policy.md#2:text",
+            "order_management_faq.html#0:text",
+            "return_policy.pdf#1:text"
+          ]
+        },
+        {
+          "id": "q11",
+          "kind": "prose",
+          "query": "Which retailers are approved for price matching?",
+          "expected_sources": [
+            "price_match_policy.pdf"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": null,
+          "evidence_labelled": false,
+          "latency_ms": 12397.3,
+          "top": [
+            "price_match_policy.pdf#11:table_row",
+            "price_match_policy.pdf#8:table",
+            "price_match_policy.pdf#13:table_row",
+            "price_match_policy.pdf#9:table_row",
+            "price_match_policy.pdf#10:table_row",
+            "price_match_policy.pdf#12:table_row",
+            "price_match_policy.pdf#14:table_row"
+          ]
+        },
+        {
+          "id": "q12",
+          "kind": "prose",
+          "query": "What is the Dead on Arrival policy?",
+          "expected_sources": [
+            "return_policy.pdf"
+          ],
+          "doc_rank": 2,
+          "evidence_rank": null,
+          "evidence_labelled": false,
+          "latency_ms": 12396.5,
+          "top": [
+            "shipping_faq.html#2:text",
+            "return_policy.pdf#1:text",
+            "seasonal_holiday_policy.md#0:text",
+            "payment_billing_policy.md#2:text",
+            "troubleshooting_guide.pdf#6:table_row",
+            "payment_billing_policy.md#1:text",
+            "troubleshooting_guide.pdf#5:table"
+          ]
+        },
+        {
+          "id": "q13",
+          "kind": "prose",
+          "query": "Noise cancellation is not working on my headphones",
+          "expected_sources": [
+            "troubleshooting_guide.pdf"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": null,
+          "evidence_labelled": false,
+          "latency_ms": 12084.2,
+          "top": [
+            "troubleshooting_guide.pdf#0:text",
+            "troubleshooting_guide.pdf#2:text",
+            "troubleshooting_guide.pdf#1:text",
+            "product_category_guide.pdf#18:table",
+            "return_policy.pdf#7:table_row",
+            "product_category_guide.pdf#20:table_row",
+            "store_services.md#2:text"
+          ]
+        },
+        {
+          "id": "q14",
+          "kind": "prose",
+          "query": "My screen is flickering and showing artifacts",
+          "expected_sources": [
+            "troubleshooting_guide.pdf"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": null,
+          "evidence_labelled": false,
+          "latency_ms": 14443.4,
+          "top": [
+            "troubleshooting_guide.pdf#1:text",
+            "troubleshooting_guide.pdf#2:text",
+            "troubleshooting_guide.pdf#0:text",
+            "return_policy.pdf#1:text",
+            "troubleshooting_guide.pdf#24:table_row",
+            "troubleshooting_guide.pdf#3:text",
+            "troubleshooting_guide.pdf#10:table_row"
+          ]
+        },
+        {
+          "id": "q15",
+          "kind": "prose",
+          "query": "My device is not charging",
+          "expected_sources": [
+            "troubleshooting_guide.pdf"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": null,
+          "evidence_labelled": false,
+          "latency_ms": 12902.7,
+          "top": [
+            "troubleshooting_guide.pdf#2:text",
+            "troubleshooting_guide.pdf#1:text",
+            "troubleshooting_guide.pdf#0:text",
+            "store_services.md#1:text",
+            "troubleshooting_guide.pdf#3:text",
+            "troubleshooting_guide.pdf#6:table_row",
+            "product_category_guide.pdf#18:table"
+          ]
+        },
+        {
+          "id": "q16",
+          "kind": "prose",
+          "query": "What actions void the warranty?",
+          "expected_sources": [
+            "warranty_terms.md"
+          ],
+          "doc_rank": 3,
+          "evidence_rank": null,
+          "evidence_labelled": false,
+          "latency_ms": 12817.5,
+          "top": [
+            "troubleshooting_guide.pdf#3:text",
+            "troubleshooting_guide.pdf#4:text",
+            "warranty_terms.md#2:text",
+            "troubleshooting_guide.pdf#11:table_row",
+            "troubleshooting_guide.pdf#2:text",
+            "order_management_faq.html#3:text",
+            "troubleshooting_guide.pdf#1:text"
+          ]
+        },
+        {
+          "id": "q17",
+          "kind": "prose",
+          "query": "What can be returned in store?",
+          "expected_sources": [
+            "store_services.md"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": null,
+          "evidence_labelled": false,
+          "latency_ms": 14612.1,
+          "top": [
+            "store_services.md#0:text",
+            "seasonal_holiday_policy.md#1:text",
+            "store_services.md#1:text",
+            "payment_billing_policy.md#1:text",
+            "return_policy.pdf#0:text",
+            "gift_cards_promotions.md#1:text",
+            "return_policy.pdf#2:text"
+          ]
+        },
+        {
+          "id": "q18",
+          "kind": "prose",
+          "query": "Do you offer loaner devices during a repair?",
+          "expected_sources": [
+            "store_services.md",
+            "warranty_terms.md"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": null,
+          "evidence_labelled": false,
+          "latency_ms": 12605.9,
+          "top": [
+            "store_services.md#3:text",
+            "warranty_terms.md#2:text",
+            "warranty_terms.md#13:table_row",
+            "warranty_terms.md#3:table",
+            "warranty_terms.md#1:text",
+            "troubleshooting_guide.pdf#4:text",
+            "troubleshooting_guide.pdf#2:text"
+          ]
+        },
+        {
+          "id": "q19",
+          "kind": "prose",
+          "query": "Are refunds ever paid onto a gift card?",
+          "expected_sources": [
+            "gift_cards_promotions.md"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": null,
+          "evidence_labelled": false,
+          "latency_ms": 11990.3,
+          "top": [
+            "gift_cards_promotions.md#0:text",
+            "gift_cards_promotions.md#1:text",
+            "payment_billing_policy.md#1:text",
+            "return_policy.pdf#23:table_row",
+            "seasonal_holiday_policy.md#1:text",
+            "payment_billing_policy.md#0:text",
+            "price_match_policy.pdf#1:text"
+          ]
+        },
+        {
+          "id": "q20",
+          "kind": "prose",
+          "query": "How do loyalty points work?",
+          "expected_sources": [
+            "gift_cards_promotions.md"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": null,
+          "evidence_labelled": false,
+          "latency_ms": 13312.7,
+          "top": [
+            "gift_cards_promotions.md#2:text",
+            "price_match_policy.pdf#2:text",
+            "product_category_guide.pdf#0:text",
+            "gift_cards_promotions.md#28:table_row",
+            "gift_cards_promotions.md#1:text",
+            "gift_cards_promotions.md#31:table_row",
+            "gift_cards_promotions.md#29:table_row"
+          ]
+        },
+        {
+          "id": "q21",
+          "kind": "prose",
+          "query": "Can support disclose details of an order I do not own?",
+          "expected_sources": [
+            "account_security_privacy.md"
+          ],
+          "doc_rank": 2,
+          "evidence_rank": null,
+          "evidence_labelled": false,
+          "latency_ms": 11899.5,
+          "top": [
+            "seasonal_holiday_policy.md#1:text",
+            "account_security_privacy.md#0:text",
+            "order_management_faq.html#3:text",
+            "account_security_privacy.md#4:table",
+            "account_security_privacy.md#2:text",
+            "account_security_privacy.md#11:table_row",
+            "account_security_privacy.md#1:text"
+          ]
+        },
+        {
+          "id": "q22",
+          "kind": "prose",
+          "query": "When are Next-Day delivery guarantees suspended?",
+          "expected_sources": [
+            "seasonal_holiday_policy.md"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": 1,
+          "evidence_labelled": true,
+          "latency_ms": 11833.2,
+          "top": [
+            "seasonal_holiday_policy.md#1:text",
+            "seasonal_holiday_policy.md#2:text",
+            "seasonal_holiday_policy.md#13:table_row",
+            "seasonal_holiday_policy.md#10:table",
+            "order_management_faq.html#0:text",
+            "payment_billing_policy.md#2:text",
+            "payment_billing_policy.md#3:text"
+          ]
+        },
+        {
+          "id": "q23",
+          "kind": "prose",
+          "query": "Is a gaming headset an Audio product or a Gaming Accessory?",
+          "expected_sources": [
+            "product_category_guide.pdf"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": 1,
+          "evidence_labelled": true,
+          "latency_ms": 12738.6,
+          "top": [
+            "product_category_guide.pdf#2:text",
+            "product_category_guide.pdf#18:table",
+            "product_category_guide.pdf#1:text",
+            "product_category_guide.pdf#19:table_row",
+            "return_policy.pdf#4:table",
+            "product_category_guide.pdf#0:text",
+            "product_category_guide.pdf#30:table_row"
+          ]
+        },
+        {
+          "id": "q24",
+          "kind": "table",
+          "query": "What is the return window for smartphones and tablets?",
+          "expected_sources": [
+            "product_category_guide.pdf",
+            "return_policy.pdf"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": 1,
+          "evidence_labelled": true,
+          "latency_ms": 12274.4,
+          "top": [
+            "return_policy.pdf#5:table_row",
+            "product_category_guide.pdf#5:table_row",
+            "product_category_guide.pdf#0:text",
+            "product_category_guide.pdf#1:text",
+            "seasonal_holiday_policy.md#0:text",
+            "return_policy.pdf#4:table",
+            "gift_cards_promotions.md#3:text"
+          ]
+        },
+        {
+          "id": "q25",
+          "kind": "paraphrase",
+          "query": "What is the return window for a smartphone?",
+          "expected_sources": [
+            "product_category_guide.pdf",
+            "return_policy.pdf"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": 1,
+          "evidence_labelled": true,
+          "latency_ms": 13645.8,
+          "top": [
+            "return_policy.pdf#5:table_row",
+            "seasonal_holiday_policy.md#0:text",
+            "product_category_guide.pdf#5:table_row",
+            "product_category_guide.pdf#0:text",
+            "gift_cards_promotions.md#3:text",
+            "seasonal_holiday_policy.md#1:text",
+            "product_category_guide.pdf#1:text"
+          ]
+        },
+        {
+          "id": "q26",
+          "kind": "paraphrase",
+          "query": "How many days do I get to send back a laptop?",
+          "expected_sources": [
+            "product_category_guide.pdf",
+            "return_policy.pdf"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": 1,
+          "evidence_labelled": true,
+          "latency_ms": 12944.4,
+          "top": [
+            "return_policy.pdf#4:table",
+            "return_policy.pdf#6:table_row",
+            "return_policy.pdf#14:table_row",
+            "return_policy.pdf#11:table_row",
+            "product_category_guide.pdf#0:text",
+            "return_policy.pdf#15:table_row",
+            "return_policy.pdf#12:table_row"
+          ]
+        },
+        {
+          "id": "q27",
+          "kind": "paraphrase",
+          "query": "Is there a restocking fee if I return an opened 65-inch TV?",
+          "expected_sources": [
+            "product_category_guide.pdf",
+            "return_policy.pdf",
+            "seasonal_holiday_policy.md"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": 1,
+          "evidence_labelled": true,
+          "latency_ms": 12367.5,
+          "top": [
+            "product_category_guide.pdf#1:text",
+            "return_policy.pdf#1:text",
+            "product_category_guide.pdf#0:text",
+            "product_category_guide.pdf#3:text",
+            "return_policy.pdf#2:text",
+            "payment_billing_policy.md#1:text",
+            "product_category_guide.pdf#8:table_row"
+          ]
+        },
+        {
+          "id": "q28",
+          "kind": "table",
+          "query": "How long is the return window for cables, and do they need to be unopened?",
+          "expected_sources": [
+            "product_category_guide.pdf",
+            "return_policy.pdf"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": 1,
+          "evidence_labelled": true,
+          "latency_ms": 14754.7,
+          "top": [
+            "return_policy.pdf#15:table_row",
+            "product_category_guide.pdf#3:text",
+            "return_policy.pdf#4:table",
+            "product_category_guide.pdf#15:table_row",
+            "return_policy.pdf#10:table_row",
+            "return_policy.pdf#8:table_row",
+            "return_policy.pdf#5:table_row"
+          ]
+        },
+        {
+          "id": "q29",
+          "kind": "table",
+          "query": "How much does express shipping to Canada cost?",
+          "expected_sources": [
+            "international_shipping.html",
+            "shipping_faq.html"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": 1,
+          "evidence_labelled": true,
+          "latency_ms": 8667.2,
+          "top": [
+            "international_shipping.html#4:table_row",
+            "international_shipping.html#8:table_row",
+            "international_shipping.html#9:table_row",
+            "international_shipping.html#6:table_row",
+            "international_shipping.html#7:table_row",
+            "international_shipping.html#5:table_row",
+            "shipping_faq.html#10:table_row"
+          ]
+        },
+        {
+          "id": "q30",
+          "kind": "table",
+          "query": "How long does standard shipping to Asia Pacific take?",
+          "expected_sources": [
+            "international_shipping.html"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": 4,
+          "evidence_labelled": true,
+          "latency_ms": 11974.4,
+          "top": [
+            "international_shipping.html#8:table_row",
+            "international_shipping.html#9:table_row",
+            "international_shipping.html#6:table_row",
+            "international_shipping.html#7:table_row",
+            "shipping_faq.html#12:table_row",
+            "shipping_faq.html#9:table",
+            "shipping_faq.html#11:table_row"
+          ]
+        },
+        {
+          "id": "q31",
+          "kind": "table",
+          "query": "What is the last order date for standard shipping to arrive by December 24?",
+          "expected_sources": [
+            "seasonal_holiday_policy.md"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": 1,
+          "evidence_labelled": true,
+          "latency_ms": 12265.7,
+          "top": [
+            "seasonal_holiday_policy.md#11:table_row",
+            "seasonal_holiday_policy.md#13:table_row",
+            "seasonal_holiday_policy.md#12:table_row",
+            "seasonal_holiday_policy.md#10:table",
+            "seasonal_holiday_policy.md#14:table_row",
+            "shipping_faq.html#0:text",
+            "seasonal_holiday_policy.md#0:text"
+          ]
+        },
+        {
+          "id": "q32",
+          "kind": "table",
+          "query": "How quickly does live chat respond to Premium members during the holiday peak?",
+          "expected_sources": [
+            "seasonal_holiday_policy.md"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": 1,
+          "evidence_labelled": true,
+          "latency_ms": 12404.0,
+          "top": [
+            "seasonal_holiday_policy.md#16:table_row",
+            "seasonal_holiday_policy.md#15:table",
+            "membership_terms.html#1:text",
+            "seasonal_holiday_policy.md#18:table_row",
+            "seasonal_holiday_policy.md#17:table_row",
+            "seasonal_holiday_policy.md#1:text",
+            "seasonal_holiday_policy.md#2:text"
+          ]
+        },
+        {
+          "id": "q33",
+          "kind": "aggregate",
+          "query": "Which product categories cannot be returned at all?",
+          "expected_sources": [
+            "product_category_guide.pdf",
+            "return_policy.pdf"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": 2,
+          "evidence_labelled": true,
+          "latency_ms": 12298.5,
+          "top": [
+            "return_policy.pdf#17:table_row",
+            "return_policy.pdf#16:table_row",
+            "product_category_guide.pdf#17:table_row",
+            "product_category_guide.pdf#0:text",
+            "product_category_guide.pdf#16:table_row",
+            "product_category_guide.pdf#3:text",
+            "return_policy.pdf#8:table_row"
+          ]
+        },
+        {
+          "id": "q34",
+          "kind": "table",
+          "query": "Does ShopSmart reimburse return shipping on a defective international return?",
+          "expected_sources": [
+            "international_shipping.html"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": 1,
+          "evidence_labelled": true,
+          "latency_ms": 12471.8,
+          "top": [
+            "international_shipping.html#11:table_row",
+            "return_policy.pdf#2:text",
+            "international_shipping.html#10:table",
+            "international_shipping.html#1:text",
+            "international_shipping.html#0:text",
+            "shipping_faq.html#2:text",
+            "international_shipping.html#14:table_row"
+          ]
+        },
+        {
+          "id": "q35",
+          "kind": "paraphrase",
+          "query": "If I bought a smartphone on November 20, until when can I return it?",
+          "expected_sources": [
+            "seasonal_holiday_policy.md",
+            "return_policy.pdf"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": 1,
+          "evidence_labelled": true,
+          "latency_ms": 12675.2,
+          "top": [
+            "seasonal_holiday_policy.md#0:text",
+            "seasonal_holiday_policy.md#1:text",
+            "return_policy.pdf#5:table_row",
+            "seasonal_holiday_policy.md#5:table_row",
+            "return_policy.pdf#0:text",
+            "product_category_guide.pdf#5:table_row",
+            "product_category_guide.pdf#1:text"
+          ]
+        },
+        {
+          "id": "q36",
+          "kind": "paraphrase",
+          "query": "Is a soundbar counted as a TV product for returns?",
+          "expected_sources": [
+            "product_category_guide.pdf"
+          ],
+          "doc_rank": 1,
+          "evidence_rank": 1,
+          "evidence_labelled": true,
+          "latency_ms": 12733.3,
+          "top": [
+            "product_category_guide.pdf#1:text",
+            "product_category_guide.pdf#20:table_row",
+            "product_category_guide.pdf#0:text",
+            "return_policy.pdf#8:table_row",
+            "troubleshooting_guide.pdf#2:text",
+            "product_category_guide.pdf#2:text",
+            "return_policy.pdf#7:table_row"
+          ]
+        }
+      ]
+    }
+  }
+}

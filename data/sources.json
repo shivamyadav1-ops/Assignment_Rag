@@ -1,0 +1,170 @@
+{
+  "description": "Provenance registry for every file under data/raw/. Read by the chunker (synthetic flag per chunk) and scripts/generate_manifest.py. Public entries are written by scripts/fetch_public_sources.py.",
+  "sources": {
+    "operational/customers.csv": {
+      "origin": "synthetic",
+      "synthetic": true,
+      "license": "Synthetic; created for this assessment (no third-party rights)",
+      "generator": "scripts/generate_synthetic_data.py (random.seed(42))",
+      "title": "Synthetic customer records"
+    },
+    "operational/orders.csv": {
+      "origin": "synthetic",
+      "synthetic": true,
+      "license": "Synthetic; created for this assessment (no third-party rights)",
+      "generator": "scripts/generate_synthetic_data.py (random.seed(42))",
+      "title": "Synthetic order records"
+    },
+    "operational/returns.json": {
+      "origin": "synthetic",
+      "synthetic": true,
+      "license": "Synthetic; created for this assessment (no third-party rights)",
+      "generator": "scripts/generate_synthetic_data.py (random.seed(42))",
+      "title": "Synthetic return requests"
+    },
+    "policies/account_security_privacy.md": {
+      "origin": "synthetic",
+      "synthetic": true,
+      "license": "Synthetic; created for this assessment (no third-party rights)",
+      "generator": "Hand-authored fictional ShopSmart Electronics policy (AI-assisted); labelled SYNTHETIC in-document",
+      "title": "Account Security Privacy"
+    },
+    "policies/ftc_mail_order_rule_16cfr435.xml": {
+      "title": "16 CFR Part 435 — Mail, Internet, or Telephone Order Merchandise Rule",
+      "publisher": "U.S. Federal Trade Commission, via the Electronic Code of Federal Regulations (eCFR)",
+      "url": "https://www.ecfr.gov/api/versioner/v1/full/2026-11-09/title-16.xml?part=435",
+      "landing_page": "https://www.ecfr.gov/current/title-16/chapter-I/subchapter-D/part-435",
+      "version_date": "2026-11-09",
+      "license": "Public domain (U.S. Government work, 17 U.S.C. § 105)",
+      "format": "xml",
+      "origin": "public",
+      "synthetic": false,
+      "sha256": "0d6529d35f47448d17e2c080a9c0ed7c7d024e59a5e7b647b3f0891f90a42fc7",
+      "retrieved_at": "2026-11-12T09:28:46+00:00",
+      "fetched_by": "scripts/fetch_public_sources.py"
+    },
+    "policies/gift_cards_promotions.md": {
+      "origin": "synthetic",
+      "synthetic": true,
+      "license": "Synthetic; created for this assessment (no third-party rights)",
+      "generator": "Hand-authored fictional ShopSmart Electronics policy (AI-assisted); labelled SYNTHETIC in-document",
+      "title": "Gift Cards Promotions"
+    },
+    "policies/international_shipping.html": {
+      "origin": "synthetic",
+      "synthetic": true,
+      "license": "Synthetic; created for this assessment (no third-party rights)",
+      "generator": "Hand-authored fictional ShopSmart Electronics policy (AI-assisted); labelled SYNTHETIC in-document",
+      "title": "International Shipping"
+    },
+    "policies/membership_terms.html": {
+      "origin": "synthetic",
+      "synthetic": true,
+      "license": "Synthetic; created for this assessment (no third-party rights)",
+      "generator": "Hand-authored fictional ShopSmart Electronics policy (AI-assisted); labelled SYNTHETIC in-document",
+      "title": "Membership Terms"
+    },
+    "policies/order_management_faq.html": {
+      "origin": "synthetic",
+      "synthetic": true,
+      "license": "Synthetic; created for this assessment (no third-party rights)",
+      "generator": "Hand-authored fictional ShopSmart Electronics policy (AI-assisted); labelled SYNTHETIC in-document",
+      "title": "Order Management Faq"
+    },
+    "policies/payment_billing_policy.md": {
+      "origin": "synthetic",
+      "synthetic": true,
+      "license": "Synthetic; created for this assessment (no third-party rights)",
+      "generator": "Hand-authored fictional ShopSmart Electronics policy (AI-assisted); labelled SYNTHETIC in-document",
+      "title": "Payment Billing Policy"
+    },
+    "policies/price_match_policy.md": {
+      "origin": "synthetic",
+      "synthetic": true,
+      "license": "Synthetic; created for this assessment (no third-party rights)",
+      "generator": "Hand-authored fictional ShopSmart Electronics policy (AI-assisted); labelled SYNTHETIC in-document",
+      "title": "Price Match Policy"
+    },
+    "policies/price_match_policy.pdf": {
+      "origin": "synthetic",
+      "synthetic": true,
+      "license": "Synthetic; created for this assessment (no third-party rights)",
+      "generator": "scripts/convert_policy_to_pdf.py",
+      "derived_from": "policies/price_match_policy.md",
+      "title": "Price Match Policy (PDF edition)"
+    },
+    "policies/product_category_guide.md": {
+      "origin": "synthetic",
+      "synthetic": true,
+      "license": "Synthetic; created for this assessment (no third-party rights)",
+      "generator": "Hand-authored fictional ShopSmart Electronics policy (AI-assisted); labelled SYNTHETIC in-document",
+      "title": "Product Category Guide"
+    },
+    "policies/product_category_guide.pdf": {
+      "origin": "synthetic",
+      "synthetic": true,
+      "license": "Synthetic; created for this assessment (no third-party rights)",
+      "generator": "scripts/convert_policy_to_pdf.py",
+      "derived_from": "policies/product_category_guide.md",
+      "title": "Product Category Guide (PDF edition)"
+    },
+    "policies/return_policy.md": {
+      "origin": "synthetic",
+      "synthetic": true,
+      "license": "Synthetic; created for this assessment (no third-party rights)",
+      "generator": "Hand-authored fictional ShopSmart Electronics policy (AI-assisted); labelled SYNTHETIC in-document",
+      "title": "Return Policy"
+    },
+    "policies/return_policy.pdf": {
+      "origin": "synthetic",
+      "synthetic": true,
+      "license": "Synthetic; created for this assessment (no third-party rights)",
+      "generator": "scripts/convert_policy_to_pdf.py",
+      "derived_from": "policies/return_policy.md",
+      "title": "Return Policy (PDF edition)"
+    },
+    "policies/seasonal_holiday_policy.md": {
+      "origin": "synthetic",
+      "synthetic": true,
+      "license": "Synthetic; created for this assessment (no third-party rights)",
+      "generator": "Hand-authored fictional ShopSmart Electronics policy (AI-assisted); labelled SYNTHETIC in-document",
+      "title": "Seasonal Holiday Policy"
+    },
+    "policies/shipping_faq.html": {
+      "origin": "synthetic",
+      "synthetic": true,
+      "license": "Synthetic; created for this assessment (no third-party rights)",
+      "generator": "Hand-authored fictional ShopSmart Electronics policy (AI-assisted); labelled SYNTHETIC in-document",
+      "title": "Shipping Faq"
+    },
+    "policies/store_services.md": {
+      "origin": "synthetic",
+      "synthetic": true,
+      "license": "Synthetic; created for this assessment (no third-party rights)",
+      "generator": "Hand-authored fictional ShopSmart Electronics policy (AI-assisted); labelled SYNTHETIC in-document",
+      "title": "Store Services"
+    },
+    "policies/troubleshooting_guide.md": {
+      "origin": "synthetic",
+      "synthetic": true,
+      "license": "Synthetic; created for this assessment (no third-party rights)",
+      "generator": "Hand-authored fictional ShopSmart Electronics policy (AI-assisted); labelled SYNTHETIC in-document",
+      "title": "Troubleshooting Guide"
+    },
+    "policies/troubleshooting_guide.pdf": {
+      "origin": "synthetic",
+      "synthetic": true,
+      "license": "Synthetic; created for this assessment (no third-party rights)",
+      "generator": "scripts/convert_policy_to_pdf.py",
+      "derived_from": "policies/troubleshooting_guide.md",
+      "title": "Troubleshooting Guide (PDF edition)"
+    },
+    "policies/warranty_terms.md": {
+      "origin": "synthetic",
+      "synthetic": true,
+      "license": "Synthetic; created for this assessment (no third-party rights)",
+      "generator": "Hand-authored fictional ShopSmart Electronics policy (AI-assisted); labelled SYNTHETIC in-document",
+      "title": "Warranty Terms"
+    }
+  }
+}

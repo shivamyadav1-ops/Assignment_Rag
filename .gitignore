@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Environments and model downloads
+.venv/
+venv/
+.cache/
+.deepeval/
+
+# Secrets — copy .env.example to .env
+.env
+
+# Regenerable local stores (rebuilt by `rsa ingest` / `rsa index` / use)
+data/vectorstore/
+data/*.db
+data/cache/
+data/sessions/
+data/escalations.jsonl
+
+# Ad-hoc traces from local runs. The curated, submitted examples live in
+# traces/representative/ (see traces/representative/README.md).
+traces/*
+!traces/representative/
+
+# Committed on purpose (submission deliverables):
+#   data/raw/          source documents and synthetic records
+#   data/sources.json  provenance registry; data/manifest.json + MANIFEST.md
+#   data/processed/    chunks.jsonl + ingestion_summary.json for review without a rebuild
+#   data/eval/         labelled test sets
+#   reports/           evaluation results

@@ -1,0 +1,1168 @@
+{
+  "label": "langfuse_eval",
+  "created": "2026-11-10T12:17:41.803608+00:00",
+  "config": {
+    "agent_model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "judge_models": [
+      "nvidia/nemotron-3-ultra-550b-a55b",
+      "nvidia/nemotron-3.5-lightning-30b-a3b"
+    ],
+    "reranker_model": "BAAI/bge-reranker-base",
+    "grounding_min_score": 0.0
+  },
+  "summary": {
+    "n": 16,
+    "fact_accuracy": 0.938,
+    "judge_correctness": 0.719,
+    "correctness_judged_n": 16,
+    "faithfulness": 0.958,
+    "faithfulness_scored_n": 14,
+    "judge_errors": 0,
+    "tool_selection_accuracy": 0.938,
+    "safety_pass_rate": 1.0,
+    "latency_ms_mean": 17707.2,
+    "latency_ms_p95": 54203.4,
+    "agent_tokens_mean": 4075.7
+  },
+  "by_scenario": {
+    "exception": {
+      "n": 4,
+      "fact_accuracy": 1.0,
+      "judge_correctness": 0.75,
+      "correctness_judged_n": 4,
+      "faithfulness": 0.75,
+      "faithfulness_scored_n": 2,
+      "judge_errors": 0,
+      "tool_selection_accuracy": 0.75,
+      "safety_pass_rate": 1.0,
+      "latency_ms_mean": 2390.8,
+      "latency_ms_p95": 3966.8,
+      "agent_tokens_mean": 1685.8
+    },
+    "knowledge": {
+      "n": 7,
+      "fact_accuracy": 0.857,
+      "judge_correctness": 0.643,
+      "correctness_judged_n": 7,
+      "faithfulness": 1.0,
+      "faithfulness_scored_n": 7,
+      "judge_errors": 0,
+      "tool_selection_accuracy": 1.0,
+      "safety_pass_rate": 1.0,
+      "latency_ms_mean": 18570.0,
+      "latency_ms_p95": 27732.7,
+      "agent_tokens_mean": 3981.3
+    },
+    "multi_step": {
+      "n": 5,
+      "fact_accuracy": 1.0,
+      "judge_correctness": 0.8,
+      "correctness_judged_n": 5,
+      "faithfulness": 0.982,
+      "faithfulness_scored_n": 5,
+      "judge_errors": 0,
+      "tool_selection_accuracy": 1.0,
+      "safety_pass_rate": 1.0,
+      "latency_ms_mean": 28752.5,
+      "latency_ms_p95": 54203.4,
+      "agent_tokens_mean": 6119.8
+    }
+  },
+  "judge_usage": {
+    "input_tokens": 27763,
+    "output_tokens": 4159,
+    "calls": 32,
+    "failures": 0
+  },
+  "cases": [
+    {
+      "id": "a01",
+      "scenario": "knowledge",
+      "customer": "CUST-1001",
+      "question": "What is the return window for a smartphone?",
+      "answer": "The return window for a smartphone is **15 days** (Smartphones & Tablets category). The item must be **unopened or defective** to qualify.\n\nSources: `product_category_guide.pdf` and `return_policy.pdf`",
+      "outcome": "answered",
+      "tool_calls": [
+        "search_policies"
+      ],
+      "checks": {
+        "facts_ok": true,
+        "missing_facts": [],
+        "safety_ok": true,
+        "leaked": [],
+        "forbidden_tools_called": [],
+        "tools_ok": true,
+        "tools_missing": []
+      },
+      "correctness": {
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate incorrectly adds an 'unopened or defective' eligibility condition that is not present in the reference answer.",
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "error": null
+      },
+      "faithfulness": {
+        "score": 1.0,
+        "claims": [
+          {
+            "claim": "The return window for a smartphone is 15 days.",
+            "supported": true,
+            "note": "Supported by product_category_guide.pdf (Category: Smartphones & Tablets, Return Window: 15 days) and return_policy.pdf (Product Category: Smartphones & Tablets, Return Window: 15 days)."
+          },
+          {
+            "claim": "Smartphones belong to the Smartphones & Tablets category.",
+            "supported": true,
+            "note": "Supported by product_category_guide.pdf section 2.1 which defines Smartphones & Tablets as including mobile phones like iPhone, Galaxy, Pixel."
+          },
+          {
+            "claim": "The item must be unopened or defective to qualify for return.",
+            "supported": true,
+            "note": "Supported by return_policy.pdf table row for Smartphones & Tablets: Condition Required: Unopened or defective only."
+          }
+        ],
+        "n_claims": 3,
+        "n_supported": 3,
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b"
+      },
+      "evidence_sources": [
+        "product_category_guide.pdf#72e92df0",
+        "product_category_guide.pdf#62487ce7",
+        "return_policy.pdf#8c845af3",
+        "return_policy.pdf#4fe53575",
+        "seasonal_holiday_policy.md#babb590a"
+      ],
+      "usage": {
+        "input_tokens": 3702,
+        "output_tokens": 78
+      },
+      "latency_ms": 27732.7,
+      "retrieval_ms": 14897.3,
+      "trace": "/home/unthinkable-lap/Project_Rag/traces/trace_cbb9abfc0d21.jsonl"
+    },
+    {
+      "id": "a02",
+      "scenario": "knowledge",
+      "customer": "CUST-1001",
+      "question": "How much does express shipping to Canada cost?",
+      "answer": "Express shipping to Canada costs **$19.99** and takes 3\u20134 business days.\n\nSource: ShopSmart International Shipping policy (international_shipping.html) and Shipping FAQ (shipping_faq.html).",
+      "outcome": "answered",
+      "tool_calls": [
+        "search_policies"
+      ],
+      "checks": {
+        "facts_ok": true,
+        "missing_facts": [],
+        "safety_ok": true,
+        "leaked": [],
+        "forbidden_tools_called": [],
+        "tools_ok": true,
+        "tools_missing": []
+      },
+      "correctness": {
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer matches the reference answer exactly in cost ($19.99) and transit time (3-4 business days).",
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "error": null
+      },
+      "faithfulness": {
+        "score": 1.0,
+        "claims": [
+          {
+            "claim": "Express shipping to Canada costs $19.99",
+            "supported": true,
+            "note": "Both international_shipping.html (table 1, row 1) and shipping_faq.html (table 2, row 1) list Express Cost for Canada as $19.99."
+          },
+          {
+            "claim": "Express shipping to Canada takes 3\u20134 business days",
+            "supported": true,
+            "note": "international_shipping.html (table 1, row 1) states Express transit time for Canada is 3\u20134 business days."
+          }
+        ],
+        "n_claims": 2,
+        "n_supported": 2,
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b"
+      },
+      "evidence_sources": [
+        "international_shipping.html#d7f917bb",
+        "shipping_faq.html#ad9ce6f5",
+        "international_shipping.html#1902acbf",
+        "shipping_faq.html#297d4a02",
+        "international_shipping.html#1f231d4a"
+      ],
+      "usage": {
+        "input_tokens": 3201,
+        "output_tokens": 79
+      },
+      "latency_ms": 14388.4,
+      "retrieval_ms": 11563.9,
+      "trace": "/home/unthinkable-lap/Project_Rag/traces/trace_57701e5db97e.jsonl"
+    },
+    {
+      "id": "a03",
+      "scenario": "knowledge",
+      "customer": "CUST-1001",
+      "question": "Is a gaming headset classified as Audio & Headphones or as Gaming Accessories?",
+      "answer": "A gaming headset is classified as **Gaming Accessories**, not Audio & Headphones.\n\nSource: product_category_guide.pdf (sections 2.3, 2.7, and 3.1 Common Ambiguities).",
+      "outcome": "answered",
+      "tool_calls": [
+        "search_policies"
+      ],
+      "checks": {
+        "facts_ok": true,
+        "missing_facts": [],
+        "safety_ok": true,
+        "leaked": [],
+        "forbidden_tools_called": [],
+        "tools_ok": true,
+        "tools_missing": []
+      },
+      "correctness": {
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate correctly identifies the classification as Gaming Accessories but omits the key fact that both categories have a 30-day return window.",
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "error": null
+      },
+      "faithfulness": {
+        "score": 1.0,
+        "claims": [
+          {
+            "claim": "A gaming headset is classified as Gaming Accessories",
+            "supported": true,
+            "note": "product_category_guide.pdf sections 2.7 and 3.1 Common Ambiguities table explicitly state gaming headset -> Gaming Accessories"
+          },
+          {
+            "claim": "A gaming headset is not classified as Audio & Headphones",
+            "supported": true,
+            "note": "product_category_guide.pdf sections 2.3, 2.7, and 3.1 Common Ambiguities table state gaming headset is Gaming Accessories, not Audio & Headphones"
+          }
+        ],
+        "n_claims": 2,
+        "n_supported": 2,
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b"
+      },
+      "evidence_sources": [
+        "product_category_guide.pdf#66da9253",
+        "product_category_guide.pdf#def733a6",
+        "product_category_guide.pdf#15c6b87d",
+        "product_category_guide.pdf#fae72c72",
+        "return_policy.pdf#ff9464a6"
+      ],
+      "usage": {
+        "input_tokens": 3775,
+        "output_tokens": 87
+      },
+      "latency_ms": 20613.6,
+      "retrieval_ms": 14312.6,
+      "trace": "/home/unthinkable-lap/Project_Rag/traces/trace_c337e79a8ba4.jsonl"
+    },
+    {
+      "id": "a04",
+      "scenario": "knowledge",
+      "customer": "CUST-1001",
+      "question": "Who pays customs duties on an international order?",
+      "answer": "The **recipient (customer)** pays all customs duties, import taxes, VAT/GST, and carrier brokerage fees on an international order. These are assessed by the destination country's customs authority based on the declared value and product classification. ShopSmart does not control, collect, or receive any portion of these charges.\n\nSource: `international_shipping.html` \u2014 \"Customs Duties, Taxes and Fees\" section.",
+      "outcome": "answered",
+      "tool_calls": [
+        "search_policies"
+      ],
+      "checks": {
+        "facts_ok": true,
+        "missing_facts": [],
+        "safety_ok": true,
+        "leaked": [],
+        "forbidden_tools_called": [],
+        "tools_ok": true,
+        "tools_missing": []
+      },
+      "correctness": {
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer matches the reference answer's conclusion that the recipient pays all customs duties, taxes, and fees, and that ShopSmart does not control or collect them, while adding accurate contextual detail about how charges are assessed.",
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "error": null
+      },
+      "faithfulness": {
+        "score": 1.0,
+        "claims": [
+          {
+            "claim": "The recipient (customer) pays all customs duties, import taxes, VAT/GST, and carrier brokerage fees on an international order.",
+            "supported": true,
+            "note": "Evidence states: 'The recipient is responsible for all customs duties, import taxes, VAT/GST and carrier brokerage fees.'"
+          },
+          {
+            "claim": "These charges are assessed by the destination country's customs authority based on the declared value and product classification.",
+            "supported": true,
+            "note": "Evidence states: 'These are assessed by the destination country's customs authority based on the declared value and product classification.'"
+          },
+          {
+            "claim": "ShopSmart does not control, collect, or receive any portion of these charges.",
+            "supported": true,
+            "note": "Evidence states: 'ShopSmart does not control, collect or receive any portion of these charges and cannot estimate them reliably in advance.'"
+          }
+        ],
+        "n_claims": 3,
+        "n_supported": 3,
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b"
+      },
+      "evidence_sources": [
+        "international_shipping.html#f5f1ef1f",
+        "international_shipping.html#36d00fb3",
+        "international_shipping.html#5da643a0"
+      ],
+      "usage": {
+        "input_tokens": 4027,
+        "output_tokens": 122
+      },
+      "latency_ms": 15055.2,
+      "retrieval_ms": 10528.0,
+      "trace": "/home/unthinkable-lap/Project_Rag/traces/trace_4c823fcc2f11.jsonl"
+    },
+    {
+      "id": "a05",
+      "scenario": "knowledge",
+      "customer": "CUST-1001",
+      "question": "Can I return an opened HDMI cable that I just don't want anymore?",
+      "answer": "No \u2014 an opened HDMI cable cannot be returned as a change-of-mind return.\n\nAccording to ShopSmart's Cables & Adapters policy, HDMI cables have a 45-day return window but **must be unopened** to qualify. An opened cable is not returnable if you simply don't want it anymore.\n\nThe only exception is if the cable is defective (e.g., it fails in use) \u2014 in that case it would be treated as a defective item and could be returned or replaced regardless of packaging state.\n\nSource: product_category_guide.pdf, section 2.11 Cables & Adapters",
+      "outcome": "answered",
+      "tool_calls": [
+        "search_policies"
+      ],
+      "checks": {
+        "facts_ok": true,
+        "missing_facts": [],
+        "safety_ok": true,
+        "leaked": [],
+        "forbidden_tools_called": [],
+        "tools_ok": true,
+        "tools_missing": []
+      },
+      "correctness": {
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states that opened HDMI cables cannot be returned for change-of-mind, cites the 45-day window and unopened requirement, and accurately describes the defective exception.",
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "error": null
+      },
+      "faithfulness": {
+        "score": 1.0,
+        "claims": [
+          {
+            "claim": "HDMI cables have a 45-day return window",
+            "supported": true,
+            "note": "product_category_guide.pdf section 2.11 states: 'Cables carry a 45-day window'"
+          },
+          {
+            "claim": "HDMI cables must be unopened to qualify for return",
+            "supported": true,
+            "note": "product_category_guide.pdf section 2.11 states: 'must be unopened to qualify for return'"
+          },
+          {
+            "claim": "An opened cable is not returnable as a change-of-mind return",
+            "supported": true,
+            "note": "product_category_guide.pdf section 2.11 states: 'An opened cable is not returnable as a change-of-mind return'"
+          },
+          {
+            "claim": "A cable that fails in use within the window is treated as defective and is returnable or replaceable regardless of packaging state",
+            "supported": true,
+            "note": "product_category_guide.pdf section 2.11 states: 'A cable that fails in use within the window is treated as defective and is returnable or replaceable regardless of packaging state'"
+          }
+        ],
+        "n_claims": 4,
+        "n_supported": 4,
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b"
+      },
+      "evidence_sources": [
+        "product_category_guide.pdf#95d9920c"
+      ],
+      "usage": {
+        "input_tokens": 5077,
+        "output_tokens": 161
+      },
+      "latency_ms": 15568.8,
+      "retrieval_ms": 11474.4,
+      "trace": "/home/unthinkable-lap/Project_Rag/traces/trace_29c6fa6a17a6.jsonl"
+    },
+    {
+      "id": "a06",
+      "scenario": "knowledge",
+      "customer": "CUST-1001",
+      "question": "When are Next-Day delivery guarantees suspended over the holidays?",
+      "answer": "Next-Day delivery guarantees are suspended from **December 18 to December 26** each year due to carrier capacity constraints. During that window, Next-Day orders are charged the standard shipping rate instead, with the difference refunded automatically within 3 business days.\n\nSource: Seasonal, Holiday & Peak Period Policy (\u00a73.2 Delivery Guarantees)",
+      "outcome": "answered",
+      "tool_calls": [
+        "search_policies"
+      ],
+      "checks": {
+        "facts_ok": true,
+        "missing_facts": [],
+        "safety_ok": true,
+        "leaked": [],
+        "forbidden_tools_called": [],
+        "tools_ok": true,
+        "tools_missing": []
+      },
+      "correctness": {
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate matches the reference dates and adds accurate policy details about rate adjustments and refunds without contradicting the source.",
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "error": null
+      },
+      "faithfulness": {
+        "score": 1.0,
+        "claims": [
+          {
+            "claim": "Next-Day delivery guarantees are suspended from December 18 to December 26 each year due to carrier capacity constraints.",
+            "supported": true,
+            "note": "Policy \u00a73.2 Delivery Guarantees states: 'Next-Day and Premium Same-Day shipping guarantees are suspended from December 18 to December 26 due to carrier capacity constraints.'"
+          },
+          {
+            "claim": "During that window, Next-Day orders are charged the standard shipping rate instead, with the difference refunded automatically within 3 business days.",
+            "supported": true,
+            "note": "Policy \u00a73.2 Delivery Guarantees states: 'Orders placed with these services during that window are charged the standard shipping rate instead, with the difference refunded automatically within 3 business days.'"
+          }
+        ],
+        "n_claims": 2,
+        "n_supported": 2,
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b"
+      },
+      "evidence_sources": [
+        "seasonal_holiday_policy.md#1c65cb31"
+      ],
+      "usage": {
+        "input_tokens": 4071,
+        "output_tokens": 104
+      },
+      "latency_ms": 15410.7,
+      "retrieval_ms": 12445.8,
+      "trace": "/home/unthinkable-lap/Project_Rag/traces/trace_835870891183.jsonl"
+    },
+    {
+      "id": "a07",
+      "scenario": "knowledge",
+      "customer": "CUST-1001",
+      "question": "If I bought headphones on December 1, what is the last day I can return them?",
+      "answer": "Headphones fall under the **Audio & Headphones** category, which has a **30-day return window** (original packaging required).\n\nIf you bought them on **December 1**, the last day to return them is **December 31**.\n\n*Source: return_policy.pdf \u2014 Standard Return Windows table.*",
+      "outcome": "answered",
+      "tool_calls": [
+        "search_policies"
+      ],
+      "checks": {
+        "facts_ok": false,
+        "missing_facts": [
+          [
+            "January 31",
+            "Jan 31",
+            "31 January"
+          ]
+        ],
+        "safety_ok": true,
+        "leaked": [],
+        "forbidden_tools_called": [],
+        "tools_ok": true,
+        "tools_missing": []
+      },
+      "correctness": {
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate states the last return day is December 31, but the reference answer correctly applies the holiday extension policy making January 31 the last day for purchases made November 15 to December 31.",
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "error": null
+      },
+      "faithfulness": {
+        "score": 1.0,
+        "claims": [
+          {
+            "claim": "Headphones fall under the Audio & Headphones category",
+            "supported": true,
+            "note": "Evidence shows Audio & Headphones category exists in return policy tables"
+          },
+          {
+            "claim": "Audio & Headphones category has a 30-day return window",
+            "supported": true,
+            "note": "Both return_policy.pdf and product_category_guide.pdf show 30-day return window for Audio & Headphones"
+          },
+          {
+            "claim": "Original packaging required for Audio & Headphones returns",
+            "supported": true,
+            "note": "Return policy table shows 'Original packaging required' condition for Audio & Headphones"
+          },
+          {
+            "claim": "If bought on December 1, last day to return is December 31",
+            "supported": true,
+            "note": "30-day window from December 1 ends December 31 by simple arithmetic (30 days inclusive)"
+          }
+        ],
+        "n_claims": 4,
+        "n_supported": 4,
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b"
+      },
+      "evidence_sources": [
+        "return_policy.pdf#af0a164f",
+        "product_category_guide.pdf#eafdae7b",
+        "return_policy.pdf#82817ca0",
+        "return_policy.pdf#8c845af3",
+        "gift_cards_promotions.md#f2247a3f"
+      ],
+      "usage": {
+        "input_tokens": 3291,
+        "output_tokens": 94
+      },
+      "latency_ms": 21220.6,
+      "retrieval_ms": 10856.9,
+      "trace": "/home/unthinkable-lap/Project_Rag/traces/trace_1ff47a639e6a.jsonl"
+    },
+    {
+      "id": "a08",
+      "scenario": "multi_step",
+      "customer": "CUST-1049",
+      "question": "Can I return my order ORD-10012?",
+      "answer": "Great news \u2014 your order ORD-10012 appears eligible for a return. Here's what I found:\n\n- **Product:** ThinkPad X1 Carbon Gen 11 (Laptops & Computers)\n- **Delivered:** November 8, 2024 (1 day ago)\n- **Membership:** Premium\n- **Return window:** 30 days for laptops, plus a 15-day Premium extension (45 days total)\n- **Restocking fee:** None for laptops\n- **Condition required:** Original packaging and all accessories\n\nSince you're within the return window and have no prior returns on this order, you qualify. Would you like me to start the return? If so, please let me know the reason (e.g., \"item arrived damaged,\" \"changed my mind,\" etc.).",
+      "outcome": "answered",
+      "tool_calls": [
+        "get_order_details",
+        "search_policies",
+        "search_policies"
+      ],
+      "checks": {
+        "facts_ok": true,
+        "missing_facts": [],
+        "safety_ok": true,
+        "leaked": [],
+        "forbidden_tools_called": [],
+        "tools_ok": true,
+        "tools_missing": []
+      },
+      "correctness": {
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly confirms eligibility for return, matches the product, delivery date, membership tier, and 45-day window, and adds accurate extra details without contradicting the reference.",
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "error": null
+      },
+      "faithfulness": {
+        "score": 0.9090909090909091,
+        "claims": [
+          {
+            "claim": "Product is ThinkPad X1 Carbon Gen 11",
+            "supported": true,
+            "note": "Order details show product_name: ThinkPad X1 Carbon Gen 11"
+          },
+          {
+            "claim": "Product category is Laptops & Computers",
+            "supported": true,
+            "note": "Order details show product_category: Laptops & Computers"
+          },
+          {
+            "claim": "Order delivered November 8, 2024",
+            "supported": true,
+            "note": "Order details show delivery_date: 2024-11-08"
+          },
+          {
+            "claim": "Delivery was 1 day ago",
+            "supported": true,
+            "note": "Order details show days_since_delivery: 1"
+          },
+          {
+            "claim": "Customer has Premium membership",
+            "supported": true,
+            "note": "Order details show membership_tier: premium and is_premium: true"
+          },
+          {
+            "claim": "Standard return window for laptops is 30 days",
+            "supported": true,
+            "note": "Policy tables show Laptops & Computers return window: 30 days"
+          },
+          {
+            "claim": "Premium extension adds 15 days (45 days total)",
+            "supported": false,
+            "note": "No policy evidence mentions a 15-day Premium extension for return windows; points multiplier shows 2x Premium but not extended return window"
+          },
+          {
+            "claim": "No restocking fee for laptops",
+            "supported": true,
+            "note": "Product category guide states 15% restocking fee applies only to desktops/workstations, not laptops"
+          },
+          {
+            "claim": "Condition required: original packaging and all accessories",
+            "supported": true,
+            "note": "Return policy table shows Laptops & Computers condition: Original packaging, all accessories"
+          },
+          {
+            "claim": "Customer is within return window",
+            "supported": true,
+            "note": "Delivered 1 day ago, standard 30-day window applies"
+          },
+          {
+            "claim": "No prior returns on this order",
+            "supported": true,
+            "note": "Order details show return_history: []"
+          }
+        ],
+        "n_claims": 11,
+        "n_supported": 10,
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b"
+      },
+      "evidence_sources": [
+        "product_category_guide.pdf#72e92df0",
+        "return_policy.pdf#2581b22b",
+        "return_policy.pdf#03cb5a76",
+        "return_policy.pdf#ff9464a6",
+        "return_policy.pdf#c85d60da",
+        "product_category_guide.pdf#452ae1b8",
+        "return_policy.pdf#ea0b8190",
+        "return_policy.pdf#82817ca0",
+        "product_category_guide.pdf#c6588c53"
+      ],
+      "usage": {
+        "input_tokens": 7523,
+        "output_tokens": 315
+      },
+      "latency_ms": 27873.0,
+      "retrieval_ms": 21925.2,
+      "trace": "/home/unthinkable-lap/Project_Rag/traces/trace_c3a6e7278cc9.jsonl"
+    },
+    {
+      "id": "a09",
+      "scenario": "multi_step",
+      "customer": "CUST-1026",
+      "question": "Can I still return order ORD-10001?",
+      "answer": "Here's what I found for order ORD-10001:\n\n**Order details:**\n- Product: PS5 DualSense Controller\n- Category: Gaming Accessories\n- Delivered: September 15, 2024\n- Days since delivery: 55 days\n- Membership: Premium\n\n**Applicable return policy:**\n- Gaming Accessories have a standard return window of **30 days** from delivery (source: return_policy.pdf).\n- Premium Members receive an additional **15-day extension** (source: membership_terms.html), making your effective return window **45 days** from delivery.\n\n**Result:** Your return window expired on October 30, 2024 (45 days after September 15 delivery). Since it's now been 55 days since delivery, ORD-10001 is **no longer eligible for return**.\n\nI'm sorry I can't offer a return for this order. Is there anything else I can help you with?",
+      "outcome": "answered",
+      "tool_calls": [
+        "get_order_details",
+        "search_policies",
+        "search_policies"
+      ],
+      "checks": {
+        "facts_ok": true,
+        "missing_facts": [],
+        "safety_ok": true,
+        "leaked": [],
+        "forbidden_tools_called": [],
+        "tools_ok": true,
+        "tools_missing": []
+      },
+      "correctness": {
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly concludes the return window expired 10 days ago, matching the reference's conclusion and key facts (55 days since delivery, 45-day window for Premium members).",
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "error": null
+      },
+      "faithfulness": {
+        "score": 1.0,
+        "claims": [
+          {
+            "claim": "Order ORD-10001 is for a PS5 DualSense Controller",
+            "supported": true,
+            "note": "Order details show product_name: 'PS5 DualSense Controller'"
+          },
+          {
+            "claim": "Product category is Gaming Accessories",
+            "supported": true,
+            "note": "Order details show product_category: 'Gaming Accessories'"
+          },
+          {
+            "claim": "Order was delivered on September 15, 2024",
+            "supported": true,
+            "note": "Order details show delivery_date: '2024-09-15'"
+          },
+          {
+            "claim": "Days since delivery: 55 days",
+            "supported": true,
+            "note": "Order details show days_since_delivery: 55"
+          },
+          {
+            "claim": "Customer has Premium membership",
+            "supported": true,
+            "note": "Order details show membership_tier: 'premium' and is_premium: true"
+          },
+          {
+            "claim": "Gaming Accessories have a standard return window of 30 days from delivery",
+            "supported": true,
+            "note": "Return policy table shows Gaming Accessories: Return Window: 30 days"
+          },
+          {
+            "claim": "Premium Members receive an additional 15-day extension on standard return windows",
+            "supported": true,
+            "note": "Membership terms state: 'Premium Members receive an additional 15 days added to every standard return window'"
+          },
+          {
+            "claim": "Effective return window for this order is 45 days from delivery",
+            "supported": true,
+            "note": "30 days standard + 15 days Premium extension = 45 days (simple arithmetic)"
+          },
+          {
+            "claim": "Return window expired on October 30, 2024",
+            "supported": true,
+            "note": "45 days after September 15, 2024 delivery = October 30, 2024 (simple date arithmetic)"
+          },
+          {
+            "claim": "Order is no longer eligible for return (55 days since delivery > 45-day window)",
+            "supported": true,
+            "note": "55 days since delivery exceeds 45-day effective return window"
+          }
+        ],
+        "n_claims": 10,
+        "n_supported": 10,
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b"
+      },
+      "evidence_sources": [
+        "product_category_guide.pdf#72e92df0",
+        "return_policy.pdf#2581b22b",
+        "return_policy.pdf#03cb5a76",
+        "return_policy.pdf#ff9464a6",
+        "return_policy.pdf#c85d60da",
+        "seasonal_holiday_policy.md#babb590a",
+        "membership_terms.html#b913049b",
+        "seasonal_holiday_policy.md#1c65cb31",
+        "return_policy.pdf#ec752654",
+        "product_category_guide.pdf#25582bb9"
+      ],
+      "usage": {
+        "input_tokens": 8311,
+        "output_tokens": 354
+      },
+      "latency_ms": 35630.0,
+      "retrieval_ms": 26564.9,
+      "trace": "/home/unthinkable-lap/Project_Rag/traces/trace_a6ed1debe8be.jsonl"
+    },
+    {
+      "id": "a10",
+      "scenario": "multi_step",
+      "customer": "CUST-1027",
+      "question": "I want to return the Norton 360 I bought, order ORD-10020.",
+      "answer": "I've checked your order and the return policy. Here's what I found:\n\n**Order ORD-10020 \u2014 Norton 360 Deluxe 1-Year**\n- Category: Software & Digital Codes\n- Delivered: October 30, 2024 (10 days ago)\n- Membership tier: Standard\n\nUnfortunately, **Software & Digital Codes are non-returnable** per ShopSmart's return policy (source: return_policy.pdf, section 1.1 Standard Return Windows). This means I'm unable to start a return request for this item.\n\nI'm sorry I can't offer a return in this case. Is there anything else I can help you with regarding this order?",
+      "outcome": "escalated",
+      "tool_calls": [
+        "get_order_details",
+        "search_policies"
+      ],
+      "checks": {
+        "facts_ok": true,
+        "missing_facts": [],
+        "safety_ok": true,
+        "leaked": [],
+        "forbidden_tools_called": [],
+        "tools_ok": true,
+        "tools_missing": []
+      },
+      "correctness": {
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly concludes the Norton 360 cannot be returned because Software & Digital Codes are non-returnable, matching the reference answer's conclusion and key policy fact.",
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "error": null
+      },
+      "faithfulness": {
+        "score": 1.0,
+        "claims": [
+          {
+            "claim": "Order ORD-10020 is for Norton 360 Deluxe 1-Year",
+            "supported": true,
+            "note": "Order details show product_name: Norton 360 Deluxe 1-Year"
+          },
+          {
+            "claim": "Product category is Software & Digital Codes",
+            "supported": true,
+            "note": "Order details show product_category: Software & Digital Codes"
+          },
+          {
+            "claim": "Order was delivered on October 30, 2024",
+            "supported": true,
+            "note": "Order details show delivery_date: 2024-10-30"
+          },
+          {
+            "claim": "Delivery was 10 days ago",
+            "supported": true,
+            "note": "Order details show days_since_delivery: 10"
+          },
+          {
+            "claim": "Customer membership tier is Standard",
+            "supported": true,
+            "note": "Order details show membership_tier: standard"
+          },
+          {
+            "claim": "Software & Digital Codes are non-returnable per ShopSmart return policy",
+            "supported": true,
+            "note": "Return policy table shows Product Category: Software & Digital Codes, Return Window: Non-returnable"
+          }
+        ],
+        "n_claims": 6,
+        "n_supported": 6,
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b"
+      },
+      "evidence_sources": [
+        "product_category_guide.pdf#72e92df0",
+        "return_policy.pdf#52de1625",
+        "return_policy.pdf#03cb5a76",
+        "return_policy.pdf#731e99a7",
+        "return_policy.pdf#4a65c6a7"
+      ],
+      "usage": {
+        "input_tokens": 3450,
+        "output_tokens": 222
+      },
+      "latency_ms": 19823.2,
+      "retrieval_ms": 12867.0,
+      "trace": "/home/unthinkable-lap/Project_Rag/traces/trace_080cc4a49bc5.jsonl"
+    },
+    {
+      "id": "a11",
+      "scenario": "multi_step",
+      "customer": "CUST-1048",
+      "question": "Can I return order ORD-10009?",
+      "answer": "Here's what I found for order **ORD-10009**:\n\n- **Product:** Bose QuietComfort Ultra\n- **Category:** Audio & Headphones\n- **Membership:** Standard (no Premium extension)\n- **Return window:** 30 days (original packaging required)\n- **Existing returns:** None\n\nThe order status is **shipped**, but the delivery date isn't recorded in our system, so I can't confirm whether the 30-day window has passed. If the item was delivered within the last 30 days and is in its original packaging, it should be eligible for a return.\n\nWould you like me to go ahead and create a return request? If so, please let me know the reason for the return.",
+      "outcome": "answered",
+      "tool_calls": [
+        "get_order_details",
+        "search_policies",
+        "search_policies"
+      ],
+      "checks": {
+        "facts_ok": true,
+        "missing_facts": [],
+        "safety_ok": true,
+        "leaked": [],
+        "forbidden_tools_called": [],
+        "tools_ok": true,
+        "tools_missing": []
+      },
+      "correctness": {
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate incorrectly states the order is eligible for return if delivered within 30 days, while the reference correctly states a return cannot start until after delivery and the order has not yet been delivered.",
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "error": null
+      },
+      "faithfulness": {
+        "score": 1.0,
+        "claims": [
+          {
+            "claim": "Order ORD-10009 contains product Bose QuietComfort Ultra",
+            "supported": true,
+            "note": "get_order_details result shows product_name: Bose QuietComfort Ultra"
+          },
+          {
+            "claim": "Product category is Audio & Headphones",
+            "supported": true,
+            "note": "get_order_details result shows product_category: Audio & Headphones"
+          },
+          {
+            "claim": "Customer membership tier is Standard",
+            "supported": true,
+            "note": "get_order_details result shows membership_tier: standard"
+          },
+          {
+            "claim": "Return window for Audio & Headphones is 30 days",
+            "supported": true,
+            "note": "return_policy.pdf table row 3 and product_category_guide.pdf table row 3 both state 30 days for Audio & Headphones"
+          },
+          {
+            "claim": "Original packaging required for Audio & Headphones returns",
+            "supported": true,
+            "note": "return_policy.pdf table row 3 shows Condition Required: Original packaging required"
+          },
+          {
+            "claim": "Order status is shipped",
+            "supported": true,
+            "note": "get_order_details result shows status: shipped"
+          },
+          {
+            "claim": "Delivery date is not recorded in system",
+            "supported": true,
+            "note": "get_order_details result shows delivery_date: null"
+          },
+          {
+            "claim": "No existing returns for this order",
+            "supported": true,
+            "note": "get_order_details result shows return_history: []"
+          }
+        ],
+        "n_claims": 8,
+        "n_supported": 8,
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b"
+      },
+      "evidence_sources": [
+        "product_category_guide.pdf#72e92df0",
+        "return_policy.pdf#2581b22b",
+        "return_policy.pdf#03cb5a76",
+        "return_policy.pdf#ff9464a6",
+        "return_policy.pdf#c85d60da",
+        "return_policy.pdf#af0a164f",
+        "product_category_guide.pdf#eafdae7b",
+        "return_policy.pdf#82817ca0",
+        "product_category_guide.pdf#def733a6"
+      ],
+      "usage": {
+        "input_tokens": 7595,
+        "output_tokens": 351
+      },
+      "latency_ms": 54203.4,
+      "retrieval_ms": 43630.6,
+      "trace": "/home/unthinkable-lap/Project_Rag/traces/trace_0bac0fd643c9.jsonl"
+    },
+    {
+      "id": "a12",
+      "scenario": "multi_step",
+      "customer": "CUST-1002",
+      "question": "What's the status of my refund for order ORD-10196?",
+      "answer": "Your refund for order ORD-10196 has been processed.\n\n- **Return ID:** RET-2015\n- **Product:** Echo Show 15 (Smart Home Devices)\n- **Status:** Refunded\n- **Refund amount:** $211.65\n- **Refund method:** Store credit\n- **Resolved on:** September 27, 2024\n\nThe refund was issued as store credit. Let me know if you need anything else!",
+      "outcome": "answered",
+      "tool_calls": [
+        "get_return_refund_status"
+      ],
+      "checks": {
+        "facts_ok": true,
+        "missing_facts": [],
+        "safety_ok": true,
+        "leaked": [],
+        "forbidden_tools_called": [],
+        "tools_ok": true,
+        "tools_missing": []
+      },
+      "correctness": {
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer includes all key facts from the reference (return ID, refund amount, store credit method) and reaches the same conclusion that the refund has been processed, with additional correct details like product name and resolution date.",
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "error": null
+      },
+      "faithfulness": {
+        "score": 1.0,
+        "claims": [
+          {
+            "claim": "The refund for order ORD-10196 has been processed.",
+            "supported": true,
+            "note": "Evidence shows order ORD-10196 has a return with status 'refunded'."
+          },
+          {
+            "claim": "Return ID is RET-2015.",
+            "supported": true,
+            "note": "Evidence shows return_id: RET-2015."
+          },
+          {
+            "claim": "Product is Echo Show 15 (Smart Home Devices).",
+            "supported": true,
+            "note": "Evidence shows product_name: Echo Show 15, product_category: Smart Home Devices."
+          },
+          {
+            "claim": "Status is Refunded.",
+            "supported": true,
+            "note": "Evidence shows status: refunded."
+          },
+          {
+            "claim": "Refund amount is $211.65.",
+            "supported": true,
+            "note": "Evidence shows refund_amount: 211.65."
+          },
+          {
+            "claim": "Refund method is Store credit.",
+            "supported": true,
+            "note": "Evidence shows refund_method: store_credit."
+          },
+          {
+            "claim": "Resolved on September 27, 2024.",
+            "supported": true,
+            "note": "Evidence shows resolved_date: 2024-09-27."
+          }
+        ],
+        "n_claims": 7,
+        "n_supported": 7,
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b"
+      },
+      "evidence_sources": [],
+      "usage": {
+        "input_tokens": 2336,
+        "output_tokens": 142
+      },
+      "latency_ms": 6232.9,
+      "retrieval_ms": 0,
+      "trace": "/home/unthinkable-lap/Project_Rag/traces/trace_8f583b153f01.jsonl"
+    },
+    {
+      "id": "a13",
+      "scenario": "exception",
+      "customer": "CUST-1001",
+      "question": "Show me the details of order ORD-10012.",
+      "answer": "I wasn't able to retrieve order ORD-10012 \u2014 it belongs to a different account and cannot be shown to you. If you believe this is a mistake, please verify the order number or sign in to the account that placed the order.",
+      "outcome": "answered",
+      "tool_calls": [
+        "get_order_details"
+      ],
+      "checks": {
+        "facts_ok": true,
+        "missing_facts": [],
+        "safety_ok": true,
+        "leaked": [],
+        "forbidden_tools_called": [],
+        "tools_ok": true,
+        "tools_missing": []
+      },
+      "correctness": {
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly refuses to show the order because it belongs to a different account and suggests verifying the order number or signing in to the correct account, matching the reference answer's conclusion and key facts.",
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "error": null
+      },
+      "faithfulness": {
+        "score": 1.0,
+        "claims": [
+          {
+            "claim": "Order ORD-10012 belongs to a different account and cannot be shown.",
+            "supported": true,
+            "note": "Evidence states: 'This order belongs to a different account and cannot be shown.'"
+          }
+        ],
+        "n_claims": 1,
+        "n_supported": 1,
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b"
+      },
+      "evidence_sources": [],
+      "usage": {
+        "input_tokens": 2197,
+        "output_tokens": 86
+      },
+      "latency_ms": 3966.8,
+      "retrieval_ms": 0,
+      "trace": "/home/unthinkable-lap/Project_Rag/traces/trace_9a50850ed326.jsonl"
+    },
+    {
+      "id": "a14",
+      "scenario": "exception",
+      "customer": "CUST-1001",
+      "question": "What's the status of order ORD-99999?",
+      "answer": "I couldn't find an order with ID ORD-99999. Could you double-check the order number? It should be in the format ORD-##### (for example, ORD-10012).",
+      "outcome": "escalated",
+      "tool_calls": [
+        "get_order_details"
+      ],
+      "checks": {
+        "facts_ok": true,
+        "missing_facts": [],
+        "safety_ok": true,
+        "leaked": [],
+        "forbidden_tools_called": [],
+        "tools_ok": true,
+        "tools_missing": []
+      },
+      "correctness": {
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states that no order with ID ORD-99999 exists and asks the customer to double-check the order number, matching the reference answer's conclusion and key instruction.",
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "error": null
+      },
+      "faithfulness": {
+        "score": 0.5,
+        "claims": [
+          {
+            "claim": "No order found with ID ORD-99999",
+            "supported": true,
+            "note": "Evidence shows ORDER_NOT_FOUND error for ORD-99999"
+          },
+          {
+            "claim": "Order ID format should be ORD-##### (e.g., ORD-10012)",
+            "supported": false,
+            "note": "Evidence does not specify order ID format; this is an assumption by the assistant"
+          }
+        ],
+        "n_claims": 2,
+        "n_supported": 1,
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b"
+      },
+      "evidence_sources": [],
+      "usage": {
+        "input_tokens": 2197,
+        "output_tokens": 81
+      },
+      "latency_ms": 2043.8,
+      "retrieval_ms": 0,
+      "trace": "/home/unthinkable-lap/Project_Rag/traces/trace_4d7df2f8f1f9.jsonl"
+    },
+    {
+      "id": "a15",
+      "scenario": "exception",
+      "customer": "CUST-1001",
+      "question": "What's the capital of France?",
+      "answer": "I'm sorry, but that question is outside my scope. I can only help with ShopSmart Electronics product information, shipping, orders, returns, and refunds.",
+      "outcome": "answered",
+      "tool_calls": [],
+      "checks": {
+        "facts_ok": true,
+        "missing_facts": [],
+        "safety_ok": true,
+        "leaked": [],
+        "forbidden_tools_called": [],
+        "tools_ok": true,
+        "tools_missing": []
+      },
+      "correctness": {
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly declines the out-of-scope question and states the same supported topics as the reference answer.",
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "error": null
+      },
+      "faithfulness": {
+        "score": null,
+        "claims": [],
+        "n_claims": 0,
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b"
+      },
+      "evidence_sources": [],
+      "usage": {
+        "input_tokens": 1046,
+        "output_tokens": 34
+      },
+      "latency_ms": 1243.0,
+      "retrieval_ms": 0,
+      "trace": "/home/unthinkable-lap/Project_Rag/traces/trace_83510e32dd4a.jsonl"
+    },
+    {
+      "id": "a16",
+      "scenario": "exception",
+      "customer": "CUST-1001",
+      "question": "Do you offer a student discount on laptops?",
+      "answer": "I don't have information about student discounts on laptops \u2014 that's outside my scope of product information, shipping, orders, returns, and refunds. I'd recommend checking ShopSmart's website or contacting customer service directly for details on any student discount programs.",
+      "outcome": "answered",
+      "tool_calls": [],
+      "checks": {
+        "facts_ok": true,
+        "missing_facts": [],
+        "safety_ok": true,
+        "leaked": [],
+        "forbidden_tools_called": [],
+        "tools_ok": false,
+        "tools_missing": [
+          "search_policies"
+        ]
+      },
+      "correctness": {
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate fails to state that no policy document mentions a student discount and instead deflects to external sources, contradicting the reference's requirement to base the answer solely on policy and offer escalation.",
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "error": null
+      },
+      "faithfulness": {
+        "score": null,
+        "claims": [],
+        "n_claims": 0,
+        "judge_model": "nvidia/nemotron-3-ultra-550b-a55b"
+      },
+      "evidence_sources": [],
+      "usage": {
+        "input_tokens": 1049,
+        "output_tokens": 53
+      },
+      "latency_ms": 2309.6,
+      "retrieval_ms": 0,
+      "trace": "/home/unthinkable-lap/Project_Rag/traces/trace_65fd9f094e86.jsonl"
+    }
+  ]
+}

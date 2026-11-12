@@ -1,0 +1,785 @@
+{
+  "kind": "ttft_eval",
+  "created": "2026-11-10T12:33:10.886584+00:00",
+  "config": {
+    "agent_model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "reranker_model": "BAAI/bge-reranker-base",
+    "rerank_candidates_cap": 5,
+    "live_grounding": true,
+    "runs": 2,
+    "n_questions": 7
+  },
+  "cold_start": {
+    "question": "What is the return window for a smartphone?",
+    "outcome": "answered",
+    "tool_calls": [
+      "search_policies"
+    ],
+    "user_ttft_ms": 13685.739837005734,
+    "final_call_ttft_ms": 599.5112329983385,
+    "end_to_end_ms": 16293.901417002082,
+    "llm_rounds": 2,
+    "n_searches": 1,
+    "stages": {
+      "input_guardrails": 7102.411614000797,
+      "llm_tool_decisions": 945.7347029969096,
+      "retrieval": 5034.014275997877,
+      "final_call_ttft": 599.5112329983385,
+      "other_before_final": 4.06801100820303,
+      "final_generation": 697.4251599982381,
+      "after_answer": 1910.7364199981093
+    },
+    "retrieval_stages": {
+      "hybrid_rrf": 377.3,
+      "expand_adjacent": 0.1,
+      "rerank": 4656.6
+    },
+    "llm_calls": [
+      {
+        "ttft_ms": 934.4857129981392,
+        "kind": "tool_call",
+        "tools": [
+          "search_policies"
+        ],
+        "input_tokens": 1109,
+        "output_tokens": 29,
+        "latency_ms": 945.7347029969096
+      },
+      {
+        "ttft_ms": 599.5112329983385,
+        "kind": "answer",
+        "tools": [],
+        "input_tokens": 2438,
+        "output_tokens": 100,
+        "latency_ms": 1296.9363930001855
+      }
+    ],
+    "answer_preview": "Based on ShopSmart's return policy:\n\n**Smartphones & Tablets** have a standard return window of **15 days**.\n\n**Condition required:** The item must be unopened "
+  },
+  "summary": {
+    "user_ttft_ms": {
+      "n": 14,
+      "mean": 7706.8,
+      "p50": 3861.2,
+      "p90": 4605.1,
+      "p95": 23751.2,
+      "p99": 52005.7,
+      "max": 59069.3
+    },
+    "final_call_ttft_ms": {
+      "n": 14,
+      "mean": 616.6,
+      "p50": 531.6,
+      "p90": 907.7,
+      "p95": 945.8,
+      "p99": 980.1,
+      "max": 988.7
+    },
+    "model_floor_ttft_ms": {
+      "n": 7,
+      "mean": 689.6,
+      "p50": 426.6,
+      "p90": 1236.8,
+      "p95": 1594.7,
+      "p99": 1880.9,
+      "max": 1952.5
+    },
+    "end_to_end_ms": {
+      "n": 14,
+      "mean": 9983.1,
+      "p50": 6249.8,
+      "p90": 7752.9,
+      "p95": 26306.4,
+      "p99": 53826.9,
+      "max": 60707.0
+    },
+    "llm_rounds_mean": 2.0,
+    "searches_mean": 1.0
+  },
+  "ttft_breakdown_mean_ms": {
+    "input_guardrails": 192.3,
+    "llm_tool_decisions": 4594.9,
+    "retrieval": 2300.2,
+    "other_before_final": 2.7,
+    "final_call_ttft": 616.6
+  },
+  "retrieval_breakdown_mean_ms": {
+    "expand_adjacent": 0.1,
+    "hybrid_rrf": 20.3,
+    "rerank": 2279.8
+  },
+  "rows": [
+    {
+      "question": "What is the return window for a smartphone?",
+      "outcome": "answered",
+      "tool_calls": [
+        "search_policies"
+      ],
+      "user_ttft_ms": 3884.0811579898,
+      "final_call_ttft_ms": 872.8654309961712,
+      "end_to_end_ms": 6139.60108999908,
+      "llm_rounds": 2,
+      "n_searches": 1,
+      "stages": {
+        "input_guardrails": 159.92459100484848,
+        "llm_tool_decisions": 621.5287050008774,
+        "retrieval": 2227.4789559990168,
+        "final_call_ttft": 872.8654309961712,
+        "other_before_final": 2.283474989235401,
+        "final_generation": 849.964684009552,
+        "after_answer": 1405.5552479997277
+      },
+      "retrieval_stages": {
+        "hybrid_rrf": 22.2,
+        "expand_adjacent": 0.1,
+        "rerank": 2205.2
+      },
+      "llm_calls": [
+        {
+          "ttft_ms": 620.4686600030982,
+          "kind": "tool_call",
+          "tools": [
+            "search_policies"
+          ],
+          "input_tokens": 1109,
+          "output_tokens": 29,
+          "latency_ms": 621.5287050008774
+        },
+        {
+          "ttft_ms": 872.8654309961712,
+          "kind": "answer",
+          "tools": [],
+          "input_tokens": 2438,
+          "output_tokens": 108,
+          "latency_ms": 1722.830115005374
+        }
+      ],
+      "answer_preview": "The standard return window for a **Smartphones & Tablets** device is **15 days**, and the item must be **unopened or defective** to qualify.\n\nSource: `return_po",
+      "run": 0
+    },
+    {
+      "question": "How much does express shipping to Canada cost?",
+      "outcome": "answered",
+      "tool_calls": [
+        "search_policies"
+      ],
+      "user_ttft_ms": 2142.287291005254,
+      "final_call_ttft_ms": 471.2955229988438,
+      "end_to_end_ms": 2972.71280400455,
+      "llm_rounds": 2,
+      "n_searches": 1,
+      "stages": {
+        "input_guardrails": 215.3367360010743,
+        "llm_tool_decisions": 596.1203090026975,
+        "retrieval": 857.7278189957142,
+        "final_call_ttft": 471.2955229988438,
+        "other_before_final": 1.8069040104746819,
+        "final_generation": 137.5255820006132,
+        "after_answer": 692.899930998683
+      },
+      "retrieval_stages": {
+        "hybrid_rrf": 24.6,
+        "expand_adjacent": 0.1,
+        "rerank": 833.0
+      },
+      "llm_calls": [
+        {
+          "ttft_ms": 595.2200339961564,
+          "kind": "tool_call",
+          "tools": [
+            "search_policies"
+          ],
+          "input_tokens": 1109,
+          "output_tokens": 33,
+          "latency_ms": 596.1203090026975
+        },
+        {
+          "ttft_ms": 471.2955229988438,
+          "kind": "answer",
+          "tools": [],
+          "input_tokens": 2214,
+          "output_tokens": 32,
+          "latency_ms": 608.8211049959064
+        }
+      ],
+      "answer_preview": "Express shipping to Canada costs **$19.99** and takes **3\u20134 business days** (per ShopSmart's international shipping policy).",
+      "run": 0
+    },
+    {
+      "question": "Is a gaming headset classified as Audio & Headphones or as Gaming Accessories?",
+      "outcome": "answered",
+      "tool_calls": [
+        "search_policies"
+      ],
+      "user_ttft_ms": 4305.081172995269,
+      "final_call_ttft_ms": 484.537922005984,
+      "end_to_end_ms": 5623.067189991474,
+      "llm_rounds": 2,
+      "n_searches": 1,
+      "stages": {
+        "input_guardrails": 229.08353999257088,
+        "llm_tool_decisions": 682.7797609940171,
+        "retrieval": 2906.03675699234,
+        "final_call_ttft": 484.537922005984,
+        "other_before_final": 2.6431930139660835,
+        "final_generation": 312.34253200143576,
+        "after_answer": 1005.6434849947691
+      },
+      "retrieval_stages": {
+        "hybrid_rrf": 17.1,
+        "expand_adjacent": 0.1,
+        "rerank": 2888.9
+      },
+      "llm_calls": [
+        {
+          "ttft_ms": 681.3701460050652,
+          "kind": "tool_call",
+          "tools": [
+            "search_policies"
+          ],
+          "input_tokens": 1117,
+          "output_tokens": 38,
+          "latency_ms": 682.7797609940171
+        },
+        {
+          "ttft_ms": 484.537922005984,
+          "kind": "answer",
+          "tools": [],
+          "input_tokens": 2376,
+          "output_tokens": 63,
+          "latency_ms": 796.8804540038109
+        }
+      ],
+      "answer_preview": "A gaming headset is classified as **Gaming Accessories**, not Audio & Headphones.\n\nThis is stated in the Product Category Guide (section 2.7 Gaming Accessories ",
+      "run": 0
+    },
+    {
+      "question": "Who pays customs duties on an international order?",
+      "outcome": "answered",
+      "tool_calls": [
+        "search_policies"
+      ],
+      "user_ttft_ms": 4099.121161997318,
+      "final_call_ttft_ms": 532.2254019993125,
+      "end_to_end_ms": 6074.237596996129,
+      "llm_rounds": 2,
+      "n_searches": 1,
+      "stages": {
+        "input_guardrails": 185.4564529955387,
+        "llm_tool_decisions": 610.3498189970851,
+        "retrieval": 2767.901011005044,
+        "final_call_ttft": 532.2254019993125,
+        "other_before_final": 3.188477002084255,
+        "final_generation": 598.5295969992876,
+        "after_answer": 1376.5868379995227
+      },
+      "retrieval_stages": {
+        "hybrid_rrf": 23.5,
+        "expand_adjacent": 0.1,
+        "rerank": 2744.3
+      },
+      "llm_calls": [
+        {
+          "ttft_ms": 609.3273650039919,
+          "kind": "tool_call",
+          "tools": [
+            "search_policies"
+          ],
+          "input_tokens": 1109,
+          "output_tokens": 32,
+          "latency_ms": 610.3498189970851
+        },
+        {
+          "ttft_ms": 532.2254019993125,
+          "kind": "answer",
+          "tools": [],
+          "input_tokens": 2687,
+          "output_tokens": 86,
+          "latency_ms": 1130.7549989968538
+        }
+      ],
+      "answer_preview": "The recipient (customer) pays all customs duties, import taxes, VAT/GST, and carrier brokerage fees on an international order. ShopSmart does not collect, contr",
+      "run": 0
+    },
+    {
+      "question": "Can I return an opened HDMI cable that I just don't want anymore?",
+      "outcome": "answered",
+      "tool_calls": [
+        "search_policies"
+      ],
+      "user_ttft_ms": 3660.679570995271,
+      "final_call_ttft_ms": 568.5069609971833,
+      "end_to_end_ms": 6620.951799996197,
+      "llm_rounds": 2,
+      "n_searches": 1,
+      "stages": {
+        "input_guardrails": 191.37057700008154,
+        "llm_tool_decisions": 598.4227249994874,
+        "retrieval": 2299.13796800375,
+        "final_call_ttft": 568.5069609971833,
+        "other_before_final": 3.2413399964571,
+        "final_generation": 827.5916530042887,
+        "after_answer": 2132.6805759966373
+      },
+      "retrieval_stages": {
+        "hybrid_rrf": 20.5,
+        "expand_adjacent": 0.1,
+        "rerank": 2278.5
+      },
+      "llm_calls": [
+        {
+          "ttft_ms": 597.0334570010891,
+          "kind": "tool_call",
+          "tools": [
+            "search_policies"
+          ],
+          "input_tokens": 1116,
+          "output_tokens": 33,
+          "latency_ms": 598.4227249994874
+        },
+        {
+          "ttft_ms": 568.5069609971833,
+          "kind": "answer",
+          "tools": [],
+          "input_tokens": 3530,
+          "output_tokens": 157,
+          "latency_ms": 1396.098613999784
+        }
+      ],
+      "answer_preview": "Based on ShopSmart's return policy, **no \u2014 an opened HDMI cable cannot be returned as a change-of-mind return.**\n\nHere's what the policy says:\n\n- **Cables & Ada",
+      "run": 0
+    },
+    {
+      "question": "When are Next-Day delivery guarantees suspended over the holidays?",
+      "outcome": "answered",
+      "tool_calls": [
+        "search_policies"
+      ],
+      "user_ttft_ms": 3460.444265000522,
+      "final_call_ttft_ms": 486.6159239973058,
+      "end_to_end_ms": 5135.982615999877,
+      "llm_rounds": 2,
+      "n_searches": 1,
+      "stages": {
+        "input_guardrails": 175.2508529946208,
+        "llm_tool_decisions": 648.5149480029941,
+        "retrieval": 2146.882043994963,
+        "final_call_ttft": 486.6159239973058,
+        "other_before_final": 3.180496007204056,
+        "final_generation": 380.60919400304556,
+        "after_answer": 1294.9291569963098
+      },
+      "retrieval_stages": {
+        "hybrid_rrf": 22.4,
+        "expand_adjacent": 0.1,
+        "rerank": 2124.4
+      },
+      "llm_calls": [
+        {
+          "ttft_ms": 647.4253990018042,
+          "kind": "tool_call",
+          "tools": [
+            "search_policies"
+          ],
+          "input_tokens": 1111,
+          "output_tokens": 31,
+          "latency_ms": 648.5149480029941
+        },
+        {
+          "ttft_ms": 486.6159239973058,
+          "kind": "answer",
+          "tools": [],
+          "input_tokens": 3196,
+          "output_tokens": 74,
+          "latency_ms": 867.2251180037856
+        }
+      ],
+      "answer_preview": "Next-Day delivery guarantees are suspended from **December 18 to December 26** due to carrier capacity constraints. During that window, orders placed with Next-",
+      "run": 0
+    },
+    {
+      "question": "If I bought headphones on December 1, what is the last day I can return them?",
+      "outcome": "answered",
+      "tool_calls": [
+        "search_policies"
+      ],
+      "user_ttft_ms": 59069.28687699139,
+      "final_call_ttft_ms": 531.0610460001044,
+      "end_to_end_ms": 60706.97825499624,
+      "llm_rounds": 2,
+      "n_searches": 1,
+      "stages": {
+        "input_guardrails": 179.86970299482346,
+        "llm_tool_decisions": 55611.22385700792,
+        "retrieval": 2744.3853280097246,
+        "final_call_ttft": 531.0610460001044,
+        "other_before_final": 2.7469429820775986,
+        "final_generation": 612.4300620034337,
+        "after_answer": 1025.2613160014153
+      },
+      "retrieval_stages": {
+        "hybrid_rrf": 18.4,
+        "expand_adjacent": 0.1,
+        "rerank": 2725.9
+      },
+      "llm_calls": [
+        {
+          "ttft_ms": 55610.59959499835,
+          "kind": "tool_call",
+          "tools": [
+            "search_policies"
+          ],
+          "input_tokens": 1120,
+          "output_tokens": 30,
+          "latency_ms": 55611.22385700792
+        },
+        {
+          "ttft_ms": 531.0610460001044,
+          "kind": "answer",
+          "tools": [],
+          "input_tokens": 2772,
+          "output_tokens": 85,
+          "latency_ms": 1143.4911080002785
+        }
+      ],
+      "answer_preview": "Headphones fall under the **Audio & Headphones** category, which has a standard return window of **30 days** (original packaging required).\n\nIf you bought them ",
+      "run": 0
+    },
+    {
+      "question": "What is the return window for a smartphone?",
+      "outcome": "answered",
+      "tool_calls": [
+        "search_policies"
+      ],
+      "user_ttft_ms": 3480.838036008179,
+      "final_call_ttft_ms": 584.2415080041974,
+      "end_to_end_ms": 7783.051040001214,
+      "llm_rounds": 2,
+      "n_searches": 1,
+      "stages": {
+        "input_guardrails": 190.95731700956821,
+        "llm_tool_decisions": 628.5371259897947,
+        "retrieval": 2074.482852987945,
+        "final_call_ttft": 584.2415080041974,
+        "other_before_final": 2.619232013821602,
+        "final_generation": 2617.1528639942408,
+        "after_answer": 1685.0601399987936
+      },
+      "retrieval_stages": {
+        "hybrid_rrf": 20.1,
+        "expand_adjacent": 0.1,
+        "rerank": 2054.3
+      },
+      "llm_calls": [
+        {
+          "ttft_ms": 627.1261399961077,
+          "kind": "tool_call",
+          "tools": [
+            "search_policies"
+          ],
+          "input_tokens": 1109,
+          "output_tokens": 29,
+          "latency_ms": 628.5371259897947
+        },
+        {
+          "ttft_ms": 584.2415080041974,
+          "kind": "answer",
+          "tools": [],
+          "input_tokens": 2438,
+          "output_tokens": 121,
+          "latency_ms": 3201.3943720012903
+        }
+      ],
+      "answer_preview": "The return window for a smartphone (Smartphones & Tablets category) is **15 days**.\n\n**Condition required:** The item must be unopened or defective.\n\n**Sources:",
+      "run": 1
+    },
+    {
+      "question": "How much does express shipping to Canada cost?",
+      "outcome": "answered",
+      "tool_calls": [
+        "search_policies"
+      ],
+      "user_ttft_ms": 3068.473695009947,
+      "final_call_ttft_ms": 922.6272370069637,
+      "end_to_end_ms": 6967.049024000764,
+      "llm_rounds": 2,
+      "n_searches": 1,
+      "stages": {
+        "input_guardrails": 173.59492100030184,
+        "llm_tool_decisions": 643.5440480038524,
+        "retrieval": 1326.7876369953156,
+        "final_call_ttft": 922.6272370069637,
+        "other_before_final": 1.919852003455162,
+        "final_generation": 2928.9412729889154,
+        "after_answer": 969.6340560019016
+      },
+      "retrieval_stages": {
+        "hybrid_rrf": 25.0,
+        "expand_adjacent": 0.1,
+        "rerank": 1301.7
+      },
+      "llm_calls": [
+        {
+          "ttft_ms": 642.6225180039182,
+          "kind": "tool_call",
+          "tools": [
+            "search_policies"
+          ],
+          "input_tokens": 1109,
+          "output_tokens": 33,
+          "latency_ms": 643.5440480038524
+        },
+        {
+          "ttft_ms": 922.6272370069637,
+          "kind": "answer",
+          "tools": [],
+          "input_tokens": 2214,
+          "output_tokens": 48,
+          "latency_ms": 3851.5685099959373
+        }
+      ],
+      "answer_preview": "Express shipping to Canada costs **$19.99** and takes **3\u20134 business days** (per ShopSmart's international shipping policy).\n\nSources: `international_shipping.h",
+      "run": 1
+    },
+    {
+      "question": "Is a gaming headset classified as Audio & Headphones or as Gaming Accessories?",
+      "outcome": "answered",
+      "tool_calls": [
+        "search_policies"
+      ],
+      "user_ttft_ms": 4294.660626001656,
+      "final_call_ttft_ms": 508.18086200160906,
+      "end_to_end_ms": 6360.022172003984,
+      "llm_rounds": 2,
+      "n_searches": 1,
+      "stages": {
+        "input_guardrails": 169.85751499980688,
+        "llm_tool_decisions": 848.1652010083199,
+        "retrieval": 2766.2146239951253,
+        "final_call_ttft": 508.18086200160906,
+        "other_before_final": 2.2424239963293076,
+        "final_generation": 590.8843540027738,
+        "after_answer": 1474.4771919995546
+      },
+      "retrieval_stages": {
+        "hybrid_rrf": 16.5,
+        "expand_adjacent": 0.1,
+        "rerank": 2749.6
+      },
+      "llm_calls": [
+        {
+          "ttft_ms": 847.5002729974221,
+          "kind": "tool_call",
+          "tools": [
+            "search_policies"
+          ],
+          "input_tokens": 1117,
+          "output_tokens": 38,
+          "latency_ms": 848.1652010083199
+        },
+        {
+          "ttft_ms": 508.18086200160906,
+          "kind": "answer",
+          "tools": [],
+          "input_tokens": 2376,
+          "output_tokens": 114,
+          "latency_ms": 1099.0652160048485
+        }
+      ],
+      "answer_preview": "A gaming headset is classified as **Gaming Accessories**, not Audio & Headphones.\n\nThis is confirmed in ShopSmart's Product Category Guide (section 2.7 Gaming A",
+      "run": 1
+    },
+    {
+      "question": "Who pays customs duties on an international order?",
+      "outcome": "answered",
+      "tool_calls": [
+        "search_policies"
+      ],
+      "user_ttft_ms": 4733.741994000971,
+      "final_call_ttft_ms": 988.7311060010688,
+      "end_to_end_ms": 6638.8531299978495,
+      "llm_rounds": 2,
+      "n_searches": 1,
+      "stages": {
+        "input_guardrails": 175.65158899128437,
+        "llm_tool_decisions": 789.1412010118365,
+        "retrieval": 2777.2153469994664,
+        "final_call_ttft": 988.7311060010688,
+        "other_before_final": 3.002751000225544,
+        "final_generation": 471.1151649951935,
+        "after_answer": 1433.9959710016847
+      },
+      "retrieval_stages": {
+        "hybrid_rrf": 17.1,
+        "expand_adjacent": 0.1,
+        "rerank": 2760.0
+      },
+      "llm_calls": [
+        {
+          "ttft_ms": 788.3980659971712,
+          "kind": "tool_call",
+          "tools": [
+            "search_policies"
+          ],
+          "input_tokens": 1109,
+          "output_tokens": 32,
+          "latency_ms": 789.1412010118365
+        },
+        {
+          "ttft_ms": 988.7311060010688,
+          "kind": "answer",
+          "tools": [],
+          "input_tokens": 2687,
+          "output_tokens": 80,
+          "latency_ms": 1459.846270993352
+        }
+      ],
+      "answer_preview": "The **recipient (customer)** pays all customs duties, import taxes, VAT/GST, and carrier brokerage fees on an international order. ShopSmart does not collect, c",
+      "run": 1
+    },
+    {
+      "question": "Can I return an opened HDMI cable that I just don't want anymore?",
+      "outcome": "answered",
+      "tool_calls": [
+        "search_policies"
+      ],
+      "user_ttft_ms": 4282.813067004085,
+      "final_call_ttft_ms": 691.6451340002823,
+      "end_to_end_ms": 7682.699335999787,
+      "llm_rounds": 2,
+      "n_searches": 1,
+      "stages": {
+        "input_guardrails": 220.55854099988937,
+        "llm_tool_decisions": 568.6603600010276,
+        "retrieval": 2799.072815991938,
+        "final_call_ttft": 691.6451340002823,
+        "other_before_final": 2.876216009259224,
+        "final_generation": 927.324501991272,
+        "after_answer": 2472.5617670044303
+      },
+      "retrieval_stages": {
+        "hybrid_rrf": 16.6,
+        "expand_adjacent": 0.1,
+        "rerank": 2782.3
+      },
+      "llm_calls": [
+        {
+          "ttft_ms": 555.3201270013233,
+          "kind": "tool_call",
+          "tools": [
+            "search_policies"
+          ],
+          "input_tokens": 1116,
+          "output_tokens": 33,
+          "latency_ms": 568.6603600010276
+        },
+        {
+          "ttft_ms": 691.6451340002823,
+          "kind": "answer",
+          "tools": [],
+          "input_tokens": 3530,
+          "output_tokens": 174,
+          "latency_ms": 1618.9696359932423
+        }
+      ],
+      "answer_preview": "No \u2014 an opened HDMI cable cannot be returned as a change-of-mind return.\n\nHere's what the policy says:\n\n- **Cables & Adapters** have a **45-day return window**,",
+      "run": 1
+    },
+    {
+      "question": "When are Next-Day delivery guarantees suspended over the holidays?",
+      "outcome": "answered",
+      "tool_calls": [
+        "search_policies"
+      ],
+      "user_ttft_ms": 3574.776028007269,
+      "final_call_ttft_ms": 485.4492130034487,
+      "end_to_end_ms": 5681.765238001943,
+      "llm_rounds": 2,
+      "n_searches": 1,
+      "stages": {
+        "input_guardrails": 179.3538749963045,
+        "llm_tool_decisions": 748.4494590014219,
+        "retrieval": 2158.4706640020013,
+        "final_call_ttft": 485.4492130034487,
+        "other_before_final": 3.05281700193882,
+        "final_generation": 447.41171899437904,
+        "after_answer": 1659.5774910002947
+      },
+      "retrieval_stages": {
+        "hybrid_rrf": 24.2,
+        "expand_adjacent": 0.1,
+        "rerank": 2134.2
+      },
+      "llm_calls": [
+        {
+          "ttft_ms": 747.2114549964317,
+          "kind": "tool_call",
+          "tools": [
+            "search_policies"
+          ],
+          "input_tokens": 1111,
+          "output_tokens": 31,
+          "latency_ms": 748.4494590014219
+        },
+        {
+          "ttft_ms": 485.4492130034487,
+          "kind": "answer",
+          "tools": [],
+          "input_tokens": 3196,
+          "output_tokens": 95,
+          "latency_ms": 932.8609319999814
+        }
+      ],
+      "answer_preview": "Next-Day delivery guarantees are suspended from **December 18 to December 26** due to carrier capacity constraints. During that window, orders placed with Next-",
+      "run": 1
+    },
+    {
+      "question": "If I bought headphones on December 1, what is the last day I can return them?",
+      "outcome": "answered",
+      "tool_calls": [
+        "search_policies"
+      ],
+      "user_ttft_ms": 3838.2819000035524,
+      "final_call_ttft_ms": 505.0232430003234,
+      "end_to_end_ms": 5376.728436000645,
+      "llm_rounds": 2,
+      "n_searches": 1,
+      "stages": {
+        "input_guardrails": 246.30467800050974,
+        "llm_tool_decisions": 732.8809090033174,
+        "retrieval": 2351.3174810037017,
+        "final_call_ttft": 505.0232430003234,
+        "other_before_final": 2.7555889934301376,
+        "final_generation": 593.7436209991574,
+        "after_answer": 944.7029149979353
+      },
+      "retrieval_stages": {
+        "hybrid_rrf": 15.6,
+        "expand_adjacent": 0.1,
+        "rerank": 2335.6
+      },
+      "llm_calls": [
+        {
+          "ttft_ms": 520.8868369954871,
+          "kind": "tool_call",
+          "tools": [
+            "search_policies"
+          ],
+          "input_tokens": 1120,
+          "output_tokens": 46,
+          "latency_ms": 732.8809090033174
+        },
+        {
+          "ttft_ms": 505.0232430003234,
+          "kind": "answer",
+          "tools": [],
+          "input_tokens": 2788,
+          "output_tokens": 99,
+          "latency_ms": 1098.766864001751
+        }
+      ],
+      "answer_preview": "Headphones fall under the **Audio & Headphones** category, which has a standard return window of **30 days** (original packaging required), per ShopSmart\u2019s retu",
+      "run": 1
+    }
+  ]
+}

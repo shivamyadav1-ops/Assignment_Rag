@@ -1,0 +1,284 @@
+{
+  "kind": "judge_calibration",
+  "label": "final",
+  "created": "2026-11-10T13:06:59.587913+00:00",
+  "judge_model": "nvidia/nemotron-3-ultra-550b-a55b",
+  "summary": {
+    "n": 26,
+    "judged": 26,
+    "exact_agreement": 1.0,
+    "binary_agreement": 1.0,
+    "score_mae": 0.0,
+    "too_harsh": 0,
+    "too_lenient": 0,
+    "exact_holdout": 1.0,
+    "exact_tuning": 1.0
+  },
+  "confusion": {
+    "correct->correct": 13,
+    "incorrect->incorrect": 8,
+    "partially_correct->partially_correct": 5
+  },
+  "rows": [
+    {
+      "id": "j01",
+      "split": "tuning",
+      "probe": "paraphrase",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "The candidate correctly states the 15-day return window for smartphones measured from the delivery date, matching all required facts from the reference.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j02",
+      "split": "tuning",
+      "probe": "arithmetic_equivalent",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "The candidate correctly states the 15-day return window for smartphones from delivery; the additional Premium member detail is extra but not contradictory.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j03",
+      "split": "tuning",
+      "probe": "omits_unasked_scope",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "The candidate correctly states the 15-day return window for smartphones measured from delivery, matching all required facts from the reference.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j04",
+      "split": "tuning",
+      "probe": "omits_unasked_detail",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "The candidate provides the exact cost for express shipping to Canada as stated in the reference answer.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j05",
+      "split": "tuning",
+      "probe": "extra_correct_detail",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "The candidate accurately states that the recipient pays all customs duties, import taxes, VAT/GST, and carrier brokerage fees, and that ShopSmart does not collect or control these charges, matching the reference answer completely.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j06",
+      "split": "tuning",
+      "probe": "rounding",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "The candidate answer correctly states the conclusion and all required facts including product, delivery timing, standard window, premium extension, and remaining days without any contradictions or leaks.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j07",
+      "split": "tuning",
+      "probe": "date_arithmetic",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "The candidate provides the correct return date and accurately explains both the standard 30-day window and the holiday extension policy that makes January 31 the applicable deadline.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j08",
+      "split": "tuning",
+      "probe": "refusal_ok",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "The candidate correctly declines the out-of-scope question and states the supported topics without leaking any information.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j09",
+      "split": "tuning",
+      "probe": "refusal_ok",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "The candidate correctly refuses to show the order, states it belongs to a different account, and suggests verifying the order ID without leaking any details.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j10",
+      "split": "tuning",
+      "probe": "unconfirmed_ok",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "The candidate correctly states that no student discount is found in policy, cannot confirm one, and offers escalation without inventing a discount.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j11",
+      "split": "tuning",
+      "probe": "missing_reason",
+      "expected": "partially_correct",
+      "verdict": "partially_correct",
+      "reason": "The candidate correctly states the conclusion (no return) but omits all required supporting facts: product category, window calculation, delivery age, and how long ago the window closed.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j12",
+      "split": "tuning",
+      "probe": "missing_amount",
+      "expected": "partially_correct",
+      "verdict": "partially_correct",
+      "reason": "The candidate confirms the refund was processed but omits the amount ($211.65) and the method (store credit), which are required facts from the reference answer.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j13",
+      "split": "tuning",
+      "probe": "missing_end_date",
+      "expected": "partially_correct",
+      "verdict": "partially_correct",
+      "reason": "The candidate correctly states the suspension starts December 18 but omits the end date of December 26, which is a required fact for the complete answer.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j14",
+      "split": "tuning",
+      "probe": "missing_reason",
+      "expected": "partially_correct",
+      "verdict": "partially_correct",
+      "reason": "The candidate states the correct conclusion but omits the required reason (category rule).",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j15",
+      "split": "tuning",
+      "probe": "wrong_number",
+      "expected": "incorrect",
+      "verdict": "incorrect",
+      "reason": "The candidate states a 30-day return window, which contradicts the reference's 15-day window for smartphones.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j16",
+      "split": "tuning",
+      "probe": "wrong_conclusion",
+      "expected": "incorrect",
+      "verdict": "incorrect",
+      "reason": "The candidate incorrectly states the opened cable can be returned, missing the critical condition that change-of-mind returns require the item to be unopened.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j17",
+      "split": "tuning",
+      "probe": "wrong_conclusion",
+      "expected": "incorrect",
+      "verdict": "incorrect",
+      "reason": "The candidate incorrectly states the return is allowed and contradicts the required facts about the delivery date and window closure.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j18",
+      "split": "tuning",
+      "probe": "refusal_leaks",
+      "expected": "incorrect",
+      "verdict": "incorrect",
+      "reason": "The candidate revealed specific order details (ThinkPad X1 Carbon Gen 11, delivered yesterday) for an order belonging to another account, violating privacy policy.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j19",
+      "split": "tuning",
+      "probe": "invented_policy",
+      "expected": "incorrect",
+      "verdict": "incorrect",
+      "reason": "The candidate invents a 10% student discount that contradicts the reference stating no policy mentions such a discount, and fails to offer escalation.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j20",
+      "split": "tuning",
+      "probe": "wrong_date",
+      "expected": "incorrect",
+      "verdict": "incorrect",
+      "reason": "The candidate gives the wrong return date (December 31 instead of January 31) and omits the extended holiday return policy that overrides the standard 30-day window.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "h01",
+      "split": "holdout",
+      "probe": "omits_unasked_detail",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "The candidate correctly states the classification conclusion; the return window detail in the reference is optional for this question.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "h02",
+      "split": "holdout",
+      "probe": "paraphrase",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "The candidate correctly states the conclusion and the two required facts (shipped but not delivered, return only after delivery) without contradiction or leakage.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "h03",
+      "split": "holdout",
+      "probe": "invented_fact",
+      "expected": "incorrect",
+      "verdict": "incorrect",
+      "reason": "The candidate states the order is out for delivery when the reference confirms no such order exists.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "h04",
+      "split": "holdout",
+      "probe": "wrong_conclusion",
+      "expected": "incorrect",
+      "verdict": "incorrect",
+      "reason": "The candidate states ShopSmart pays customs duties, directly contradicting the reference that the recipient pays all duties and fees.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "h05",
+      "split": "holdout",
+      "probe": "missing_reason",
+      "expected": "partially_correct",
+      "verdict": "partially_correct",
+      "reason": "The candidate gives the correct conclusion but omits all required supporting facts (product category, standard window, delivery age, premium extension, and days remaining).",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "h06",
+      "split": "holdout",
+      "probe": "paraphrase",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "The candidate accurately states the suspension period for Next-Day and Premium Same-Day delivery guarantees as December 18 to December 26, matching the reference answer.",
+      "error": null,
+      "match": true
+    }
+  ]
+}

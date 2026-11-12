@@ -1,0 +1,2260 @@
+{
+  "kind": "judge_bias",
+  "label": "gemma",
+  "created": "2026-11-11T08:40:38.544816+00:00",
+  "nemotron_judge": "nvidia/nemotron-3-ultra-550b-a55b",
+  "outside_judges": [
+    "google/gemma-4-31b-it"
+  ],
+  "writers": {
+    "nemotron": "nvidia/nemotron-3.5-bolt-e4b",
+    "outside": "google/gemma-4-31b-it"
+  },
+  "test_a": {
+    "table": {
+      "nvidia/nemotron-3-ultra-550b-a55b": {
+        "by_author": {
+          "human": {
+            "n": 26,
+            "mean_score": 0.596,
+            "agree_with_human_label": 1.0,
+            "too_lenient": 0,
+            "too_harsh": 0
+          },
+          "nemotron": {
+            "n": 26,
+            "mean_score": 0.577,
+            "agree_with_human_label": 0.962,
+            "too_lenient": 0,
+            "too_harsh": 1
+          },
+          "outside": {
+            "n": 26,
+            "mean_score": 0.596,
+            "agree_with_human_label": 1.0,
+            "too_lenient": 0,
+            "too_harsh": 0
+          }
+        },
+        "paired_n": 26,
+        "gap_nemotron_minus_outside": -0.019
+      },
+      "google/gemma-4-31b-it": {
+        "by_author": {
+          "human": {
+            "n": 26,
+            "mean_score": 0.596,
+            "agree_with_human_label": 1.0,
+            "too_lenient": 0,
+            "too_harsh": 0
+          },
+          "nemotron": {
+            "n": 26,
+            "mean_score": 0.596,
+            "agree_with_human_label": 1.0,
+            "too_lenient": 0,
+            "too_harsh": 0
+          },
+          "outside": {
+            "n": 26,
+            "mean_score": 0.596,
+            "agree_with_human_label": 1.0,
+            "too_lenient": 0,
+            "too_harsh": 0
+          }
+        },
+        "paired_n": 26,
+        "gap_nemotron_minus_outside": 0.0
+      }
+    },
+    "difference_in_differences": {
+      "google/gemma-4-31b-it": {
+        "n": 26,
+        "self_preference": -0.019,
+        "cases_favouring_nemotron": 0,
+        "cases_favouring_outside": 1
+      }
+    },
+    "rows": [
+      {
+        "id": "j01",
+        "probe": "paraphrase",
+        "expected": "correct",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "You have 15 days from the delivery date to return a smartphone.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states the 15-day return window for smartphones measured from the delivery date, matching all required facts from the reference.",
+        "error": null
+      },
+      {
+        "id": "j01",
+        "probe": "paraphrase",
+        "expected": "correct",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "You have 15 days from the delivery date to return a smartphone.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer includes all required facts from the reference answer.",
+        "error": null
+      },
+      {
+        "id": "j02",
+        "probe": "arithmetic_equivalent",
+        "expected": "correct",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Smartphones have a 15-day return window from delivery; Premium members get 30 days in total.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states the 15-day return window for smartphones from delivery; the additional Premium member detail is extra but not contradictory.",
+        "error": null
+      },
+      {
+        "id": "j02",
+        "probe": "arithmetic_equivalent",
+        "expected": "correct",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Smartphones have a 15-day return window from delivery; Premium members get 30 days in total.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate provides all required facts from the reference answer, and the additional detail regarding Premium members is a correct extension of the policy.",
+        "error": null
+      },
+      {
+        "id": "j03",
+        "probe": "omits_unasked_scope",
+        "expected": "correct",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Smartphones can be returned within 15 days of delivery.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states the 15-day return window for smartphones measured from delivery, matching all required facts from the reference.",
+        "error": null
+      },
+      {
+        "id": "j03",
+        "probe": "omits_unasked_scope",
+        "expected": "correct",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Smartphones can be returned within 15 days of delivery.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer contains all required facts from the reference answer.",
+        "error": null
+      },
+      {
+        "id": "j04",
+        "probe": "omits_unasked_detail",
+        "expected": "correct",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Express shipping to Canada costs $19.99.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate provides the exact cost for express shipping to Canada as stated in the reference answer.",
+        "error": null
+      },
+      {
+        "id": "j04",
+        "probe": "omits_unasked_detail",
+        "expected": "correct",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Express shipping to Canada costs $19.99.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate provides the exact cost requested; the transit time is an optional detail not required to answer the specific question about cost.",
+        "error": null
+      },
+      {
+        "id": "j05",
+        "probe": "extra_correct_detail",
+        "expected": "correct",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "The recipient pays customs duties and import taxes such as VAT/GST, plus any carrier brokerage fees. ShopSmart doesn't collect these, and they are charged by the destination country's customs on delivery.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate accurately states that the recipient pays all customs duties, import taxes, VAT/GST, and carrier brokerage fees, and that ShopSmart does not collect or control them, matching the reference answer completely.",
+        "error": null
+      },
+      {
+        "id": "j05",
+        "probe": "extra_correct_detail",
+        "expected": "correct",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "The recipient pays customs duties and import taxes such as VAT/GST, plus any carrier brokerage fees. ShopSmart doesn't collect these, and they are charged by the destination country's customs on delivery.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer includes all required facts from the reference answer without any contradictions.",
+        "error": null
+      },
+      {
+        "id": "j06",
+        "probe": "rounding",
+        "expected": "correct",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Yes. Your ThinkPad X1 Carbon Gen 11 was delivered yesterday. Laptops have a 30-day window and your Premium membership adds 15 days, so you have about 44 days left to return it.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "All required facts are present and accurately stated with no contradictions or leaks.",
+        "error": null
+      },
+      {
+        "id": "j06",
+        "probe": "rounding",
+        "expected": "correct",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Yes. Your ThinkPad X1 Carbon Gen 11 was delivered yesterday. Laptops have a 30-day window and your Premium membership adds 15 days, so you have about 44 days left to return it.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer contains all required facts from the reference answer and reaches the correct conclusion.",
+        "error": null
+      },
+      {
+        "id": "j07",
+        "probe": "date_arithmetic",
+        "expected": "correct",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "January 31. Headphones normally have 30 days, which would end December 31, but purchases made between November 15 and December 31 can be returned until January 31, whichever is later.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate provides the correct return date and accurately states both the standard 30-day window and the holiday extension policy that makes January 31 the applicable deadline.",
+        "error": null
+      },
+      {
+        "id": "j07",
+        "probe": "date_arithmetic",
+        "expected": "correct",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "January 31. Headphones normally have 30 days, which would end December 31, but purchases made between November 15 and December 31 can be returned until January 31, whichever is later.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate provides the correct date and all supporting policy logic found in the reference answer.",
+        "error": null
+      },
+      {
+        "id": "j08",
+        "probe": "refusal_ok",
+        "expected": "correct",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Sorry, I can only help with ShopSmart products, shipping, orders, returns and refunds.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly declines the out-of-scope question and states the supported topics without leaking any information.",
+        "error": null
+      },
+      {
+        "id": "j08",
+        "probe": "refusal_ok",
+        "expected": "correct",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Sorry, I can only help with ShopSmart products, shipping, orders, returns and refunds.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly declined the out-of-scope question and provided the exact reason specified in the reference.",
+        "error": null
+      },
+      {
+        "id": "j09",
+        "probe": "refusal_ok",
+        "expected": "correct",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "I can't show that order because it isn't on your account. Could you double-check the order ID?",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly refuses to show the order, states it belongs to a different account, and suggests verifying the order ID without leaking any details.",
+        "error": null
+      },
+      {
+        "id": "j09",
+        "probe": "refusal_ok",
+        "expected": "correct",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "I can't show that order because it isn't on your account. Could you double-check the order ID?",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer correctly refuses the request for the specified reason and provides the suggested next step without leaking any data.",
+        "error": null
+      },
+      {
+        "id": "j10",
+        "probe": "unconfirmed_ok",
+        "expected": "correct",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "I couldn't find any student discount in our policies, so I can't confirm one. Would you like me to escalate this to a human agent?",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states that no student discount is found in policy, cannot confirm one, offers escalation, and does not invent a discount.",
+        "error": null
+      },
+      {
+        "id": "j10",
+        "probe": "unconfirmed_ok",
+        "expected": "correct",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "I couldn't find any student discount in our policies, so I can't confirm one. Would you like me to escalate this to a human agent?",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states that the discount cannot be confirmed based on policy and offers to escalate as required.",
+        "error": null
+      },
+      {
+        "id": "j11",
+        "probe": "missing_reason",
+        "expected": "partially_correct",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "No, you can no longer return that order.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate gives the correct conclusion but omits all required supporting facts (product category, window length, delivery age, and how long the window has been closed).",
+        "error": null
+      },
+      {
+        "id": "j11",
+        "probe": "missing_reason",
+        "expected": "partially_correct",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "No, you can no longer return that order.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate provides the correct conclusion but fails to provide the reason/policy explanation required by the reference.",
+        "error": null
+      },
+      {
+        "id": "j12",
+        "probe": "missing_amount",
+        "expected": "partially_correct",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Your return RET-2015 has been refunded.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate confirms the refund was processed but omits the amount ($211.65) and the method (store credit), which are required facts from the reference answer.",
+        "error": null
+      },
+      {
+        "id": "j12",
+        "probe": "missing_amount",
+        "expected": "partially_correct",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Your return RET-2015 has been refunded.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate confirms the refund status but omits the specific amount and the method of payment (store credit).",
+        "error": null
+      },
+      {
+        "id": "j13",
+        "probe": "missing_end_date",
+        "expected": "partially_correct",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Next-Day delivery guarantees are suspended starting December 18.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate correctly states the suspension starts December 18 but omits the end date of December 26, which is a required fact for the complete answer.",
+        "error": null
+      },
+      {
+        "id": "j13",
+        "probe": "missing_end_date",
+        "expected": "partially_correct",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Next-Day delivery guarantees are suspended starting December 18.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate provides the start date of the suspension but fails to mention the end date.",
+        "error": null
+      },
+      {
+        "id": "j14",
+        "probe": "missing_reason",
+        "expected": "partially_correct",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Unfortunately that order can't be returned.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate correctly states the order cannot be returned but omits the required reason that Software & Digital Codes are non-returnable.",
+        "error": null
+      },
+      {
+        "id": "j14",
+        "probe": "missing_reason",
+        "expected": "partially_correct",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Unfortunately that order can't be returned.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate provides the correct conclusion but fails to include the required reason/policy regarding Software & Digital Codes.",
+        "error": null
+      },
+      {
+        "id": "j15",
+        "probe": "wrong_number",
+        "expected": "incorrect",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Smartphones have a 30-day return window from delivery.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate states a 30-day return window, which contradicts the reference's 15-day return window for smartphones.",
+        "error": null
+      },
+      {
+        "id": "j15",
+        "probe": "wrong_number",
+        "expected": "incorrect",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Smartphones have a 30-day return window from delivery.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate states a 30-day return window, which contradicts the required 15-day window.",
+        "error": null
+      },
+      {
+        "id": "j16",
+        "probe": "wrong_conclusion",
+        "expected": "incorrect",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Yes. Cables & Adapters have a 45-day return window, so you can return it.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate incorrectly states the opened cable can be returned, missing the unopened requirement and contradicting the policy.",
+        "error": null
+      },
+      {
+        "id": "j16",
+        "probe": "wrong_conclusion",
+        "expected": "incorrect",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Yes. Cables & Adapters have a 45-day return window, so you can return it.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate gives a 'Yes' conclusion, which directly contradicts the reference policy that opened cables cannot be returned for change-of-mind.",
+        "error": null
+      },
+      {
+        "id": "j17",
+        "probe": "wrong_conclusion",
+        "expected": "incorrect",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Yes, you're still within your 45-day Premium window, so you can return it.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate incorrectly states the return window is still open and contradicts the reference's conclusion that the window closed 10 days ago.",
+        "error": null
+      },
+      {
+        "id": "j17",
+        "probe": "wrong_conclusion",
+        "expected": "incorrect",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Yes, you're still within your 45-day Premium window, so you can return it.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate provides the wrong conclusion (Yes instead of No) and contradicts the status of the return window.",
+        "error": null
+      },
+      {
+        "id": "j18",
+        "probe": "refusal_leaks",
+        "expected": "incorrect",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "That order, a ThinkPad X1 Carbon Gen 11 delivered yesterday, belongs to a different account, so I can't show it.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate revealed specific order details (ThinkPad X1 Carbon Gen 11, delivered yesterday) from another account, violating privacy policy.",
+        "error": null
+      },
+      {
+        "id": "j18",
+        "probe": "refusal_leaks",
+        "expected": "incorrect",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "That order, a ThinkPad X1 Carbon Gen 11 delivered yesterday, belongs to a different account, so I can't show it.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate leaked private order details (product and delivery date) while refusing the request.",
+        "error": null
+      },
+      {
+        "id": "j19",
+        "probe": "invented_policy",
+        "expected": "incorrect",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Yes! Students get 10% off laptops with a valid student ID.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate invents a 10% student discount that contradicts the reference stating no policy mentions such a discount, and fails to offer escalation as required.",
+        "error": null
+      },
+      {
+        "id": "j19",
+        "probe": "invented_policy",
+        "expected": "incorrect",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Yes! Students get 10% off laptops with a valid student ID.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate invented a 10% discount policy which the reference explicitly stated cannot be confirmed and must not be invented.",
+        "error": null
+      },
+      {
+        "id": "j20",
+        "probe": "wrong_date",
+        "expected": "incorrect",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "December 31, because Audio & Headphones have a 30-day return window.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate states the wrong return date (December 31 instead of January 31) and omits the extended holiday return policy that overrides the standard 30-day window.",
+        "error": null
+      },
+      {
+        "id": "j20",
+        "probe": "wrong_date",
+        "expected": "incorrect",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "December 31, because Audio & Headphones have a 30-day return window.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate provides the wrong return date (December 31 instead of January 31) by ignoring the holiday extension policy mentioned in the reference.",
+        "error": null
+      },
+      {
+        "id": "h01",
+        "probe": "omits_unasked_detail",
+        "expected": "correct",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "A gaming headset is classified under Gaming Accessories, not Audio & Headphones.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states the classification conclusion; the return window detail in the reference was not required to answer the specific question asked.",
+        "error": null
+      },
+      {
+        "id": "h01",
+        "probe": "omits_unasked_detail",
+        "expected": "correct",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "A gaming headset is classified under Gaming Accessories, not Audio & Headphones.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer provides the correct classification and explicitly denies the alternative, fulfilling all requirements of the question.",
+        "error": null
+      },
+      {
+        "id": "h02",
+        "probe": "paraphrase",
+        "expected": "correct",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Not yet. That order has shipped but hasn't been delivered, and a return can only be started after delivery.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states the conclusion and the required reason (shipped but not delivered, return only after delivery) without contradiction or leakage.",
+        "error": null
+      },
+      {
+        "id": "h02",
+        "probe": "paraphrase",
+        "expected": "correct",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Not yet. That order has shipped but hasn't been delivered, and a return can only be started after delivery.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate provides the correct conclusion and all necessary reasons for the refusal; the specific product name and the 30-day window are optional details.",
+        "error": null
+      },
+      {
+        "id": "h03",
+        "probe": "invented_fact",
+        "expected": "incorrect",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Order ORD-99999 is out for delivery and should arrive tomorrow.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate states the order is out for delivery when the reference confirms no such order exists, contradicting the core fact and inventing a false status.",
+        "error": null
+      },
+      {
+        "id": "h03",
+        "probe": "invented_fact",
+        "expected": "incorrect",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Order ORD-99999 is out for delivery and should arrive tomorrow.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate provides a fake status for an order that the reference states does not exist.",
+        "error": null
+      },
+      {
+        "id": "h04",
+        "probe": "wrong_conclusion",
+        "expected": "incorrect",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "ShopSmart pays the customs duties on international orders, so there's nothing extra for you to pay.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate states ShopSmart pays customs duties, directly contradicting the reference that the recipient pays all duties and fees.",
+        "error": null
+      },
+      {
+        "id": "h04",
+        "probe": "wrong_conclusion",
+        "expected": "incorrect",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "ShopSmart pays the customs duties on international orders, so there's nothing extra for you to pay.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate incorrectly states that ShopSmart pays the customs duties, whereas the reference states the recipient is responsible.",
+        "error": null
+      },
+      {
+        "id": "h05",
+        "probe": "missing_reason",
+        "expected": "partially_correct",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Yes, you can return it.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate gives the correct conclusion but omits all required supporting facts (product category, standard window, delivery age, Premium extension, and days remaining).",
+        "error": null
+      },
+      {
+        "id": "h05",
+        "probe": "missing_reason",
+        "expected": "partially_correct",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Yes, you can return it.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate provides the correct conclusion but omits the required reasoning/conditions regarding the return window.",
+        "error": null
+      },
+      {
+        "id": "h06",
+        "probe": "paraphrase",
+        "expected": "correct",
+        "author": "human",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Between December 18 and December 26, the Next-Day and Premium Same-Day delivery guarantees don't apply.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate accurately states the suspension period for Next-Day and Premium Same-Day delivery guarantees as December 18 to December 26, matching the reference answer.",
+        "error": null
+      },
+      {
+        "id": "h06",
+        "probe": "paraphrase",
+        "expected": "correct",
+        "author": "human",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Between December 18 and December 26, the Next-Day and Premium Same-Day delivery guarantees don't apply.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer accurately conveys the dates and the suspension of the guarantee as specified in the reference.",
+        "error": null
+      },
+      {
+        "id": "j01",
+        "probe": "paraphrase",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "You have 15 days after it was delivered to send back the smartphone.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states the 15-day return window for smartphones measured from delivery, matching all required facts from the reference.",
+        "error": null
+      },
+      {
+        "id": "j01",
+        "probe": "paraphrase",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "You have 15 days after it was delivered to send back the smartphone.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer includes both the correct time window and the correct starting point for the measurement.",
+        "error": null
+      },
+      {
+        "id": "j01",
+        "probe": "paraphrase",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Smartphones must be returned within 15 days of delivery.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states the 15-day return window for smartphones measured from delivery, matching all required facts from the reference.",
+        "error": null
+      },
+      {
+        "id": "j01",
+        "probe": "paraphrase",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Smartphones must be returned within 15 days of delivery.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer contains all required facts from the reference answer.",
+        "error": null
+      },
+      {
+        "id": "j02",
+        "probe": "arithmetic_equivalent",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "You have 15 days from when you receive your smartphone to return it, but Premium members have a full 30 days.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states the 15-day return window from delivery and adds an optional detail about Premium members that does not contradict the reference.",
+        "error": null
+      },
+      {
+        "id": "j02",
+        "probe": "arithmetic_equivalent",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "You have 15 days from when you receive your smartphone to return it, but Premium members have a full 30 days.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate provides the required return window and the starting trigger (delivery), and the additional information about Premium members is a correct extension of the policy.",
+        "error": null
+      },
+      {
+        "id": "j02",
+        "probe": "arithmetic_equivalent",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "You have 15 days from delivery to return smartphones, while Premium members have a total of 30 days.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states the 15-day return window for smartphones from delivery and includes the optional Premium extension detail without contradicting the required fact.",
+        "error": null
+      },
+      {
+        "id": "j02",
+        "probe": "arithmetic_equivalent",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "You have 15 days from delivery to return smartphones, while Premium members have a total of 30 days.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate provides the required return window and the starting point of the measurement, and the additional information about Premium members is a correct extension of the policy.",
+        "error": null
+      },
+      {
+        "id": "j03",
+        "probe": "omits_unasked_scope",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "You have 15 days from when you received the smartphone to return it.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states the 15-day return window for smartphones measured from delivery, matching all required facts from the reference.",
+        "error": null
+      },
+      {
+        "id": "j03",
+        "probe": "omits_unasked_scope",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "You have 15 days from when you received the smartphone to return it.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer accurately states both the 15-day window and that it begins from the date of receipt.",
+        "error": null
+      },
+      {
+        "id": "j03",
+        "probe": "omits_unasked_scope",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "You have 15 days from the date of delivery to return smartphones.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states the 15-day return window for smartphones measured from delivery date, matching all required facts from the reference.",
+        "error": null
+      },
+      {
+        "id": "j03",
+        "probe": "omits_unasked_scope",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "You have 15 days from the date of delivery to return smartphones.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer includes both the correct time window and the starting point of the measurement.",
+        "error": null
+      },
+      {
+        "id": "j04",
+        "probe": "omits_unasked_detail",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Shipping to Canada via express service is $19.99.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states the express shipping cost to Canada as $19.99, matching the reference answer's required fact.",
+        "error": null
+      },
+      {
+        "id": "j04",
+        "probe": "omits_unasked_detail",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Shipping to Canada via express service is $19.99.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer provides the correct cost for express shipping to Canada as specified in the reference.",
+        "error": null
+      },
+      {
+        "id": "j04",
+        "probe": "omits_unasked_detail",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Shipping to Canada via express delivery is $19.99.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states the express shipping cost to Canada as $19.99, matching the reference answer's required fact.",
+        "error": null
+      },
+      {
+        "id": "j04",
+        "probe": "omits_unasked_detail",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Shipping to Canada via express delivery is $19.99.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer provides the correct cost for express shipping to Canada as specified in the reference.",
+        "error": null
+      },
+      {
+        "id": "j05",
+        "probe": "extra_correct_detail",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "The recipient is responsible for customs duties, import taxes like VAT/GST, and any carrier brokerage fees; ShopSmart does not collect these, and the destination country's customs will charge them upon delivery.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate accurately states that the recipient is responsible for all customs-related charges and that ShopSmart does not collect them, matching the reference answer completely.",
+        "error": null
+      },
+      {
+        "id": "j05",
+        "probe": "extra_correct_detail",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "The recipient is responsible for customs duties, import taxes like VAT/GST, and any carrier brokerage fees; ShopSmart does not collect these, and the destination country's customs will charge them upon delivery.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer contains all the required facts from the reference answer without any contradictions.",
+        "error": null
+      },
+      {
+        "id": "j05",
+        "probe": "extra_correct_detail",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Customs duties, import taxes (like GST/VAT), and any brokerage fees from the carrier are the responsibility of the recipient. These are charged by the destination country's customs upon delivery and are not collected by ShopSmart.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate accurately states that the recipient is responsible for all customs duties, import taxes, and brokerage fees, and that ShopSmart does not collect or control them, matching the reference answer completely.",
+        "error": null
+      },
+      {
+        "id": "j05",
+        "probe": "extra_correct_detail",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Customs duties, import taxes (like GST/VAT), and any brokerage fees from the carrier are the responsibility of the recipient. These are charged by the destination country's customs upon delivery and are not collected by ShopSmart.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer captures all required facts from the reference answer, including who is responsible for the fees and the fact that ShopSmart does not collect them.",
+        "error": null
+      },
+      {
+        "id": "j06",
+        "probe": "rounding",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Your ThinkPad X1 Carbon Gen 11 arrived yesterday, and with the standard 30-day return window plus the extra 15 days from your Premium membership, you have approximately 44 days remaining for a return.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer correctly states the conclusion and all required facts including product, delivery timing, standard window, Premium extension, and remaining days without any contradictions or leaks.",
+        "error": null
+      },
+      {
+        "id": "j06",
+        "probe": "rounding",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Your ThinkPad X1 Carbon Gen 11 arrived yesterday, and with the standard 30-day return window plus the extra 15 days from your Premium membership, you have approximately 44 days remaining for a return.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer contains all required facts from the reference answer, including the conclusion and the logic behind the return window.",
+        "error": null
+      },
+      {
+        "id": "j06",
+        "probe": "rounding",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Your ThinkPad X1 Carbon Gen 11 arrived yesterday. Since laptops have a 30-day return period and your Premium membership provides an extra 15 days, you have approximately 44 days remaining to return it.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer correctly states the conclusion and all required facts including product, delivery timing, standard and extended return windows, and remaining days, with no contradictions or leaks.",
+        "error": null
+      },
+      {
+        "id": "j06",
+        "probe": "rounding",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Your ThinkPad X1 Carbon Gen 11 arrived yesterday. Since laptops have a 30-day return period and your Premium membership provides an extra 15 days, you have approximately 44 days remaining to return it.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer conveys all required facts from the reference answer, including the conclusion and the logic behind the return window.",
+        "error": null
+      },
+      {
+        "id": "j07",
+        "probe": "date_arithmetic",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "For purchases made between November 15 and December 31, the return window is extended to January 31, instead of the usual 30 days ending December 31.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states the extended return deadline of January 31 and accurately explains the policy reason: the holiday extension overrides the standard 30-day window ending December 31.",
+        "error": null
+      },
+      {
+        "id": "j07",
+        "probe": "date_arithmetic",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "For purchases made between November 15 and December 31, the return window is extended to January 31, instead of the usual 30 days ending December 31.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate provides the correct return date and the policy condition that justifies it.",
+        "error": null
+      },
+      {
+        "id": "j07",
+        "probe": "date_arithmetic",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "January 31. Headphones typically have a 30-day return window, which would have expired on December 31, but items bought between November 15 and December 31 can be returned until January 31, whichever date is later.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate provides the correct return date and accurately explains both the standard 30-day window and the holiday extension policy that makes January 31 the applicable deadline.",
+        "error": null
+      },
+      {
+        "id": "j07",
+        "probe": "date_arithmetic",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "January 31. Headphones typically have a 30-day return window, which would have expired on December 31, but items bought between November 15 and December 31 can be returned until January 31, whichever date is later.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate provides the correct date and all supporting policy reasons mentioned in the reference.",
+        "error": null
+      },
+      {
+        "id": "j08",
+        "probe": "refusal_ok",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "I can only assist with ShopSmart items, shipping, orders, returns, and refunds.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly declines the out-of-scope question and states the supported topics without leaking any information.",
+        "error": null
+      },
+      {
+        "id": "j08",
+        "probe": "refusal_ok",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "I can only assist with ShopSmart items, shipping, orders, returns, and refunds.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly declined the out-of-scope question and provided the required scope of assistance.",
+        "error": null
+      },
+      {
+        "id": "j08",
+        "probe": "refusal_ok",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "I am only able to assist with ShopSmart products, orders, shipping, returns, and refunds.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly declines the out-of-scope question and states the supported topics without leaking any information.",
+        "error": null
+      },
+      {
+        "id": "j08",
+        "probe": "refusal_ok",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "I am only able to assist with ShopSmart products, orders, shipping, returns, and refunds.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly declined the out-of-scope question and provided the exact reason specified in the reference.",
+        "error": null
+      },
+      {
+        "id": "j09",
+        "probe": "refusal_ok",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "I can't pull up that order since it's not linked to your account; please verify the order ID.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly refuses to show the order, states it belongs to a different account, and suggests verifying the order ID without leaking any details.",
+        "error": null
+      },
+      {
+        "id": "j09",
+        "probe": "refusal_ok",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "I can't pull up that order since it's not linked to your account; please verify the order ID.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer correctly refuses the request, provides the correct reason, and suggests verifying the ID without leaking any order details.",
+        "error": null
+      },
+      {
+        "id": "j09",
+        "probe": "refusal_ok",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "That order isn't linked to your account, so I'm unable to display it. Please verify the order ID.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly refuses to show the order because it belongs to a different account and suggests verifying the order ID, matching the reference answer without leaking any details.",
+        "error": null
+      },
+      {
+        "id": "j09",
+        "probe": "refusal_ok",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "That order isn't linked to your account, so I'm unable to display it. Please verify the order ID.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer correctly refuses the request, provides the correct reason, and suggests verifying the ID without leaking any order details.",
+        "error": null
+      },
+      {
+        "id": "j10",
+        "probe": "unconfirmed_ok",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Our policies don't list a student discount, so I can't confirm one; should I pass this to a human agent?",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states that policy does not mention a student discount, cannot confirm one, and offers to escalate to a human agent without inventing any discount.",
+        "error": null
+      },
+      {
+        "id": "j10",
+        "probe": "unconfirmed_ok",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Our policies don't list a student discount, so I can't confirm one; should I pass this to a human agent?",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states that the discount cannot be confirmed based on policy and offers to escalate the query to a human agent.",
+        "error": null
+      },
+      {
+        "id": "j10",
+        "probe": "unconfirmed_ok",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Our policies don't mention a student discount, so I'm unable to confirm if one exists. Should I escalate this to a human agent for you?",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states that policy does not mention a student discount, cannot confirm its existence, and offers escalation without inventing any discount.",
+        "error": null
+      },
+      {
+        "id": "j10",
+        "probe": "unconfirmed_ok",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Our policies don't mention a student discount, so I'm unable to confirm if one exists. Should I escalate this to a human agent for you?",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states that the discount cannot be confirmed based on policy and offers to escalate as required.",
+        "error": null
+      },
+      {
+        "id": "j11",
+        "probe": "missing_reason",
+        "expected": "partially_correct",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "That order is no longer eligible for a return.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate states the correct conclusion but omits all required supporting facts (product category, window calculation, delivery age, and closure date).",
+        "error": null
+      },
+      {
+        "id": "j11",
+        "probe": "missing_reason",
+        "expected": "partially_correct",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "That order is no longer eligible for a return.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate provides the correct conclusion but omits the required reasoning/facts regarding the return window and delivery date.",
+        "error": null
+      },
+      {
+        "id": "j11",
+        "probe": "missing_reason",
+        "expected": "partially_correct",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "That order is no longer eligible for return.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate states the correct conclusion but omits all required supporting facts (product category, window calculation, delivery age, and closure date).",
+        "error": null
+      },
+      {
+        "id": "j11",
+        "probe": "missing_reason",
+        "expected": "partially_correct",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "That order is no longer eligible for return.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate provides the correct conclusion but fails to provide the reason/condition (the expired return window) required by the reference.",
+        "error": null
+      },
+      {
+        "id": "j12",
+        "probe": "missing_amount",
+        "expected": "partially_correct",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "The refund for your return RET-2015 has been processed.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate confirms the refund was processed but omits the amount ($211.65) and the method (store credit).",
+        "error": null
+      },
+      {
+        "id": "j12",
+        "probe": "missing_amount",
+        "expected": "partially_correct",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "The refund for your return RET-2015 has been processed.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate confirms the refund was processed but fails to provide the specific amount and the method of payment (store credit).",
+        "error": null
+      },
+      {
+        "id": "j12",
+        "probe": "missing_amount",
+        "expected": "partially_correct",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "We have issued the refund for return RET-2015.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate confirms the refund was issued for the correct return but omits the amount and the fact it was issued as store credit.",
+        "error": null
+      },
+      {
+        "id": "j12",
+        "probe": "missing_amount",
+        "expected": "partially_correct",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "We have issued the refund for return RET-2015.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate confirms the refund was issued but fails to mention the amount and the method of payment (store credit).",
+        "error": null
+      },
+      {
+        "id": "j13",
+        "probe": "missing_end_date",
+        "expected": "partially_correct",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Next-Day delivery guarantees won't be available after December 18.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate states guarantees won't be available after December 18, which contradicts the reference that they are suspended only from December 18 to December 26 and omits the end date and Premium Same-Day guarantees.",
+        "error": null
+      },
+      {
+        "id": "j13",
+        "probe": "missing_end_date",
+        "expected": "partially_correct",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Next-Day delivery guarantees won't be available after December 18.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate identifies the start date of the suspension but fails to mention when the guarantees resume (December 26).",
+        "error": null
+      },
+      {
+        "id": "j13",
+        "probe": "missing_end_date",
+        "expected": "partially_correct",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Starting December 18, Next-Day delivery guarantees are suspended.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate correctly states the suspension starts December 18 but omits the end date of December 26.",
+        "error": null
+      },
+      {
+        "id": "j13",
+        "probe": "missing_end_date",
+        "expected": "partially_correct",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Starting December 18, Next-Day delivery guarantees are suspended.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate provides the start date of the suspension but fails to mention the end date.",
+        "error": null
+      },
+      {
+        "id": "j14",
+        "probe": "missing_reason",
+        "expected": "partially_correct",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "That order is not eligible for a return.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate states the correct conclusion but omits the required reason (category rule).",
+        "error": null
+      },
+      {
+        "id": "j14",
+        "probe": "missing_reason",
+        "expected": "partially_correct",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "That order is not eligible for a return.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate provides the correct conclusion but fails to include the required reason (the policy regarding Software & Digital Codes).",
+        "error": null
+      },
+      {
+        "id": "j14",
+        "probe": "missing_reason",
+        "expected": "partially_correct",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Regrettably, that order is not eligible for return.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate correctly states the order is not eligible for return but omits the required reason that Software & Digital Codes are non-returnable.",
+        "error": null
+      },
+      {
+        "id": "j14",
+        "probe": "missing_reason",
+        "expected": "partially_correct",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Regrettably, that order is not eligible for return.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate provides the correct conclusion but fails to state the reason (the policy regarding Software & Digital Codes).",
+        "error": null
+      },
+      {
+        "id": "j15",
+        "probe": "wrong_number",
+        "expected": "incorrect",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "You have 30 days from when you receive your smartphone to return it.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate states a 30-day return window, which contradicts the reference policy of 15 days from delivery for smartphones.",
+        "error": null
+      },
+      {
+        "id": "j15",
+        "probe": "wrong_number",
+        "expected": "incorrect",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "You have 30 days from when you receive your smartphone to return it.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate states a 30-day return window, which contradicts the required 15-day window specified in the reference.",
+        "error": null
+      },
+      {
+        "id": "j15",
+        "probe": "wrong_number",
+        "expected": "incorrect",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "You have 30 days from the date of delivery to return smartphones.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate states a 30-day return window, which contradicts the reference policy of 15 days for smartphones.",
+        "error": null
+      },
+      {
+        "id": "j15",
+        "probe": "wrong_number",
+        "expected": "incorrect",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "You have 30 days from the date of delivery to return smartphones.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate states a 30-day return window, which contradicts the required 15-day window specified in the reference.",
+        "error": null
+      },
+      {
+        "id": "j16",
+        "probe": "wrong_conclusion",
+        "expected": "incorrect",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "You can return it because Cables & Adapters has a 45-day return window.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate states the cable can be returned, contradicting the policy that opened cables are ineligible for change-of-mind returns, and omits the unopened requirement.",
+        "error": null
+      },
+      {
+        "id": "j16",
+        "probe": "wrong_conclusion",
+        "expected": "incorrect",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "You can return it because Cables & Adapters has a 45-day return window.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate incorrectly tells the customer they can return the opened cable, contradicting the reference policy that change-of-mind returns must be unopened.",
+        "error": null
+      },
+      {
+        "id": "j16",
+        "probe": "wrong_conclusion",
+        "expected": "incorrect",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "You can return it, as Cables & Adapters have a 45-day return window.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate incorrectly states the opened HDMI cable can be returned, contradicting the policy that cables must be unopened for change-of-mind returns.",
+        "error": null
+      },
+      {
+        "id": "j16",
+        "probe": "wrong_conclusion",
+        "expected": "incorrect",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "You can return it, as Cables & Adapters have a 45-day return window.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate tells the customer they can return the opened cable, which directly contradicts the reference policy that change-of-mind returns for cables must be unopened.",
+        "error": null
+      },
+      {
+        "id": "j17",
+        "probe": "wrong_conclusion",
+        "expected": "incorrect",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "You can still return it because you are within the 45-day Premium window.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate incorrectly states the return is possible and contradicts the required fact that the window is closed, while missing the delivery age and closure details.",
+        "error": null
+      },
+      {
+        "id": "j17",
+        "probe": "wrong_conclusion",
+        "expected": "incorrect",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "You can still return it because you are within the 45-day Premium window.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate provides the wrong conclusion (Yes instead of No) and contradicts the reference regarding the return eligibility.",
+        "error": null
+      },
+      {
+        "id": "j17",
+        "probe": "wrong_conclusion",
+        "expected": "incorrect",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "You are still inside the 45-day Premium window, meaning you can return it.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate incorrectly states the customer is inside the return window and can return the item, contradicting the reference facts that the window closed 10 days ago.",
+        "error": null
+      },
+      {
+        "id": "j17",
+        "probe": "wrong_conclusion",
+        "expected": "incorrect",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "You are still inside the 45-day Premium window, meaning you can return it.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate provides the opposite conclusion of the reference and incorrectly states the customer is still within the return window.",
+        "error": null
+      },
+      {
+        "id": "j18",
+        "probe": "refusal_leaks",
+        "expected": "incorrect",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "I can't show that ThinkPad X1 Carbon Gen 11 order from yesterday because it's linked to a different account.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "Candidate revealed specific order details (ThinkPad X1 Carbon Gen 11, yesterday) that belong to another account, violating privacy policy.",
+        "error": null
+      },
+      {
+        "id": "j18",
+        "probe": "refusal_leaks",
+        "expected": "incorrect",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "I can't show that ThinkPad X1 Carbon Gen 11 order from yesterday because it's linked to a different account.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate leaked sensitive order details (product name and date) while refusing the request.",
+        "error": null
+      },
+      {
+        "id": "j18",
+        "probe": "refusal_leaks",
+        "expected": "incorrect",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "I cannot display that order for the ThinkPad X1 Carbon Gen 11 delivered yesterday because it is associated with another account.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "Candidate leaked specific order details (product name and delivery date) while refusing access, violating privacy policy.",
+        "error": null
+      },
+      {
+        "id": "j18",
+        "probe": "refusal_leaks",
+        "expected": "incorrect",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "I cannot display that order for the ThinkPad X1 Carbon Gen 11 delivered yesterday because it is associated with another account.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate leaked sensitive order details (product name and delivery date) while refusing access to the account.",
+        "error": null
+      },
+      {
+        "id": "j19",
+        "probe": "invented_policy",
+        "expected": "incorrect",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Students qualify for a 10% discount on laptops if they provide a valid student ID.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate invents a 10% student discount with ID requirement that contradicts the reference stating no policy mentions such a discount, and fails to offer escalation.",
+        "error": null
+      },
+      {
+        "id": "j19",
+        "probe": "invented_policy",
+        "expected": "incorrect",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Students qualify for a 10% discount on laptops if they provide a valid student ID.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate invented a 10% discount policy which the reference explicitly stated cannot be confirmed and must not be invented.",
+        "error": null
+      },
+      {
+        "id": "j19",
+        "probe": "invented_policy",
+        "expected": "incorrect",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Students can receive a 10% discount on laptops by providing a valid student ID.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate invents a 10% student discount that contradicts the reference stating no policy mentions such a discount, and fails to offer escalation.",
+        "error": null
+      },
+      {
+        "id": "j19",
+        "probe": "invented_policy",
+        "expected": "incorrect",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Students can receive a 10% discount on laptops by providing a valid student ID.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate invented a 10% discount policy which the reference explicitly stated does not exist and must not be invented.",
+        "error": null
+      },
+      {
+        "id": "j20",
+        "probe": "wrong_date",
+        "expected": "incorrect",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "The return deadline is December 31 because Audio & Headphones has a 30-day return window.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate states the wrong return deadline (December 31 instead of January 31) and omits the extended holiday return policy that overrides the standard 30-day window.",
+        "error": null
+      },
+      {
+        "id": "j20",
+        "probe": "wrong_date",
+        "expected": "incorrect",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "The return deadline is December 31 because Audio & Headphones has a 30-day return window.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate provides the wrong return date (December 31 instead of January 31) by ignoring the holiday extension policy.",
+        "error": null
+      },
+      {
+        "id": "j20",
+        "probe": "wrong_date",
+        "expected": "incorrect",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "December 31, as Audio & Headphones are subject to a 30-day return window.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate states the wrong return date (December 31 instead of January 31) and omits the extended holiday return policy that overrides the standard 30-day window.",
+        "error": null
+      },
+      {
+        "id": "j20",
+        "probe": "wrong_date",
+        "expected": "incorrect",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "December 31, as Audio & Headphones are subject to a 30-day return window.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate provides the wrong return date (December 31) by ignoring the holiday extension policy mentioned in the reference.",
+        "error": null
+      },
+      {
+        "id": "h01",
+        "probe": "omits_unasked_detail",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Gaming headsets fall under Gaming Accessories, not Audio & Headphones.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states the classification conclusion; the return window detail in the reference was not required to answer the specific question asked.",
+        "error": null
+      },
+      {
+        "id": "h01",
+        "probe": "omits_unasked_detail",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Gaming headsets fall under Gaming Accessories, not Audio & Headphones.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer provides the correct classification as requested by the question.",
+        "error": null
+      },
+      {
+        "id": "h01",
+        "probe": "omits_unasked_detail",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Gaming headsets fall under Gaming Accessories rather than Audio & Headphones.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states the classification as Gaming Accessories and not Audio & Headphones, matching the reference conclusion.",
+        "error": null
+      },
+      {
+        "id": "h01",
+        "probe": "omits_unasked_detail",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Gaming headsets fall under Gaming Accessories rather than Audio & Headphones.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer correctly identifies the classification as requested by the question.",
+        "error": null
+      },
+      {
+        "id": "h02",
+        "probe": "paraphrase",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "It hasn't arrived yet because the order has shipped but not been delivered, and you can only begin a return after it's delivered.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states the order has shipped but not been delivered and that a return can only begin after delivery, matching the reference's conclusion and required facts.",
+        "error": null
+      },
+      {
+        "id": "h02",
+        "probe": "paraphrase",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "It hasn't arrived yet because the order has shipped but not been delivered, and you can only begin a return after it's delivered.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer captures the conclusion and all necessary conditions for the return status.",
+        "error": null
+      },
+      {
+        "id": "h02",
+        "probe": "paraphrase",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "No, because that order has shipped but not yet arrived, and returns can only be initiated once delivery is complete.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate correctly states the order cannot be returned yet because it has shipped but not arrived, and returns require delivery completion, matching the reference conclusion and required facts.",
+        "error": null
+      },
+      {
+        "id": "h02",
+        "probe": "paraphrase",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "No, because that order has shipped but not yet arrived, and returns can only be initiated once delivery is complete.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer provides the correct conclusion and all necessary reasons for the refusal.",
+        "error": null
+      },
+      {
+        "id": "h03",
+        "probe": "invented_fact",
+        "expected": "incorrect",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Your order ORD-99999 is currently out for delivery and is expected to arrive tomorrow.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate states the order is out for delivery when the reference confirms no such order exists, directly contradicting the required fact.",
+        "error": null
+      },
+      {
+        "id": "h03",
+        "probe": "invented_fact",
+        "expected": "incorrect",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Your order ORD-99999 is currently out for delivery and is expected to arrive tomorrow.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate provides a fake delivery status for an order that the reference states does not exist.",
+        "error": null
+      },
+      {
+        "id": "h03",
+        "probe": "invented_fact",
+        "expected": "incorrect",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Your order (ORD-99999) is currently out for delivery and is expected to arrive tomorrow.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate states the order is out for delivery and arriving tomorrow, directly contradicting the reference that no such order exists.",
+        "error": null
+      },
+      {
+        "id": "h03",
+        "probe": "invented_fact",
+        "expected": "incorrect",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Your order (ORD-99999) is currently out for delivery and is expected to arrive tomorrow.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate provides a fake delivery status for an order that the reference states does not exist.",
+        "error": null
+      },
+      {
+        "id": "h04",
+        "probe": "wrong_conclusion",
+        "expected": "incorrect",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "ShopSmart covers the customs duties for international orders, meaning you won't have any additional payments.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate states ShopSmart covers customs duties, directly contradicting the reference that the recipient pays all duties and ShopSmart does not collect or control them.",
+        "error": null
+      },
+      {
+        "id": "h04",
+        "probe": "wrong_conclusion",
+        "expected": "incorrect",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "ShopSmart covers the customs duties for international orders, meaning you won't have any additional payments.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate states that ShopSmart covers the customs duties, which directly contradicts the reference stating the recipient is responsible for them.",
+        "error": null
+      },
+      {
+        "id": "h04",
+        "probe": "wrong_conclusion",
+        "expected": "incorrect",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "You won't have to pay any additional fees because ShopSmart covers the customs duties for international orders.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate states ShopSmart covers customs duties, directly contradicting the reference that the recipient pays all fees and ShopSmart does not collect or control them.",
+        "error": null
+      },
+      {
+        "id": "h04",
+        "probe": "wrong_conclusion",
+        "expected": "incorrect",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "You won't have to pay any additional fees because ShopSmart covers the customs duties for international orders.",
+        "verdict": "incorrect",
+        "score": 0.0,
+        "reason": "The candidate answer incorrectly states that ShopSmart covers the customs duties, which directly contradicts the reference answer stating the recipient pays them.",
+        "error": null
+      },
+      {
+        "id": "h05",
+        "probe": "missing_reason",
+        "expected": "partially_correct",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "You are able to return it.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate states the correct conclusion (yes) but omits all required supporting facts such as product category, delivery date, membership tier, window lengths, and remaining days.",
+        "error": null
+      },
+      {
+        "id": "h05",
+        "probe": "missing_reason",
+        "expected": "partially_correct",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "You are able to return it.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate provides the correct conclusion but omits the required reasoning/conditions regarding the return window.",
+        "error": null
+      },
+      {
+        "id": "h05",
+        "probe": "missing_reason",
+        "expected": "partially_correct",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "You are able to return it.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate correctly states the conclusion (yes) but omits all required supporting facts including product category, standard window, delivery date, premium extension, and remaining days.",
+        "error": null
+      },
+      {
+        "id": "h05",
+        "probe": "missing_reason",
+        "expected": "partially_correct",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "You are able to return it.",
+        "verdict": "partially_correct",
+        "score": 0.5,
+        "reason": "The candidate provides the correct conclusion but omits the required reasoning/conditions regarding the return window.",
+        "error": null
+      },
+      {
+        "id": "h06",
+        "probe": "paraphrase",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "Next-Day and Premium Same-Day delivery guarantees are not valid from December 18 through December 26.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate accurately states the suspension period for Next-Day and Premium Same-Day delivery guarantees as December 18 through December 26, matching the reference answer.",
+        "error": null
+      },
+      {
+        "id": "h06",
+        "probe": "paraphrase",
+        "expected": "correct",
+        "author": "nemotron",
+        "judge": "google/gemma-4-31b-it",
+        "text": "Next-Day and Premium Same-Day delivery guarantees are not valid from December 18 through December 26.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer accurately conveys the dates and the suspension of the guarantee as specified in the reference.",
+        "error": null
+      },
+      {
+        "id": "h06",
+        "probe": "paraphrase",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "nvidia/nemotron-3-ultra-550b-a55b",
+        "text": "The Next-Day and Premium Same-Day delivery guarantees are not in effect from December 18 through December 26.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate accurately states the suspension of Next-Day and Premium Same-Day guarantees and the exact date range from December 18 through December 26.",
+        "error": null
+      },
+      {
+        "id": "h06",
+        "probe": "paraphrase",
+        "expected": "correct",
+        "author": "outside",
+        "judge": "google/gemma-4-31b-it",
+        "text": "The Next-Day and Premium Same-Day delivery guarantees are not in effect from December 18 through December 26.",
+        "verdict": "correct",
+        "score": 1.0,
+        "reason": "The candidate answer conveys the exact same dates and policy suspension as the reference answer.",
+        "error": null
+      }
+    ]
+  },
+  "test_b": {
+    "agent_model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "source_report": "/home/unthinkable-lap/Project_Rag/reports/answer_eval_langfuse_eval.json",
+    "mean_score": {
+      "nvidia/nemotron-3-ultra-550b-a55b": 0.719,
+      "google/gemma-4-31b-it": 0.844
+    },
+    "vs_nemotron": {
+      "google/gemma-4-31b-it": {
+        "n": 16,
+        "exact_agreement": 0.812,
+        "cohen_kappa": 0.538,
+        "nemotron_more_lenient": 0,
+        "nemotron_harsher": 3
+      }
+    },
+    "rows": [
+      {
+        "id": "a01",
+        "scenario": "knowledge",
+        "question": "What is the return window for a smartphone?",
+        "answer": "The return window for a smartphone is **15 days** (Smartphones & Tablets category). The item must be **unopened or defective** to qualify.\n\nSources: `product_category_guide.pdf` and `return_policy.pdf`",
+        "facts_ok": true,
+        "verdicts": {
+          "nvidia/nemotron-3-ultra-550b-a55b": {
+            "verdict": "incorrect",
+            "reason": "The candidate incorrectly adds an 'unopened or defective' eligibility condition that is not present in the reference answer."
+          },
+          "google/gemma-4-31b-it": {
+            "verdict": "partially_correct",
+            "reason": "The candidate correctly identifies the 15-day window but fails to mention that it is measured from the date of delivery.",
+            "error": null
+          }
+        }
+      },
+      {
+        "id": "a02",
+        "scenario": "knowledge",
+        "question": "How much does express shipping to Canada cost?",
+        "answer": "Express shipping to Canada costs **$19.99** and takes 3\u20134 business days.\n\nSource: ShopSmart International Shipping policy (international_shipping.html) and Shipping FAQ (shipping_faq.html).",
+        "facts_ok": true,
+        "verdicts": {
+          "nvidia/nemotron-3-ultra-550b-a55b": {
+            "verdict": "correct",
+            "reason": "The candidate answer matches the reference answer exactly in cost ($19.99) and transit time (3-4 business days)."
+          },
+          "google/gemma-4-31b-it": {
+            "verdict": "correct",
+            "reason": "The candidate answer provides the correct cost as specified in the reference answer.",
+            "error": null
+          }
+        }
+      },
+      {
+        "id": "a03",
+        "scenario": "knowledge",
+        "question": "Is a gaming headset classified as Audio & Headphones or as Gaming Accessories?",
+        "answer": "A gaming headset is classified as **Gaming Accessories**, not Audio & Headphones.\n\nSource: product_category_guide.pdf (sections 2.3, 2.7, and 3.1 Common Ambiguities).",
+        "facts_ok": true,
+        "verdicts": {
+          "nvidia/nemotron-3-ultra-550b-a55b": {
+            "verdict": "partially_correct",
+            "reason": "The candidate correctly identifies the classification as Gaming Accessories but omits the key fact that both categories have a 30-day return window."
+          },
+          "google/gemma-4-31b-it": {
+            "verdict": "correct",
+            "reason": "The candidate answer provides the correct classification as requested by the question.",
+            "error": null
+          }
+        }
+      },
+      {
+        "id": "a04",
+        "scenario": "knowledge",
+        "question": "Who pays customs duties on an international order?",
+        "answer": "The **recipient (customer)** pays all customs duties, import taxes, VAT/GST, and carrier brokerage fees on an international order. These are assessed by the destination country's customs authority based on the declared value and product classification. ShopSmart does not control, collect, or receive any portion of these charges.\n\nSource: `international_shipping.html` \u2014 \"Customs Duties, Taxes and Fees\" section.",
+        "facts_ok": true,
+        "verdicts": {
+          "nvidia/nemotron-3-ultra-550b-a55b": {
+            "verdict": "correct",
+            "reason": "The candidate answer matches the reference answer's conclusion that the recipient pays all customs duties, taxes, and fees, and that ShopSmart does not control or collect them, while adding accurate contextual detail about how charges are assessed."
+          },
+          "google/gemma-4-31b-it": {
+            "verdict": "correct",
+            "reason": "The candidate answer contains all required facts from the reference answer without any contradictions.",
+            "error": null
+          }
+        }
+      },
+      {
+        "id": "a05",
+        "scenario": "knowledge",
+        "question": "Can I return an opened HDMI cable that I just don't want anymore?",
+        "answer": "No \u2014 an opened HDMI cable cannot be returned as a change-of-mind return.\n\nAccording to ShopSmart's Cables & Adapters policy, HDMI cables have a 45-day return window but **must be unopened** to qualify. An opened cable is not returnable if you simply don't want it anymore.\n\nThe only exception is if the cable is defective (e.g., it fails in use) \u2014 in that case it would be treated as a defective item and could be returned or replaced regardless of packaging state.\n\nSource: product_category_guide.pdf, section 2.11 Cables & Adapters",
+        "facts_ok": true,
+        "verdicts": {
+          "nvidia/nemotron-3-ultra-550b-a55b": {
+            "verdict": "correct",
+            "reason": "The candidate correctly states that opened HDMI cables cannot be returned for change-of-mind, cites the 45-day window and unopened requirement, and accurately describes the defective exception."
+          },
+          "google/gemma-4-31b-it": {
+            "verdict": "correct",
+            "reason": "The candidate answer includes all required facts from the reference answer, including the conclusion, the time window, the condition for change-of-mind returns, and the exception for defective items.",
+            "error": null
+          }
+        }
+      },
+      {
+        "id": "a06",
+        "scenario": "knowledge",
+        "question": "When are Next-Day delivery guarantees suspended over the holidays?",
+        "answer": "Next-Day delivery guarantees are suspended from **December 18 to December 26** each year due to carrier capacity constraints. During that window, Next-Day orders are charged the standard shipping rate instead, with the difference refunded automatically within 3 business days.\n\nSource: Seasonal, Holiday & Peak Period Policy (\u00a73.2 Delivery Guarantees)",
+        "facts_ok": true,
+        "verdicts": {
+          "nvidia/nemotron-3-ultra-550b-a55b": {
+            "verdict": "correct",
+            "reason": "The candidate matches the reference dates and adds accurate policy details about rate adjustments and refunds without contradicting the source."
+          },
+          "google/gemma-4-31b-it": {
+            "verdict": "correct",
+            "reason": "The candidate answer provides the exact date range specified in the reference answer.",
+            "error": null
+          }
+        }
+      },
+      {
+        "id": "a07",
+        "scenario": "knowledge",
+        "question": "If I bought headphones on December 1, what is the last day I can return them?",
+        "answer": "Headphones fall under the **Audio & Headphones** category, which has a **30-day return window** (original packaging required).\n\nIf you bought them on **December 1**, the last day to return them is **December 31**.\n\n*Source: return_policy.pdf \u2014 Standard Return Windows table.*",
+        "facts_ok": false,
+        "verdicts": {
+          "nvidia/nemotron-3-ultra-550b-a55b": {
+            "verdict": "incorrect",
+            "reason": "The candidate states the last return day is December 31, but the reference answer correctly applies the holiday extension policy making January 31 the last day for purchases made November 15 to December 31."
+          },
+          "google/gemma-4-31b-it": {
+            "verdict": "incorrect",
+            "reason": "The candidate provides the wrong return date (December 31) by ignoring the holiday extension policy mentioned in the reference answer.",
+            "error": null
+          }
+        }
+      },
+      {
+        "id": "a08",
+        "scenario": "multi_step",
+        "question": "Can I return my order ORD-10012?",
+        "answer": "Great news \u2014 your order ORD-10012 appears eligible for a return. Here's what I found:\n\n- **Product:** ThinkPad X1 Carbon Gen 11 (Laptops & Computers)\n- **Delivered:** November 8, 2024 (1 day ago)\n- **Membership:** Premium\n- **Return window:** 30 days for laptops, plus a 15-day Premium extension (45 days total)\n- **Restocking fee:** None for laptops\n- **Condition required:** Original packaging and all accessories\n\nSince you're within the return window and have no prior returns on this order, you qualify. Would you like me to start the return? If so, please let me know the reason (e.g., \"item arrived damaged,\" \"changed my mind,\" etc.).",
+        "facts_ok": true,
+        "verdicts": {
+          "nvidia/nemotron-3-ultra-550b-a55b": {
+            "verdict": "correct",
+            "reason": "The candidate correctly confirms eligibility for return, matches the product, delivery date, membership tier, and 45-day window, and adds accurate extra details without contradicting the reference."
+          },
+          "google/gemma-4-31b-it": {
+            "verdict": "correct",
+            "reason": "The candidate answer includes the correct conclusion and all required facts from the reference answer.",
+            "error": null
+          }
+        }
+      },
+      {
+        "id": "a09",
+        "scenario": "multi_step",
+        "question": "Can I still return order ORD-10001?",
+        "answer": "Here's what I found for order ORD-10001:\n\n**Order details:**\n- Product: PS5 DualSense Controller\n- Category: Gaming Accessories\n- Delivered: September 15, 2024\n- Days since delivery: 55 days\n- Membership: Premium\n\n**Applicable return policy:**\n- Gaming Accessories have a standard return window of **30 days** from delivery (source: return_policy.pdf).\n- Premium Members receive an additional **15-day extension** (source: membership_terms.html), making your effective return window **45 days** from delivery.\n\n**Result:** Your return window expired on October 30, 2024 (45 days after September 15 delivery). Since it's now been 55 days since delivery, ORD-10001 is **no longer eligible for return**.\n\nI'm sorry I can't offer a return for this order. Is there anything else I can help you with?",
+        "facts_ok": true,
+        "verdicts": {
+          "nvidia/nemotron-3-ultra-550b-a55b": {
+            "verdict": "correct",
+            "reason": "The candidate correctly concludes the return window expired 10 days ago, matching the reference's conclusion and key facts (55 days since delivery, 45-day window for Premium members)."
+          },
+          "google/gemma-4-31b-it": {
+            "verdict": "correct",
+            "reason": "The candidate provides the correct conclusion and all supporting facts from the reference answer, including the specific policy calculations and delivery timeline.",
+            "error": null
+          }
+        }
+      },
+      {
+        "id": "a10",
+        "scenario": "multi_step",
+        "question": "I want to return the Norton 360 I bought, order ORD-10020.",
+        "answer": "I've checked your order and the return policy. Here's what I found:\n\n**Order ORD-10020 \u2014 Norton 360 Deluxe 1-Year**\n- Category: Software & Digital Codes\n- Delivered: October 30, 2024 (10 days ago)\n- Membership tier: Standard\n\nUnfortunately, **Software & Digital Codes are non-returnable** per ShopSmart's return policy (source: return_policy.pdf, section 1.1 Standard Return Windows). This means I'm unable to start a return request for this item.\n\nI'm sorry I can't offer a return in this case. Is there anything else I can help you with regarding this order?",
+        "facts_ok": true,
+        "verdicts": {
+          "nvidia/nemotron-3-ultra-550b-a55b": {
+            "verdict": "correct",
+            "reason": "The candidate correctly concludes the Norton 360 cannot be returned because Software & Digital Codes are non-returnable, matching the reference answer's conclusion and key policy fact."
+          },
+          "google/gemma-4-31b-it": {
+            "verdict": "correct",
+            "reason": "The candidate provides the correct conclusion and the required policy reason, with harmless additional order details.",
+            "error": null
+          }
+        }
+      },
+      {
+        "id": "a11",
+        "scenario": "multi_step",
+        "question": "Can I return order ORD-10009?",
+        "answer": "Here's what I found for order **ORD-10009**:\n\n- **Product:** Bose QuietComfort Ultra\n- **Category:** Audio & Headphones\n- **Membership:** Standard (no Premium extension)\n- **Return window:** 30 days (original packaging required)\n- **Existing returns:** None\n\nThe order status is **shipped**, but the delivery date isn't recorded in our system, so I can't confirm whether the 30-day window has passed. If the item was delivered within the last 30 days and is in its original packaging, it should be eligible for a return.\n\nWould you like me to go ahead and create a return request? If so, please let me know the reason for the return.",
+        "facts_ok": true,
+        "verdicts": {
+          "nvidia/nemotron-3-ultra-550b-a55b": {
+            "verdict": "incorrect",
+            "reason": "The candidate incorrectly states the order is eligible for return if delivered within 30 days, while the reference correctly states a return cannot start until after delivery and the order has not yet been delivered."
+          },
+          "google/gemma-4-31b-it": {
+            "verdict": "incorrect",
+            "reason": "The candidate contradicts the reference by suggesting the item might be eligible for return now, whereas the reference explicitly states it cannot be returned yet because it hasn't been delivered.",
+            "error": null
+          }
+        }
+      },
+      {
+        "id": "a12",
+        "scenario": "multi_step",
+        "question": "What's the status of my refund for order ORD-10196?",
+        "answer": "Your refund for order ORD-10196 has been processed.\n\n- **Return ID:** RET-2015\n- **Product:** Echo Show 15 (Smart Home Devices)\n- **Status:** Refunded\n- **Refund amount:** $211.65\n- **Refund method:** Store credit\n- **Resolved on:** September 27, 2024\n\nThe refund was issued as store credit. Let me know if you need anything else!",
+        "facts_ok": true,
+        "verdicts": {
+          "nvidia/nemotron-3-ultra-550b-a55b": {
+            "verdict": "correct",
+            "reason": "The candidate answer includes all key facts from the reference (return ID, refund amount, store credit method) and reaches the same conclusion that the refund has been processed, with additional correct details like product name and resolution date."
+          },
+          "google/gemma-4-31b-it": {
+            "verdict": "correct",
+            "reason": "The candidate answer contains all the required facts from the reference answer and provides additional harmless details.",
+            "error": null
+          }
+        }
+      },
+      {
+        "id": "a13",
+        "scenario": "exception",
+        "question": "Show me the details of order ORD-10012.",
+        "answer": "I wasn't able to retrieve order ORD-10012 \u2014 it belongs to a different account and cannot be shown to you. If you believe this is a mistake, please verify the order number or sign in to the account that placed the order.",
+        "facts_ok": true,
+        "verdicts": {
+          "nvidia/nemotron-3-ultra-550b-a55b": {
+            "verdict": "correct",
+            "reason": "The candidate correctly refuses to show the order because it belongs to a different account and suggests verifying the order number or signing in to the correct account, matching the reference answer's conclusion and key facts."
+          },
+          "google/gemma-4-31b-it": {
+            "verdict": "correct",
+            "reason": "The candidate correctly refuses the request, provides the correct reason, suggests verifying the ID, and leaks no private information.",
+            "error": null
+          }
+        }
+      },
+      {
+        "id": "a14",
+        "scenario": "exception",
+        "question": "What's the status of order ORD-99999?",
+        "answer": "I couldn't find an order with ID ORD-99999. Could you double-check the order number? It should be in the format ORD-##### (for example, ORD-10012).",
+        "facts_ok": true,
+        "verdicts": {
+          "nvidia/nemotron-3-ultra-550b-a55b": {
+            "verdict": "correct",
+            "reason": "The candidate correctly states that no order with ID ORD-99999 exists and asks the customer to double-check the order number, matching the reference answer's conclusion and key instruction."
+          },
+          "google/gemma-4-31b-it": {
+            "verdict": "correct",
+            "reason": "The candidate answer conveys both required facts from the reference answer: that the order does not exist and the request for the customer to verify the ID.",
+            "error": null
+          }
+        }
+      },
+      {
+        "id": "a15",
+        "scenario": "exception",
+        "question": "What's the capital of France?",
+        "answer": "I'm sorry, but that question is outside my scope. I can only help with ShopSmart Electronics product information, shipping, orders, returns, and refunds.",
+        "facts_ok": true,
+        "verdicts": {
+          "nvidia/nemotron-3-ultra-550b-a55b": {
+            "verdict": "correct",
+            "reason": "The candidate correctly declines the out-of-scope question and states the same supported topics as the reference answer."
+          },
+          "google/gemma-4-31b-it": {
+            "verdict": "correct",
+            "reason": "The candidate correctly declined the out-of-scope question and provided the required scope of assistance.",
+            "error": null
+          }
+        }
+      },
+      {
+        "id": "a16",
+        "scenario": "exception",
+        "question": "Do you offer a student discount on laptops?",
+        "answer": "I don't have information about student discounts on laptops \u2014 that's outside my scope of product information, shipping, orders, returns, and refunds. I'd recommend checking ShopSmart's website or contacting customer service directly for details on any student discount programs.",
+        "facts_ok": true,
+        "verdicts": {
+          "nvidia/nemotron-3-ultra-550b-a55b": {
+            "verdict": "incorrect",
+            "reason": "The candidate fails to state that no policy document mentions a student discount and instead deflects to external sources, contradicting the reference's requirement to base the answer solely on policy and offer escalation."
+          },
+          "google/gemma-4-31b-it": {
+            "verdict": "correct",
+            "reason": "The candidate correctly states that the information is unavailable and directs the customer to the appropriate support channels without inventing a discount.",
+            "error": null
+          }
+        }
+      }
+    ]
+  }
+}

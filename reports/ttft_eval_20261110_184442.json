@@ -1,0 +1,257 @@
+{
+  "kind": "ttft_eval",
+  "created": "2026-11-10T13:14:42.164448+00:00",
+  "config": {
+    "agent_model": "nvidia/nemotron-3.5-bolt-e4b",
+    "reranker_model": "BAAI/bge-reranker-base",
+    "rerank_candidates_cap": 8,
+    "live_grounding": true,
+    "runs": 3,
+    "n_questions": 1
+  },
+  "cold_start": {
+    "question": "What is the return window for a smartphone?",
+    "outcome": "answered",
+    "tool_calls": [
+      "search_policies"
+    ],
+    "user_ttft_ms": 42428.44985399395,
+    "final_call_ttft_ms": 539.4519069959642,
+    "end_to_end_ms": 44360.85949699581,
+    "llm_rounds": 2,
+    "n_searches": 1,
+    "stages": {
+      "input_guardrails": 12422.722856998444,
+      "llm_tool_decisions": 976.3124059960246,
+      "retrieval": 28477.18877299875,
+      "final_call_ttft": 539.4519069959642,
+      "other_before_final": 12.773911006748676,
+      "final_generation": 1476.2719210013747,
+      "after_answer": 456.1377220004797
+    },
+    "retrieval_stages": {
+      "hybrid_rrf": 2126.2,
+      "expand_adjacent": 0.2,
+      "rerank": 26350.7
+    },
+    "llm_calls": [
+      {
+        "ttft_ms": 944.3066130043007,
+        "kind": "tool_call",
+        "tools": [
+          "search_policies"
+        ],
+        "input_tokens": 917,
+        "output_tokens": 18,
+        "latency_ms": 976.3124059960246
+      },
+      {
+        "ttft_ms": 539.4519069959642,
+        "kind": "answer",
+        "tools": [],
+        "input_tokens": 3294,
+        "output_tokens": 128,
+        "latency_ms": 2015.72382799536
+      }
+    ],
+    "answer_preview": "The standard return window for Smartphones & Tablets is **15 days**, provided the item is unopened or defective only (return_policy.pdf).\n\nPlease note that if t"
+  },
+  "summary": {
+    "user_ttft_ms": {
+      "n": 3,
+      "mean": 15183.1,
+      "p50": 15175.9,
+      "p90": 15479.3,
+      "p95": 15517.2,
+      "p99": 15547.5,
+      "max": 15555.1
+    },
+    "final_call_ttft_ms": {
+      "n": 3,
+      "mean": 338.6,
+      "p50": 339.8,
+      "p90": 342.6,
+      "p95": 342.9,
+      "p99": 343.2,
+      "max": 343.3
+    },
+    "model_floor_ttft_ms": {
+      "n": 1,
+      "mean": 293.2,
+      "p50": 293.2,
+      "p90": 293.2,
+      "p95": 293.2,
+      "p99": 293.2,
+      "max": 293.2
+    },
+    "end_to_end_ms": {
+      "n": 3,
+      "mean": 16970.0,
+      "p50": 17055.5,
+      "p90": 17415.6,
+      "p95": 17460.6,
+      "p99": 17496.6,
+      "max": 17505.6
+    },
+    "llm_rounds_mean": 2.0,
+    "searches_mean": 1.0
+  },
+  "ttft_breakdown_mean_ms": {
+    "input_guardrails": 26.6,
+    "llm_tool_decisions": 507.8,
+    "retrieval": 14300.5,
+    "other_before_final": 9.6,
+    "final_call_ttft": 338.6
+  },
+  "retrieval_breakdown_mean_ms": {
+    "expand_adjacent": 0.2,
+    "hybrid_rrf": 94.7,
+    "rerank": 14204.4
+  },
+  "rows": [
+    {
+      "question": "What is the return window for a smartphone?",
+      "outcome": "answered",
+      "tool_calls": [
+        "search_policies"
+      ],
+      "user_ttft_ms": 15175.892363995314,
+      "final_call_ttft_ms": 339.81453900196357,
+      "end_to_end_ms": 17055.532432995737,
+      "llm_rounds": 2,
+      "n_searches": 1,
+      "stages": {
+        "input_guardrails": 29.34297200292349,
+        "llm_tool_decisions": 538.6695289984345,
+        "retrieval": 14254.03656899929,
+        "final_call_ttft": 339.81453900196357,
+        "other_before_final": 14.028754994273186,
+        "final_generation": 1444.5616030022502,
+        "after_answer": 435.07846599817276
+      },
+      "retrieval_stages": {
+        "hybrid_rrf": 170.3,
+        "expand_adjacent": 0.2,
+        "rerank": 14083.5
+      },
+      "llm_calls": [
+        {
+          "ttft_ms": 520.5977660007193,
+          "kind": "tool_call",
+          "tools": [
+            "search_policies"
+          ],
+          "input_tokens": 917,
+          "output_tokens": 18,
+          "latency_ms": 538.6695289984345
+        },
+        {
+          "ttft_ms": 339.81453900196357,
+          "kind": "answer",
+          "tools": [],
+          "input_tokens": 3294,
+          "output_tokens": 122,
+          "latency_ms": 1784.3761420026422
+        }
+      ],
+      "answer_preview": "The standard return window for a smartphone is **15 days**, provided it is unopened or defective only (source: return_policy.pdf).\n\nPlease note that if your pur",
+      "run": 0
+    },
+    {
+      "question": "What is the return window for a smartphone?",
+      "outcome": "answered",
+      "tool_calls": [
+        "search_policies"
+      ],
+      "user_ttft_ms": 15555.094434991479,
+      "final_call_ttft_ms": 343.2969170025899,
+      "end_to_end_ms": 17505.596899993718,
+      "llm_rounds": 2,
+      "n_searches": 1,
+      "stages": {
+        "input_guardrails": 26.32454899698496,
+        "llm_tool_decisions": 473.4809819981456,
+        "retrieval": 14703.589671000838,
+        "final_call_ttft": 343.2969170025899,
+        "other_before_final": 8.402315996587276,
+        "final_generation": 1555.871010005474,
+        "after_answer": 394.63145499676466
+      },
+      "retrieval_stages": {
+        "hybrid_rrf": 45.2,
+        "expand_adjacent": 0.2,
+        "rerank": 14658.2
+      },
+      "llm_calls": [
+        {
+          "ttft_ms": 460.0113530032104,
+          "kind": "tool_call",
+          "tools": [
+            "search_policies"
+          ],
+          "input_tokens": 917,
+          "output_tokens": 18,
+          "latency_ms": 473.4809819981456
+        },
+        {
+          "ttft_ms": 343.2969170025899,
+          "kind": "answer",
+          "tools": [],
+          "input_tokens": 3294,
+          "output_tokens": 110,
+          "latency_ms": 1899.167927004397
+        }
+      ],
+      "answer_preview": "The standard return window for Smartphones & Tablets is **15 days**, provided the item is unopened or defective only (return_policy.pdf).\n\nPlease note that if t",
+      "run": 1
+    },
+    {
+      "question": "What is the return window for a smartphone?",
+      "outcome": "answered",
+      "tool_calls": [
+        "search_policies"
+      ],
+      "user_ttft_ms": 14818.332322008908,
+      "final_call_ttft_ms": 332.6651040042634,
+      "end_to_end_ms": 16348.997069008648,
+      "llm_rounds": 2,
+      "n_searches": 1,
+      "stages": {
+        "input_guardrails": 24.07081900537014,
+        "llm_tool_decisions": 511.1404180005193,
+        "retrieval": 13943.96372500062,
+        "final_call_ttft": 332.6651040042634,
+        "other_before_final": 6.492256000638008,
+        "final_generation": 1187.9379169940948,
+        "after_answer": 342.72683000564575
+      },
+      "retrieval_stages": {
+        "hybrid_rrf": 68.5,
+        "expand_adjacent": 0.1,
+        "rerank": 13871.5
+      },
+      "llm_calls": [
+        {
+          "ttft_ms": 498.40311399748316,
+          "kind": "tool_call",
+          "tools": [
+            "search_policies"
+          ],
+          "input_tokens": 917,
+          "output_tokens": 18,
+          "latency_ms": 511.1404180005193
+        },
+        {
+          "ttft_ms": 332.6651040042634,
+          "kind": "answer",
+          "tools": [],
+          "input_tokens": 3294,
+          "output_tokens": 100,
+          "latency_ms": 1520.6030209958553
+        }
+      ],
+      "answer_preview": "The standard return window for Smartphones & Tablets is **15 days**, provided the item is unopened or defective only (return_policy.pdf).\n\nPlease note that if t",
+      "run": 2
+    }
+  ]
+}

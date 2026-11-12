@@ -1,0 +1,86 @@
+[project]
+name = "retail-support-agent"
+version = "0.1.0"
+description = "Agentic AI support resolution system for retail: hybrid RAG over policy documents + MCP tools over operational records"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+
+dependencies = [
+    # --- LLM / agent runtime -------------------------------------------------
+    "anthropic>=0.40.0",            # Claude client; returns per-call token usage for cost reporting
+    "openai>=1.60.0",               # OpenAI-compatible client for NVIDIA NIM (nemotron)
+    "mcp>=1.2.0",                   # Model Context Protocol SDK (FastMCP server + stdio client)
+    "langgraph>=1.0",               # agent orchestration: StateGraph over guardrails/LLM/tools
+    "langchain-core>=1.0",          # BaseRetriever over hybrid search + StructuredTool registry
+    # --- Config & contracts --------------------------------------------------
+    "pydantic>=2.10.0",             # MCP tool input/output contracts + validation
+    "python-dotenv>=1.0.1",
+    # --- Ingestion: document formats ----------------------------------------
+    "pdfplumber>=0.11.4",           # PDF layout/table extraction (fallback for tricky pages)
+    "beautifulsoup4>=4.12.3",       # HTML parsing
+    "lxml>=5.3.0",                  # fast HTML/XML backend
+    "html2text>=2024.2.26",         # HTML -> clean markdown
+    "pandas>=2.2.3",                # CSV/JSON operational records
+    # --- Retrieval & ranking -------------------------------------------------
+    "qdrant-client>=1.12.0",        # persistent vector store w/ named vectors + RRF fusion
+    "fastembed>=0.4.2",             # ONNX dense embeddings, BM25 sparse and cross-encoder rerank
+    "numpy>=1.26.0",
+    # --- Storage -------------------------------------------------------------
+    "sqlalchemy>=2.0.36",           # typed access to the synthetic operational DB
+    "psycopg[binary]>=3.2",         # PostgreSQL driver (production store; sqlite still used in tests)
+    # --- Observability & CLI --------------------------------------------------
+    "langfuse>=2.0.0",              # LLM observability: traces, generations, spans, cost/latency
+    "rich>=13.9.0",                 # trace / eval table rendering
+    "typer>=0.15.0",                # CLI entrypoints (ingest, eval, ask)
+    "deepeval>=3",
+]
+
+[project.optional-dependencies]
+# Local classifier guardrails + metrics (toxicity, injection, NLI, perplexity, NSFW image).
+ml = [
+    "torch>=2.2",
+    "torchvision>=0.17",            # required by transformers image processors (NSFW check)
+    "transformers>=4.45",
+    "pillow>=10.0",
+]
+# Streamlit dashboard: .venv/bin/streamlit run app/streamlit_app.py
+app = [
+    "streamlit>=1.40",
+    "plotly>=5.24",
+]
+dev = [
+    "pytest>=8.3.4",
+    "pytest-asyncio>=0.25.0",       # async MCP client tests
+    "pytest-cov>=6.0.0",
+    "ruff>=0.8.4",
+    "mypy>=1.14.0",
+]
+
+[project.scripts]
+rsa = "retail_support_agent.cli:app"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/retail_support_agent"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+markers = [
+    "retrieval: retrieval-quality evaluation (ranking metrics)",
+    "agent: agent-behaviour evaluation (action selection, multi-step)",
+    "negative: negative / exception-path cases",
+    "live: requires ANTHROPIC_API_KEY and makes real model calls",
+    "ml: runs local classifier models (toxicity, injection, NLI, perplexity, NSFW)",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

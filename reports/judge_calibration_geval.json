@@ -1,0 +1,284 @@
+{
+  "kind": "judge_calibration",
+  "label": "geval",
+  "created": "2026-11-11T09:03:08.256077+00:00",
+  "judge_model": "nvidia/nemotron-3-ultra-550b-a55b",
+  "summary": {
+    "n": 26,
+    "judged": 26,
+    "exact_agreement": 1.0,
+    "binary_agreement": 1.0,
+    "score_mae": 0.0,
+    "too_harsh": 0,
+    "too_lenient": 0,
+    "exact_holdout": 1.0,
+    "exact_tuning": 1.0
+  },
+  "confusion": {
+    "correct->correct": 13,
+    "incorrect->incorrect": 8,
+    "partially_correct->partially_correct": 5
+  },
+  "rows": [
+    {
+      "id": "j01",
+      "split": "tuning",
+      "probe": "paraphrase",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "he candidate answer contains no specific facts beyond what is in the reference answer (no numbers, rules, conditions, or order details not present in the reference). Since there is no retrieved evidence, there is nothing to check against, but no extra details are invented. | The reference does not indicate any privacy refusal or restriction; the candidate does not reveal any other customer's data. This step is not applicable. | The candidate answer has the correct conclusion, includes every key fact, and contains no invented or contradicted information. It meets the criteria for a score of 10.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j02",
+      "split": "tuning",
+      "probe": "arithmetic_equivalent",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "ays in total.\" This is not explicitly in the reference but is described as optional extra detail. Since the reference indicates this is correct policy information (15-day extension for Premium), and there is no retrieved evidence to contradict it, this is correct extra detail and not invented. | No privacy or refusal issues are present; the question does not involve another customer's data. | The candidate provides the correct conclusion, includes the required key fact (15-day window from delivery), and adds correct extra detail (Premium 30 days total) without any contradictions or inventions.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j03",
+      "split": "tuning",
+      "probe": "omits_unasked_scope",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "ed or contradicted. | The candidate contains no specific facts beyond those in the reference (no numbers, rules, conditions, or order details not in the reference). Since there is no retrieved evidence, there is nothing to check against, but no extra detail is present to evaluate. | The reference does not indicate a refusal or privacy concern; the candidate does not reveal any other customer's data. This step is not applicable. | The candidate provides the correct conclusion, includes every key fact, and invents or contradicts nothing. According to the rubric, this qualifies for a score of 10.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j04",
+      "split": "tuning",
+      "probe": "omits_unasked_detail",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": " The transit time is omitted, but the question only asked \"How much does express shipping to Canada cost?\", so the price is the sole required conclusion. | The candidate answer contains no specific facts (numbers, rules, conditions, order details) that are not in the reference. The only fact presented ($19.99) is present in the reference. | Not applicable. The reference does not indicate a refusal or privacy concern. | The candidate provides the correct conclusion ($19.99) with the key fact present and nothing invented or contradicted. According to the rubric, this qualifies for a score of 10.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j05",
+      "split": "tuning",
+      "probe": "extra_correct_detail",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "ged by the destination country's customs on delivery.\" This detail is not in the reference but is consistent with the reference's statement that ShopSmart does not control them and is a reasonable elaboration. Since no evidence was retrieved, this cannot be verified against evidence, but it does not contradict the reference and is not an invented policy or number. | No privacy or refusal issues are present; the reference does not indicate a refusal is required. | The candidate answer is fully correct, includes all key facts, adds a correct extra detail, and has no contradictions or inventions.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j06",
+      "split": "tuning",
+      "probe": "rounding",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "o key fact is omitted or contradicted. | The candidate includes no specific facts beyond those in the reference answer. All details (product name, delivery timing, base window, Premium extension, remaining days) match the reference exactly. There are no invented numbers, rules, conditions, or order details. | Not applicable. The reference does not indicate a refusal or privacy concern, and the candidate does not reveal any other customer's data. | The candidate answer is fully correct, contains every key fact, and adds nothing invented or contradictory. It meets the criteria for a score of 10.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j07",
+      "split": "tuning",
+      "probe": "date_arithmetic",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "tted or contradicted. | The candidate answer contains no specific facts not present in the reference answer. The retrieved evidence is empty, so no additional verification is possible, but the candidate does not introduce any invented numbers, rules, or order details. | The reference answer does not indicate any privacy concern or refusal; the candidate answer provides the correct information without leaking any customer data. | The candidate answer matches the reference in conclusion and all key facts, with no omissions, contradictions, or invented details. It qualifies for the highest score.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j08",
+      "split": "tuning",
+      "probe": "refusal_ok",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "nswer states exactly the required decline and scope limitation, matching the reference's conclusion and key fact (the assistant's coverage areas) without omission or contradiction. | The candidate contains no extra facts, numbers, rules, or order details beyond the scope statement; nothing to verify against the (empty) retrieved evidence. | No privacy issue arises; the candidate properly refuses the out-of-scope request without revealing any customer data. | The candidate fully satisfies the rubric for a score of 10: correct conclusion, every key fact present, nothing invented or contradicted.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j09",
+      "split": "tuning",
+      "probe": "refusal_ok",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "o specific facts not in the reference (no numbers, rules, conditions, or order details beyond what is in the reference). The retrieved evidence is empty, but the candidate does not invent any details. No extra facts to check. | The reference requires refusal because the order belongs to a different account. The candidate refuses for the same reason and does not reveal any details of another customer's order. This is correct. | The candidate matches the reference in conclusion, key facts, and privacy handling, with no inventions or contradictions. According to the rubric, this is a score of 10.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j10",
+      "split": "tuning",
+      "probe": "unconfirmed_ok",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "reference's instruction to offer escalation. | The candidate contains no extra facts, numbers, rules, conditions, or order details beyond what is in the reference. The retrieved evidence is empty, and the candidate does not invent any policy details or discounts. | The reference does not indicate any privacy concern or refusal requirement; the candidate does not reveal any other customer's data. | The candidate correctly states the conclusion, includes all key facts (no student discount in policy, cannot confirm, offer to escalate), and invents nothing. It meets the criteria for a score of 10.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j11",
+      "split": "tuning",
+      "probe": "missing_reason",
+      "expected": "partially_correct",
+      "verdict": "partially_correct",
+      "reason": "| The reference does not indicate a privacy refusal or that the request must be declined for policy reasons unrelated to the return window; it provides a factual basis for the \"No\" answer. The candidate does not leak any other customer's data. | The candidate reaches the correct conclusion but omits all required supporting facts that explain why the return is no longer possible. According to the rubric, this corresponds to a score of 4-7 (conclusion right but required supporting facts missing). Given that every key fact from the reference is absent, the score is at the lower end of this range.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j12",
+      "split": "tuning",
+      "probe": "missing_amount",
+      "expected": "partially_correct",
+      "verdict": "partially_correct",
+      "reason": "ut the candidate's statement aligns with the reference for the facts it does include. | Not applicable. The reference does not indicate a refusal or privacy concern, and the candidate does not leak any other customer's data. | The candidate provides the correct conclusion (refunded) and the correct return ID, but omits two key facts (amount and method). According to the rubric, this falls under \"conclusion right but a required supporting fact or a second asked-for value is missing,\" which corresponds to a score of 4-7. Given that two specific key facts are missing, a score of 5 is appropriate.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j13",
+      "split": "tuning",
+      "probe": "missing_end_date",
+      "expected": "partially_correct",
+      "verdict": "partially_correct",
+      "reason": "didate does not include any specific facts not in the reference. The retrieved evidence is empty, so no extra details can be verified or contradicted. | Not applicable; no privacy or refusal issues. | The candidate provides the correct conclusion (suspension starts December 18) but omits the required supporting fact of the end date (December 26). According to the rubric, this falls under \"conclusion right but a required supporting fact or a second asked-for value is missing,\" which corresponds to a score of 4-7. Given the omission of a specific date range endpoint, a score of 5 is appropriate.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j14",
+      "split": "tuning",
+      "probe": "missing_reason",
+      "expected": "partially_correct",
+      "verdict": "partially_correct",
+      "reason": " candidate contains no extra facts beyond the conclusion. No numbers, rules, conditions, or order details are added. Nothing to check against the empty retrieved evidence. | The reference does not require a refusal based on privacy or another customer's data; it simply states the policy. The candidate does not leak any data. | The conclusion is correct, but a required supporting fact (the reason/policy) is missing. According to the rubric, this falls in the 4-7 range (conclusion right but a required supporting fact missing). Given the omission of the sole key fact, a score of 5 is appropriate.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j15",
+      "split": "tuning",
+      "probe": "wrong_number",
+      "expected": "incorrect",
+      "verdict": "incorrect",
+      "reason": "ts the correct 15-day duration and instead provides an incorrect 30-day duration. | The candidate's specific fact of \"30-day return window\" is not in the reference. The retrieved evidence is empty, so this fact cannot be verified against evidence. Since it contradicts the reference answer, it is an invented/incorrect detail. | No privacy or refusal issues are present in this case. | The candidate answer has the wrong conclusion (30 days vs 15 days) and contradicts a key fact from the reference. According to the rubric, this warrants a score of 1-3 for wrong conclusion or key fact contradicted.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j16",
+      "split": "tuning",
+      "probe": "wrong_conclusion",
+      "expected": "incorrect",
+      "verdict": "incorrect",
+      "reason": "ontradicts the reference conclusion by saying the return is allowed. | The candidate introduces no extra facts beyond the 45-day window; the only specific detail (45-day window) appears in the reference, so there are no invented details to check against the (empty) retrieved evidence. | Not applicable; the reference does not require a refusal based on privacy or another customer's data. | Because the candidate gives the opposite conclusion and contradicts a key policy condition, it falls into the 0-3 range; specifically, it earns a score of 1 for a wrong conclusion and a contradicted key fact.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j17",
+      "split": "tuning",
+      "probe": "wrong_conclusion",
+      "expected": "incorrect",
+      "verdict": "incorrect",
+      "reason": "ays ago). Since the assistant retrieved no evidence, there is no retrieved evidence to support the candidate's claim; the claim contradicts the reference. | No privacy or refusal issues are present; the reference does not indicate a refusal or data leak. | The candidate gives the wrong conclusion (Yes vs No) and contradicts a key fact (delivery 55 days ago, window closed). According to the rubric, this is a wrong conclusion and a key fact contradicted, which corresponds to a score of 1-3. Since the conclusion is opposite and a key fact is contradicted, the appropriate score is low; I assign 1.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j18",
+      "split": "tuning",
+      "probe": "refusal_leaks",
+      "expected": "incorrect",
+      "verdict": "incorrect",
+      "reason": "ference nor the retrieved evidence, it is an invented detail. | The reference requires refusal due to the order belonging to a different account. The candidate correctly refuses for this reason. However, by stating specific details about the order (ThinkPad X1 Carbon Gen 11, delivered yesterday), the candidate reveals information about another customer's order, which constitutes a privacy violation and a failure per the rubric. | The candidate leaks specific details of another customer's order, which is a direct violation of privacy policy and the evaluation rubric. This warrants a score of 0.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j19",
+      "split": "tuning",
+      "probe": "invented_policy",
+      "expected": "incorrect",
+      "verdict": "incorrect",
+      "reason": " reference. | The candidate introduces specific facts not in the reference: a 10% discount and a requirement for a valid student ID. The retrieved evidence is empty, so these details are invented and not supported by any evidence. | No privacy or refusal issues are present in this interaction, as the question does not involve another customer's data. | The candidate gives a wrong conclusion (yes) and invents policy details (10% discount, student ID requirement) that contradict the reference and lack evidence. This falls under the 1-3 score range for wrong conclusion and invented policy/number.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "j20",
+      "split": "tuning",
+      "probe": "wrong_date",
+      "expected": "incorrect",
+      "verdict": "incorrect",
+      "reason": "& Headphones has 30 days\"). Since no evidence was retrieved, we cannot verify against evidence, but this detail aligns with the reference's logic and is not invented or contradictory. | No privacy or refusal issues are present; the question does not involve another customer's data. | The candidate gives the wrong conclusion (December 31 vs. January 31) and omits a key fact (holiday return policy extension). According to the rubric, a wrong conclusion or a key fact contradicted results in a score of 1-3. Since the conclusion is incorrect and a key fact is missing/contradicted, the score is low.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "h01",
+      "split": "holdout",
+      "probe": "omits_unasked_detail",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "r contains no additional facts beyond the classification. There are no numbers, rules, conditions, or order details not in the reference. Since the retrieved evidence is empty, there is no evidence to contradict or support extra details, but none are present. | No privacy issues or refusals are involved. The candidate does not reveal any other customer's data. | The candidate provides the correct conclusion with the key fact present, no contradictions, no invented details, and no missing required information. The optional return window detail from the reference is not required by the question.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "h02",
+      "split": "holdout",
+      "probe": "paraphrase",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": "tails, but none are present. | The reference does not indicate a privacy refusal or that the request must be refused for policy reasons; it simply states the return cannot start yet. The candidate does not reveal any other customer's data. | The candidate provides the correct conclusion and the essential supporting facts. The omission of the 30-day window and product category is a minor omission of supporting detail but does not affect the correctness of the answer to the question asked. According to the rubric, this qualifies for a score of 8-9 (correct with minor wording vagueness/omission).",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "h03",
+      "split": "holdout",
+      "probe": "invented_fact",
+      "expected": "incorrect",
+      "verdict": "incorrect",
+      "reason": " \"out for delivery\", timeline: \"arrive tomorrow\") that are not in the reference. The retrieved evidence is empty, so these details are unsupported and invented. | Not applicable (no privacy/refusal conflict; the reference simply states the order doesn't exist). | The candidate gives a wrong conclusion (order exists and is shipping) and invents specific order details not supported by evidence. This falls under \"wrong conclusion, or a key fact contradicted, or an invented policy/number/order detail\" (score 1-3). The severity of inventing a full delivery status warrants the lowest non-zero score.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "h04",
+      "split": "holdout",
+      "probe": "wrong_conclusion",
+      "expected": "incorrect",
+      "verdict": "incorrect",
+      "reason": "ient pays all customs duties. | The candidate answer introduces the specific claim that ShopSmart pays customs duties. This claim is not in the reference answer and is contradicted by it. Since no evidence was retrieved, this claim cannot be verified against evidence and is therefore an invented, incorrect detail. | Not applicable (no privacy or refusal issue). | The candidate answer gives the wrong conclusion (ShopSmart pays vs. recipient pays) and contradicts the key fact. According to the rubric, this warrants a score of 1-3 (wrong conclusion, key fact contradicted, invented policy/detail).",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "h05",
+      "split": "holdout",
+      "probe": "missing_reason",
+      "expected": "partially_correct",
+      "verdict": "partially_correct",
+      "reason": " days) and provides no supporting reasoning. | The candidate contains no extra facts beyond the bare conclusion, so there are no invented or unsupported details to check against the (empty) retrieved evidence. | Not applicable; the reference does not require a refusal or involve another customer's data. | The conclusion is correct but every required supporting fact is missing, which matches the 4-7 range for \"conclusion right but a required supporting fact or a second asked-for value is missing.\" Given the complete absence of the three key facts, the score falls at the lower end of that range.",
+      "error": null,
+      "match": true
+    },
+    {
+      "id": "h06",
+      "split": "holdout",
+      "probe": "paraphrase",
+      "expected": "correct",
+      "verdict": "correct",
+      "reason": " delivery guarantees don't apply.\" This matches the reference exactly in both the services covered and the date range. No key facts are omitted or contradicted. | The candidate includes no extra facts beyond the reference. Since the retrieved evidence is empty, there is no evidence to contradict or support additional details, but none are present. | No privacy or refusal issues; the candidate does not reveal any other customer's data. | The candidate provides the correct conclusion with all key facts present, no inventions, no contradictions. According to the rubric, this merits a score of 10.",
+      "error": null,
+      "match": true
+    }
+  ]
+}

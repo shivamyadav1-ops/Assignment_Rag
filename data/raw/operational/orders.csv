@@ -1,0 +1,201 @@
+order_id,customer_id,product_name,product_category,order_date,delivery_date,status,amount,payment_method,shipping_method,warranty_plan,synthetic
+ORD-10001,CUST-1026,PS5 DualSense Controller,Gaming Accessories,2024-09-11,2024-09-15,delivered,69.0,debit_card,next_day,,True
+ORD-10002,CUST-1035,PS5 DualSense Controller,Gaming Accessories,2024-10-06,2024-10-10,delivered,69.0,credit_card,expedited,protect_plus,True
+ORD-10003,CUST-1023,Nintendo Switch OLED,Gaming Consoles,2024-09-30,2024-10-05,delivered,349.0,store_credit,standard,,True
+ORD-10004,CUST-1046,Fitbit Charge 6,Wearables & Fitness,2024-09-16,2024-09-20,delivered,159.0,paypal,standard,,True
+ORD-10005,CUST-1022,Nintendo Switch OLED,Gaming Consoles,2024-10-02,2024-10-09,delivered,349.0,debit_card,expedited,,True
+ORD-10006,CUST-1021,Ring Video Doorbell Pro 2,Smart Home Devices,2024-10-06,2024-10-09,delivered,249.0,paypal,next_day,,True
+ORD-10007,CUST-1012,ShopSmart Gift Card $100,Gift Cards,2024-05-17,2024-05-21,delivered,100.0,debit_card,standard,,True
+ORD-10008,CUST-1038,Nintendo Switch OLED,Gaming Consoles,2024-09-22,,cancelled,349.0,credit_card,next_day,,True
+ORD-10009,CUST-1048,Bose QuietComfort Ultra,Audio & Headphones,2024-11-06,,shipped,429.0,credit_card,standard,,True
+ORD-10010,CUST-1015,"Samsung 65"" OLED S90C",Televisions & Monitors,2024-09-17,2024-09-20,delivered,1799.0,paypal,standard,,True
+ORD-10011,CUST-1041,ShopSmart Gift Card $100,Gift Cards,2024-11-08,,confirmed,100.0,paypal,standard,protect_basic,True
+ORD-10012,CUST-1049,ThinkPad X1 Carbon Gen 11,Laptops & Computers,2024-11-05,2024-11-08,delivered,1449.0,bnpl,next_day,protect_basic,True
+ORD-10013,CUST-1008,Mechanical Keyboard Keychron Q1,Computer Accessories,2024-09-23,,cancelled,169.0,store_credit,expedited,,True
+ORD-10014,CUST-1029,Thunderbolt 4 Cable 1m,Cables & Adapters,2024-10-25,,cancelled,33.27,bnpl,next_day,,True
+ORD-10015,CUST-1049,Sony A7 IV Mirrorless Camera,Cameras & Photography,2024-11-05,,shipped,2499.0,bnpl,standard,,True
+ORD-10016,CUST-1005,PlayStation 5 Slim,Gaming Consoles,2024-11-08,,processing,449.0,store_credit,standard,protect_basic,True
+ORD-10017,CUST-1025,AirPods Pro 2nd Gen,Audio & Headphones,2024-10-23,2024-10-28,delivered,249.0,paypal,expedited,,True
+ORD-10018,CUST-1027,Pixel 8 Pro 128GB,Smartphones & Tablets,2024-11-08,,confirmed,899.0,store_credit,standard,,True
+ORD-10019,CUST-1049,ShopSmart Gift Card $100,Gift Cards,2024-06-26,2024-06-30,delivered,100.0,debit_card,next_day,,True
+ORD-10020,CUST-1027,Norton 360 Deluxe 1-Year,Software & Digital Codes,2024-10-25,2024-10-30,delivered,49.0,credit_card,expedited,,True
+ORD-10021,CUST-1002,Google Nest Hub Max,Smart Home Devices,2024-11-07,,confirmed,229.0,credit_card,next_day,,True
+ORD-10022,CUST-1040,Norton 360 Deluxe 1-Year,Software & Digital Codes,2024-11-07,,confirmed,49.0,store_credit,standard,protect_plus,True
+ORD-10023,CUST-1009,Mechanical Keyboard Keychron Q1,Computer Accessories,2024-11-05,,shipped,169.0,debit_card,standard,,True
+ORD-10024,CUST-1022,Google Nest Hub Max,Smart Home Devices,2024-11-08,,confirmed,229.0,credit_card,next_day,protect_basic,True
+ORD-10025,CUST-1023,"Dell 27"" 4K Monitor U2723QE",Televisions & Monitors,2024-11-05,2024-11-07,delivered,549.0,credit_card,standard,,True
+ORD-10026,CUST-1040,AirPods Pro 2nd Gen,Audio & Headphones,2024-09-23,,cancelled,249.0,credit_card,standard,,True
+ORD-10027,CUST-1017,Echo Show 15,Smart Home Devices,2024-07-09,2024-07-12,delivered,249.0,debit_card,standard,,True
+ORD-10028,CUST-1020,ShopSmart Gift Card $100,Gift Cards,2024-11-08,,confirmed,100.0,bnpl,standard,protect_basic,True
+ORD-10029,CUST-1007,Xbox Series X,Gaming Consoles,2024-10-12,2024-10-18,delivered,499.0,credit_card,expedited,,True
+ORD-10030,CUST-1043,Echo Show 15,Smart Home Devices,2024-11-09,,processing,249.0,paypal,next_day,protect_plus,True
+ORD-10031,CUST-1041,Mechanical Keyboard Keychron Q1,Computer Accessories,2024-11-09,,confirmed,169.0,bnpl,expedited,,True
+ORD-10032,CUST-1035,Anker USB-C Hub 7-in-1,Computer Accessories,2024-11-06,,shipped,39.65,credit_card,standard,,True
+ORD-10033,CUST-1029,Sony A7 IV Mirrorless Camera,Cameras & Photography,2024-11-08,,confirmed,2499.0,credit_card,next_day,,True
+ORD-10034,CUST-1012,USB-C to HDMI Cable 6ft,Cables & Adapters,2024-11-06,,shipped,15.06,debit_card,expedited,,True
+ORD-10035,CUST-1034,"Samsung 65"" OLED S90C",Televisions & Monitors,2024-11-08,,confirmed,1799.0,store_credit,standard,,True
+ORD-10036,CUST-1042,USB-C to HDMI Cable 6ft,Cables & Adapters,2024-10-03,2024-10-05,delivered,16.24,debit_card,standard,,True
+ORD-10037,CUST-1016,Xbox Series X,Gaming Consoles,2024-11-08,,processing,499.0,store_credit,expedited,,True
+ORD-10038,CUST-1048,ShopSmart Gift Card $50,Gift Cards,2024-10-18,,cancelled,50.0,debit_card,expedited,,True
+ORD-10039,CUST-1047,"Samsung 65"" OLED S90C",Televisions & Monitors,2024-05-22,2024-05-25,delivered,1799.0,credit_card,next_day,,True
+ORD-10040,CUST-1038,Microsoft 365 Personal (Digital),Software & Digital Codes,2024-10-09,2024-10-12,delivered,69.0,debit_card,standard,,True
+ORD-10041,CUST-1020,Galaxy S24 Ultra 256GB,Smartphones & Tablets,2024-10-14,2024-10-18,delivered,1199.0,credit_card,standard,,True
+ORD-10042,CUST-1045,Sony WH-1000XM5,Audio & Headphones,2024-10-29,,cancelled,349.0,credit_card,expedited,,True
+ORD-10043,CUST-1029,PS5 DualSense Controller,Gaming Accessories,2024-05-27,2024-05-31,delivered,69.0,paypal,standard,,True
+ORD-10044,CUST-1026,USB-C to HDMI Cable 6ft,Cables & Adapters,2024-08-11,2024-08-14,delivered,14.37,credit_card,expedited,protect_basic,True
+ORD-10045,CUST-1008,ShopSmart Gift Card $50,Gift Cards,2024-09-24,2024-09-30,delivered,50.0,paypal,next_day,,True
+ORD-10046,CUST-1020,Fitbit Charge 6,Wearables & Fitness,2024-10-20,2024-10-26,delivered,159.0,bnpl,standard,,True
+ORD-10047,CUST-1014,"LG 55"" C3 OLED",Televisions & Monitors,2024-09-18,2024-09-21,delivered,1299.0,credit_card,standard,,True
+ORD-10048,CUST-1011,Galaxy S24 Ultra 256GB,Smartphones & Tablets,2024-10-17,,cancelled,1199.0,credit_card,standard,,True
+ORD-10049,CUST-1019,Mechanical Keyboard Keychron Q1,Computer Accessories,2024-08-27,2024-08-31,delivered,169.0,bnpl,standard,,True
+ORD-10050,CUST-1035,"Dell 27"" 4K Monitor U2723QE",Televisions & Monitors,2024-11-07,,shipped,549.0,credit_card,standard,protect_plus,True
+ORD-10051,CUST-1039,ShopSmart Gift Card $100,Gift Cards,2024-10-28,,cancelled,100.0,paypal,expedited,,True
+ORD-10052,CUST-1018,Thunderbolt 4 Cable 1m,Cables & Adapters,2024-10-30,,cancelled,34.4,store_credit,standard,,True
+ORD-10053,CUST-1048,Nintendo Switch OLED,Gaming Consoles,2024-11-05,2024-11-07,delivered,349.0,credit_card,standard,,True
+ORD-10054,CUST-1044,GoPro Hero 12 Black,Cameras & Photography,2024-10-17,2024-10-22,delivered,399.0,store_credit,next_day,,True
+ORD-10055,CUST-1012,Fitbit Charge 6,Wearables & Fitness,2024-10-30,,cancelled,159.0,paypal,expedited,,True
+ORD-10056,CUST-1021,ThinkPad X1 Carbon Gen 11,Laptops & Computers,2024-11-08,,processing,1449.0,bnpl,next_day,,True
+ORD-10057,CUST-1026,ShopSmart Gift Card $50,Gift Cards,2024-10-18,2024-10-22,delivered,50.0,debit_card,expedited,protect_plus,True
+ORD-10058,CUST-1033,Galaxy S24 Ultra 256GB,Smartphones & Tablets,2024-10-09,,cancelled,1199.0,credit_card,standard,,True
+ORD-10059,CUST-1040,USB-C to HDMI Cable 6ft,Cables & Adapters,2024-10-23,2024-10-26,delivered,17.13,debit_card,standard,,True
+ORD-10060,CUST-1029,USB-C to HDMI Cable 6ft,Cables & Adapters,2024-04-30,2024-05-07,delivered,14.61,credit_card,expedited,,True
+ORD-10061,CUST-1036,Apple Watch Ultra 2,Wearables & Fitness,2024-10-18,2024-10-23,delivered,799.0,credit_card,standard,,True
+ORD-10062,CUST-1046,PlayStation 5 Slim,Gaming Consoles,2024-11-05,,shipped,449.0,paypal,next_day,,True
+ORD-10063,CUST-1036,AirPods Pro 2nd Gen,Audio & Headphones,2024-09-08,2024-09-10,delivered,249.0,debit_card,next_day,,True
+ORD-10064,CUST-1033,GoPro Hero 12 Black,Cameras & Photography,2024-11-06,,shipped,399.0,store_credit,next_day,,True
+ORD-10065,CUST-1029,Norton 360 Deluxe 1-Year,Software & Digital Codes,2024-11-07,,processing,49.0,store_credit,next_day,,True
+ORD-10066,CUST-1021,"Samsung 65"" OLED S90C",Televisions & Monitors,2024-07-01,2024-07-07,delivered,1799.0,paypal,standard,,True
+ORD-10067,CUST-1027,iPad Air M2 128GB,Smartphones & Tablets,2024-09-20,,cancelled,599.0,paypal,next_day,,True
+ORD-10068,CUST-1042,AirPods Pro 2nd Gen,Audio & Headphones,2024-10-11,2024-10-14,delivered,249.0,store_credit,expedited,,True
+ORD-10069,CUST-1029,ThinkPad X1 Carbon Gen 11,Laptops & Computers,2024-11-04,,cancelled,1449.0,bnpl,standard,,True
+ORD-10070,CUST-1042,AirPods Pro 2nd Gen,Audio & Headphones,2024-11-06,,shipped,249.0,store_credit,next_day,,True
+ORD-10071,CUST-1022,Norton 360 Deluxe 1-Year,Software & Digital Codes,2024-11-07,,processing,49.0,bnpl,next_day,,True
+ORD-10072,CUST-1003,"MacBook Pro 14"" M3",Laptops & Computers,2024-11-07,,shipped,1692.91,bnpl,standard,,True
+ORD-10073,CUST-1007,ThinkPad X1 Carbon Gen 11,Laptops & Computers,2024-11-08,,shipped,1449.0,credit_card,expedited,,True
+ORD-10074,CUST-1019,Xbox Elite Controller Series 2,Gaming Accessories,2024-10-18,2024-10-21,delivered,179.0,store_credit,next_day,,True
+ORD-10075,CUST-1012,Bose QuietComfort Ultra,Audio & Headphones,2024-11-07,,confirmed,429.0,bnpl,standard,,True
+ORD-10076,CUST-1038,AirPods Pro 2nd Gen,Audio & Headphones,2024-11-05,,shipped,249.0,debit_card,standard,,True
+ORD-10077,CUST-1030,PlayStation 5 Slim,Gaming Consoles,2024-10-24,2024-10-26,delivered,449.0,paypal,expedited,,True
+ORD-10078,CUST-1020,Fitbit Charge 6,Wearables & Fitness,2024-09-11,,cancelled,159.0,debit_card,standard,,True
+ORD-10079,CUST-1031,ThinkPad X1 Carbon Gen 11,Laptops & Computers,2024-11-07,,processing,1449.0,debit_card,expedited,protect_plus,True
+ORD-10080,CUST-1018,Galaxy S24 Ultra 256GB,Smartphones & Tablets,2024-09-24,2024-09-30,delivered,1199.0,bnpl,next_day,,True
+ORD-10081,CUST-1019,"Dell 27"" 4K Monitor U2723QE",Televisions & Monitors,2024-11-09,,processing,549.0,bnpl,standard,,True
+ORD-10082,CUST-1044,Sony WH-1000XM5,Audio & Headphones,2024-07-08,2024-07-12,delivered,349.0,paypal,standard,,True
+ORD-10083,CUST-1047,Sony WH-1000XM5,Audio & Headphones,2024-11-06,,shipped,349.0,bnpl,next_day,protect_basic,True
+ORD-10084,CUST-1035,Echo Show 15,Smart Home Devices,2024-11-07,,shipped,249.0,debit_card,next_day,,True
+ORD-10085,CUST-1019,PS5 DualSense Controller,Gaming Accessories,2024-10-31,,cancelled,69.0,credit_card,standard,,True
+ORD-10086,CUST-1047,Ring Video Doorbell Pro 2,Smart Home Devices,2024-11-09,,processing,249.0,paypal,standard,,True
+ORD-10087,CUST-1008,Mechanical Keyboard Keychron Q1,Computer Accessories,2024-11-05,,shipped,169.0,bnpl,expedited,protect_basic,True
+ORD-10088,CUST-1031,iPhone 15 Pro Max 512GB,Smartphones & Tablets,2024-11-07,,processing,1399.0,credit_card,standard,,True
+ORD-10089,CUST-1030,Xbox Series X,Gaming Consoles,2024-10-04,2024-10-07,delivered,499.0,credit_card,standard,,True
+ORD-10090,CUST-1032,"HP Spectre x360 14""",Laptops & Computers,2024-09-10,2024-09-15,delivered,1249.0,paypal,expedited,,True
+ORD-10091,CUST-1048,Norton 360 Deluxe 1-Year,Software & Digital Codes,2024-10-05,2024-10-10,delivered,49.0,bnpl,standard,,True
+ORD-10092,CUST-1040,Apple Watch Ultra 2,Wearables & Fitness,2024-11-08,,shipped,799.0,bnpl,expedited,,True
+ORD-10093,CUST-1029,Sony A7 IV Mirrorless Camera,Cameras & Photography,2024-05-17,2024-05-24,delivered,2499.0,debit_card,expedited,protect_plus,True
+ORD-10094,CUST-1013,"HP Spectre x360 14""",Laptops & Computers,2024-10-30,,cancelled,1249.0,bnpl,standard,,True
+ORD-10095,CUST-1039,iPhone 15 Pro Max 512GB,Smartphones & Tablets,2024-11-09,,processing,1399.0,credit_card,standard,protect_basic,True
+ORD-10096,CUST-1038,"LG 55"" C3 OLED",Televisions & Monitors,2024-10-08,2024-10-12,delivered,1299.0,credit_card,standard,,True
+ORD-10097,CUST-1010,Sony WH-1000XM5,Audio & Headphones,2024-06-09,2024-06-11,delivered,349.0,bnpl,standard,protect_plus,True
+ORD-10098,CUST-1016,Nintendo Switch OLED,Gaming Consoles,2024-11-08,,shipped,349.0,credit_card,next_day,,True
+ORD-10099,CUST-1048,"MacBook Pro 14"" M3",Laptops & Computers,2024-11-07,,processing,1789.5,store_credit,standard,,True
+ORD-10100,CUST-1015,iPad Air M2 128GB,Smartphones & Tablets,2024-11-05,,shipped,599.0,bnpl,standard,protect_plus,True
+ORD-10101,CUST-1026,Fitbit Charge 6,Wearables & Fitness,2024-09-20,,cancelled,159.0,paypal,standard,,True
+ORD-10102,CUST-1021,AirPods Pro 2nd Gen,Audio & Headphones,2024-11-06,,shipped,249.0,paypal,expedited,,True
+ORD-10103,CUST-1039,Fitbit Charge 6,Wearables & Fitness,2024-08-09,2024-08-16,delivered,159.0,bnpl,standard,,True
+ORD-10104,CUST-1015,Apple Watch Ultra 2,Wearables & Fitness,2024-10-10,,cancelled,799.0,paypal,standard,,True
+ORD-10105,CUST-1021,Canon EOS R6 Mark II,Cameras & Photography,2024-11-01,2024-11-08,delivered,2299.0,paypal,standard,protect_basic,True
+ORD-10106,CUST-1006,Fitbit Charge 6,Wearables & Fitness,2024-11-09,,processing,159.0,store_credit,standard,,True
+ORD-10107,CUST-1036,ShopSmart Gift Card $50,Gift Cards,2024-08-26,2024-08-31,delivered,50.0,debit_card,next_day,,True
+ORD-10108,CUST-1047,Pixel 8 Pro 128GB,Smartphones & Tablets,2024-11-06,,shipped,899.0,credit_card,standard,protect_plus,True
+ORD-10109,CUST-1015,ThinkPad X1 Carbon Gen 11,Laptops & Computers,2024-11-09,,processing,1449.0,debit_card,standard,,True
+ORD-10110,CUST-1036,ShopSmart Gift Card $50,Gift Cards,2024-11-08,,shipped,50.0,credit_card,expedited,,True
+ORD-10111,CUST-1020,PS5 DualSense Controller,Gaming Accessories,2024-10-12,2024-10-15,delivered,69.0,store_credit,next_day,protect_basic,True
+ORD-10112,CUST-1006,Microsoft 365 Personal (Digital),Software & Digital Codes,2024-11-08,,confirmed,69.0,debit_card,standard,,True
+ORD-10113,CUST-1047,Nintendo Switch OLED,Gaming Consoles,2024-06-18,2024-06-20,delivered,349.0,credit_card,standard,,True
+ORD-10114,CUST-1004,Dell XPS 15 i7 16GB,Laptops & Computers,2024-11-08,,confirmed,1353.42,store_credit,next_day,,True
+ORD-10115,CUST-1014,Thunderbolt 4 Cable 1m,Cables & Adapters,2024-11-09,,confirmed,30.14,debit_card,next_day,,True
+ORD-10116,CUST-1020,iPad Air M2 128GB,Smartphones & Tablets,2024-08-29,2024-08-31,delivered,599.0,credit_card,expedited,,True
+ORD-10117,CUST-1050,Sony WH-1000XM5,Audio & Headphones,2024-11-06,,shipped,349.0,credit_card,standard,,True
+ORD-10118,CUST-1028,JBL Charge 5 Speaker,Audio & Headphones,2024-11-01,2024-11-07,delivered,179.0,store_credit,expedited,protect_basic,True
+ORD-10119,CUST-1028,iPhone 15 Pro Max 512GB,Smartphones & Tablets,2024-10-03,2024-10-07,delivered,1399.0,store_credit,next_day,,True
+ORD-10120,CUST-1046,Apple Watch Ultra 2,Wearables & Fitness,2024-11-09,,confirmed,799.0,debit_card,standard,,True
+ORD-10121,CUST-1040,Mechanical Keyboard Keychron Q1,Computer Accessories,2024-11-09,,processing,169.0,paypal,standard,,True
+ORD-10122,CUST-1038,Ring Video Doorbell Pro 2,Smart Home Devices,2024-11-08,,confirmed,249.0,bnpl,expedited,,True
+ORD-10123,CUST-1050,Bose QuietComfort Ultra,Audio & Headphones,2024-10-24,2024-10-30,delivered,429.0,store_credit,standard,,True
+ORD-10124,CUST-1023,Xbox Elite Controller Series 2,Gaming Accessories,2024-10-07,2024-10-10,delivered,179.0,credit_card,standard,,True
+ORD-10125,CUST-1012,AirPods Pro 2nd Gen,Audio & Headphones,2024-10-02,2024-10-05,delivered,249.0,bnpl,next_day,,True
+ORD-10126,CUST-1037,Logitech MX Master 3S,Computer Accessories,2024-11-07,,processing,99.0,debit_card,standard,,True
+ORD-10127,CUST-1031,Logitech MX Master 3S,Computer Accessories,2024-11-08,,shipped,99.0,debit_card,standard,,True
+ORD-10128,CUST-1029,iPad Air M2 128GB,Smartphones & Tablets,2024-11-08,,shipped,599.0,bnpl,standard,,True
+ORD-10129,CUST-1033,Google Nest Hub Max,Smart Home Devices,2024-10-17,2024-10-22,delivered,229.0,store_credit,standard,,True
+ORD-10130,CUST-1031,Thunderbolt 4 Cable 1m,Cables & Adapters,2024-05-08,2024-05-13,delivered,30.51,credit_card,expedited,,True
+ORD-10131,CUST-1006,Thunderbolt 4 Cable 1m,Cables & Adapters,2024-10-21,2024-10-24,delivered,35.46,bnpl,next_day,,True
+ORD-10132,CUST-1034,Microsoft 365 Personal (Digital),Software & Digital Codes,2024-11-08,,processing,69.0,debit_card,next_day,,True
+ORD-10133,CUST-1022,Pixel 8 Pro 128GB,Smartphones & Tablets,2024-11-09,,processing,899.0,debit_card,standard,,True
+ORD-10134,CUST-1025,PlayStation 5 Slim,Gaming Consoles,2024-09-26,2024-09-30,delivered,449.0,credit_card,standard,,True
+ORD-10135,CUST-1020,Ring Video Doorbell Pro 2,Smart Home Devices,2024-07-12,2024-07-16,delivered,249.0,store_credit,next_day,,True
+ORD-10136,CUST-1022,Sony WH-1000XM5,Audio & Headphones,2024-11-01,2024-11-08,delivered,349.0,bnpl,next_day,,True
+ORD-10137,CUST-1002,Echo Show 15,Smart Home Devices,2024-05-02,2024-05-06,delivered,249.0,paypal,standard,,True
+ORD-10138,CUST-1009,AirPods Pro 2nd Gen,Audio & Headphones,2024-10-22,2024-10-28,delivered,249.0,store_credit,standard,,True
+ORD-10139,CUST-1050,Sony WH-1000XM5,Audio & Headphones,2024-09-17,2024-09-20,delivered,349.0,credit_card,standard,,True
+ORD-10140,CUST-1003,Apple Watch Ultra 2,Wearables & Fitness,2024-07-22,2024-07-27,delivered,799.0,store_credit,expedited,,True
+ORD-10141,CUST-1029,"Dell 27"" 4K Monitor U2723QE",Televisions & Monitors,2024-11-05,,shipped,549.0,credit_card,expedited,,True
+ORD-10142,CUST-1037,Logitech MX Master 3S,Computer Accessories,2024-11-05,,shipped,99.0,store_credit,next_day,,True
+ORD-10143,CUST-1013,Sony WH-1000XM5,Audio & Headphones,2024-10-11,2024-10-18,delivered,349.0,paypal,expedited,,True
+ORD-10144,CUST-1007,Microsoft 365 Personal (Digital),Software & Digital Codes,2024-11-08,,shipped,69.0,credit_card,expedited,,True
+ORD-10145,CUST-1033,AirPods Pro 2nd Gen,Audio & Headphones,2024-08-08,2024-08-11,delivered,249.0,paypal,expedited,,True
+ORD-10146,CUST-1027,Pixel 8 Pro 128GB,Smartphones & Tablets,2024-11-09,,processing,899.0,paypal,standard,,True
+ORD-10147,CUST-1002,Nintendo Switch OLED,Gaming Consoles,2024-11-09,,processing,349.0,credit_card,standard,,True
+ORD-10148,CUST-1031,Sony WH-1000XM5,Audio & Headphones,2024-10-07,,cancelled,349.0,store_credit,standard,,True
+ORD-10149,CUST-1002,Canon EOS R6 Mark II,Cameras & Photography,2024-05-07,2024-05-13,delivered,2299.0,bnpl,next_day,protect_plus,True
+ORD-10150,CUST-1016,Xbox Series X,Gaming Consoles,2024-08-06,2024-08-11,delivered,499.0,bnpl,next_day,protect_plus,True
+ORD-10151,CUST-1039,Norton 360 Deluxe 1-Year,Software & Digital Codes,2024-10-27,2024-11-03,delivered,49.0,credit_card,expedited,,True
+ORD-10152,CUST-1040,Xbox Elite Controller Series 2,Gaming Accessories,2024-11-09,,confirmed,179.0,bnpl,standard,,True
+ORD-10153,CUST-1024,"MacBook Pro 14"" M3",Laptops & Computers,2024-05-06,2024-05-11,delivered,1980.36,paypal,standard,,True
+ORD-10154,CUST-1024,Canon EOS R6 Mark II,Cameras & Photography,2024-11-09,,processing,2299.0,debit_card,standard,,True
+ORD-10155,CUST-1041,ThinkPad X1 Carbon Gen 11,Laptops & Computers,2024-11-09,,processing,1449.0,credit_card,expedited,,True
+ORD-10156,CUST-1042,JBL Charge 5 Speaker,Audio & Headphones,2024-09-21,,cancelled,179.0,paypal,standard,,True
+ORD-10157,CUST-1005,Mechanical Keyboard Keychron Q1,Computer Accessories,2024-08-12,2024-08-14,delivered,169.0,credit_card,standard,,True
+ORD-10158,CUST-1020,Thunderbolt 4 Cable 1m,Cables & Adapters,2024-10-19,,cancelled,32.98,credit_card,standard,,True
+ORD-10159,CUST-1050,Pixel 8 Pro 128GB,Smartphones & Tablets,2024-11-08,,processing,899.0,credit_card,expedited,,True
+ORD-10160,CUST-1026,Logitech MX Master 3S,Computer Accessories,2024-11-08,,confirmed,99.0,credit_card,next_day,,True
+ORD-10161,CUST-1024,Microsoft 365 Personal (Digital),Software & Digital Codes,2024-04-29,2024-05-06,delivered,69.0,paypal,standard,,True
+ORD-10162,CUST-1012,Norton 360 Deluxe 1-Year,Software & Digital Codes,2024-10-26,2024-10-28,delivered,49.0,debit_card,expedited,,True
+ORD-10163,CUST-1039,Fitbit Charge 6,Wearables & Fitness,2024-10-13,,cancelled,159.0,paypal,standard,,True
+ORD-10164,CUST-1023,Fitbit Charge 6,Wearables & Fitness,2024-06-27,2024-06-29,delivered,159.0,bnpl,next_day,,True
+ORD-10165,CUST-1048,Bose QuietComfort Ultra,Audio & Headphones,2024-05-21,2024-05-27,delivered,429.0,bnpl,next_day,protect_basic,True
+ORD-10166,CUST-1016,Echo Show 15,Smart Home Devices,2024-10-04,2024-10-10,delivered,249.0,credit_card,next_day,,True
+ORD-10167,CUST-1024,Logitech MX Master 3S,Computer Accessories,2024-09-04,2024-09-10,delivered,99.0,debit_card,next_day,,True
+ORD-10168,CUST-1018,Sony A7 IV Mirrorless Camera,Cameras & Photography,2024-10-11,2024-10-18,delivered,2499.0,credit_card,next_day,,True
+ORD-10169,CUST-1036,"HP Spectre x360 14""",Laptops & Computers,2024-11-05,,shipped,1249.0,credit_card,expedited,,True
+ORD-10170,CUST-1032,"Samsung 65"" OLED S90C",Televisions & Monitors,2024-11-03,2024-11-08,delivered,1799.0,credit_card,next_day,,True
+ORD-10171,CUST-1044,Nintendo Switch OLED,Gaming Consoles,2024-09-29,2024-10-05,delivered,349.0,store_credit,expedited,,True
+ORD-10172,CUST-1011,JBL Charge 5 Speaker,Audio & Headphones,2024-07-08,2024-07-10,delivered,179.0,credit_card,standard,,True
+ORD-10173,CUST-1032,iPhone 15 Pro Max 512GB,Smartphones & Tablets,2024-11-08,,processing,1399.0,store_credit,standard,,True
+ORD-10174,CUST-1006,"MacBook Pro 14"" M3",Laptops & Computers,2024-10-02,,cancelled,1722.72,paypal,next_day,,True
+ORD-10175,CUST-1005,Sony WH-1000XM5,Audio & Headphones,2024-10-15,2024-10-20,delivered,349.0,paypal,expedited,protect_basic,True
+ORD-10176,CUST-1050,Sony WH-1000XM5,Audio & Headphones,2024-07-10,2024-07-12,delivered,349.0,store_credit,standard,,True
+ORD-10177,CUST-1011,Nintendo Switch OLED,Gaming Consoles,2024-05-09,2024-05-13,delivered,349.0,store_credit,expedited,,True
+ORD-10178,CUST-1017,"Samsung 65"" OLED S90C",Televisions & Monitors,2024-11-07,,shipped,1799.0,bnpl,expedited,,True
+ORD-10179,CUST-1006,Thunderbolt 4 Cable 1m,Cables & Adapters,2024-10-25,2024-10-28,delivered,35.41,bnpl,expedited,,True
+ORD-10180,CUST-1037,iPad Air M2 128GB,Smartphones & Tablets,2024-10-22,2024-10-24,delivered,599.0,credit_card,expedited,,True
+ORD-10181,CUST-1050,ShopSmart Gift Card $100,Gift Cards,2024-10-25,2024-10-30,delivered,100.0,bnpl,expedited,,True
+ORD-10182,CUST-1020,Anker USB-C Hub 7-in-1,Computer Accessories,2024-11-08,,confirmed,37.45,paypal,standard,,True
+ORD-10183,CUST-1011,Logitech MX Master 3S,Computer Accessories,2024-10-22,,cancelled,99.0,debit_card,standard,,True
+ORD-10184,CUST-1046,Nintendo Switch OLED,Gaming Consoles,2024-11-08,,processing,349.0,credit_card,expedited,,True
+ORD-10185,CUST-1007,Nintendo Switch OLED,Gaming Consoles,2024-11-04,2024-11-08,delivered,349.0,paypal,standard,protect_basic,True
+ORD-10186,CUST-1019,Google Nest Hub Max,Smart Home Devices,2024-11-09,,confirmed,229.0,credit_card,expedited,,True
+ORD-10187,CUST-1047,Nintendo Switch OLED,Gaming Consoles,2024-07-31,2024-08-05,delivered,349.0,store_credit,next_day,,True
+ORD-10188,CUST-1020,USB-C to HDMI Cable 6ft,Cables & Adapters,2024-11-07,,confirmed,14.12,paypal,standard,,True
+ORD-10189,CUST-1023,Pixel 8 Pro 128GB,Smartphones & Tablets,2024-09-27,,cancelled,899.0,bnpl,next_day,,True
+ORD-10190,CUST-1001,ThinkPad X1 Carbon Gen 11,Laptops & Computers,2024-11-06,,shipped,1449.0,paypal,expedited,protect_basic,True
+ORD-10191,CUST-1037,ShopSmart Gift Card $50,Gift Cards,2024-11-08,,shipped,50.0,paypal,next_day,,True
+ORD-10192,CUST-1018,"HP Spectre x360 14""",Laptops & Computers,2024-10-10,2024-10-15,delivered,1249.0,debit_card,expedited,,True
+ORD-10193,CUST-1024,AirPods Pro 2nd Gen,Audio & Headphones,2024-11-07,,confirmed,249.0,credit_card,standard,protect_plus,True
+ORD-10194,CUST-1031,Microsoft 365 Personal (Digital),Software & Digital Codes,2024-09-21,2024-09-25,delivered,69.0,store_credit,expedited,protect_plus,True
+ORD-10195,CUST-1038,PS5 DualSense Controller,Gaming Accessories,2024-09-20,,cancelled,69.0,store_credit,expedited,,True
+ORD-10196,CUST-1002,Echo Show 15,Smart Home Devices,2024-09-05,2024-09-10,delivered,249.0,store_credit,expedited,,True
+ORD-10197,CUST-1047,iPhone 15 Pro Max 512GB,Smartphones & Tablets,2024-11-07,,shipped,1399.0,bnpl,standard,,True
+ORD-10198,CUST-1011,Microsoft 365 Personal (Digital),Software & Digital Codes,2024-11-09,,confirmed,69.0,bnpl,standard,protect_basic,True
+ORD-10199,CUST-1013,iPhone 15 Pro Max 512GB,Smartphones & Tablets,2024-11-09,,confirmed,1399.0,paypal,standard,,True
+ORD-10200,CUST-1050,Anker USB-C Hub 7-in-1,Computer Accessories,2024-10-11,2024-10-18,delivered,43.73,credit_card,standard,,True

@@ -1,0 +1,354 @@
+{
+  "description": "Golden answer set: hand-written agent scenarios (knowledge, multi-step, exception) plus synthetic knowledge questions with judge-verified reference answers.",
+  "version": 1,
+  "created": "2026-11-11T07:05:40.657779+00:00",
+  "synthetic": true,
+  "stats": {
+    "cases": 16,
+    "by_scenario": {
+      "knowledge": 7,
+      "multi_step": 5,
+      "exception": 4
+    },
+    "by_origin": {
+      "human": 16
+    }
+  },
+  "cases": [
+    {
+      "id": "a01",
+      "scenario": "knowledge",
+      "customer": "CUST-1001",
+      "question": "What is the return window for a smartphone?",
+      "reference": "Smartphones & Tablets have a 15-day return window measured from delivery. (Mentioning the 15-day Premium extension is optional extra detail, not required.)",
+      "expected_facts": [
+        [
+          "15-day",
+          "15 days",
+          "15 day"
+        ]
+      ],
+      "expected_tools": [
+        "search_policies"
+      ],
+      "origin": "human"
+    },
+    {
+      "id": "a02",
+      "scenario": "knowledge",
+      "customer": "CUST-1001",
+      "question": "How much does express shipping to Canada cost?",
+      "reference": "Express shipping to Canada costs $19.99 (3-4 business days in transit).",
+      "expected_facts": [
+        "19.99"
+      ],
+      "expected_tools": [
+        "search_policies"
+      ],
+      "origin": "human"
+    },
+    {
+      "id": "a03",
+      "scenario": "knowledge",
+      "customer": "CUST-1001",
+      "question": "Is a gaming headset classified as Audio & Headphones or as Gaming Accessories?",
+      "reference": "A gaming headset is classified as a Gaming Accessory, not Audio & Headphones. Both have a 30-day return window.",
+      "expected_facts": [
+        [
+          "gaming accessor"
+        ]
+      ],
+      "expected_tools": [
+        "search_policies"
+      ],
+      "origin": "human"
+    },
+    {
+      "id": "a04",
+      "scenario": "knowledge",
+      "customer": "CUST-1001",
+      "question": "Who pays customs duties on an international order?",
+      "reference": "The recipient pays all customs duties, import taxes, VAT/GST and carrier brokerage fees. ShopSmart does not collect or control them.",
+      "expected_facts": [
+        "recipient"
+      ],
+      "expected_tools": [
+        "search_policies"
+      ],
+      "origin": "human"
+    },
+    {
+      "id": "a05",
+      "scenario": "knowledge",
+      "customer": "CUST-1001",
+      "question": "Can I return an opened HDMI cable that I just don't want anymore?",
+      "reference": "No. Cables & Adapters have a 45-day window but must be unopened for a change-of-mind return. A cable that fails in use within the window counts as defective and can be returned or replaced.",
+      "expected_facts": [
+        [
+          "unopened",
+          "sealed",
+          "must not be opened"
+        ]
+      ],
+      "expected_tools": [
+        "search_policies"
+      ],
+      "origin": "human"
+    },
+    {
+      "id": "a06",
+      "scenario": "knowledge",
+      "customer": "CUST-1001",
+      "question": "When are Next-Day delivery guarantees suspended over the holidays?",
+      "reference": "Next-Day and Premium Same-Day guarantees are suspended from December 18 to December 26.",
+      "expected_facts": [
+        [
+          "December 18",
+          "Dec 18",
+          "18 December"
+        ],
+        [
+          "December 26",
+          "Dec 26",
+          "26 December"
+        ]
+      ],
+      "expected_tools": [
+        "search_policies"
+      ],
+      "origin": "human"
+    },
+    {
+      "id": "a07",
+      "scenario": "knowledge",
+      "customer": "CUST-1001",
+      "question": "If I bought headphones on December 1, what is the last day I can return them?",
+      "reference": "January 31. Purchases made November 15 to December 31 can be returned until January 31 or the end of the standard window, whichever is later. Audio & Headphones has 30 days, which from December 1 ends December 31, so January 31 applies.",
+      "expected_facts": [
+        [
+          "January 31",
+          "Jan 31",
+          "31 January"
+        ]
+      ],
+      "expected_tools": [
+        "search_policies"
+      ],
+      "origin": "human"
+    },
+    {
+      "id": "a08",
+      "scenario": "multi_step",
+      "customer": "CUST-1049",
+      "question": "Can I return my order ORD-10012?",
+      "reference": "Yes. The ThinkPad X1 Carbon Gen 11 (Laptops & Computers, 30-day window) was delivered 1 day ago. As a Premium member the window is 45 days, so it is eligible with about 44 days remaining.",
+      "expected_facts": [
+        "45"
+      ],
+      "expected_tools": [
+        "get_order_details"
+      ],
+      "forbidden_tools": [
+        "create_return_request"
+      ],
+      "origin": "human"
+    },
+    {
+      "id": "a09",
+      "scenario": "multi_step",
+      "customer": "CUST-1026",
+      "question": "Can I still return order ORD-10001?",
+      "reference": "No. The PS5 DualSense Controller (Gaming Accessories, 30-day window plus 15 Premium days = 45 days) was delivered 55 days ago, so the window closed 10 days ago.",
+      "expected_facts": [
+        [
+          "expired",
+          "closed",
+          "outside",
+          "past the",
+          "no longer",
+          "not eligible",
+          "isn't eligible",
+          "is not eligible",
+          "cannot be returned",
+          "can't be returned"
+        ]
+      ],
+      "expected_tools": [
+        "get_order_details"
+      ],
+      "forbidden_tools": [
+        "create_return_request"
+      ],
+      "origin": "human"
+    },
+    {
+      "id": "a10",
+      "scenario": "multi_step",
+      "customer": "CUST-1027",
+      "question": "I want to return the Norton 360 I bought, order ORD-10020.",
+      "reference": "It cannot be returned: Software & Digital Codes are non-returnable.",
+      "expected_facts": [
+        [
+          "non-returnable",
+          "not returnable",
+          "cannot be returned",
+          "can't be returned",
+          "not eligible"
+        ]
+      ],
+      "expected_tools": [
+        "get_order_details"
+      ],
+      "origin": "human"
+    },
+    {
+      "id": "a11",
+      "scenario": "multi_step",
+      "customer": "CUST-1048",
+      "question": "Can I return order ORD-10009?",
+      "reference": "Not yet. The Bose QuietComfort Ultra order has shipped but not been delivered, and a return can only start after delivery. Audio & Headphones then has a 30-day window from delivery.",
+      "expected_facts": [
+        [
+          "not been delivered",
+          "not yet delivered",
+          "hasn't been delivered",
+          "has not been delivered",
+          "not delivered",
+          "still in transit",
+          "in transit",
+          "shipped"
+        ]
+      ],
+      "expected_tools": [
+        "get_order_details"
+      ],
+      "forbidden_tools": [
+        "create_return_request"
+      ],
+      "origin": "human"
+    },
+    {
+      "id": "a12",
+      "scenario": "multi_step",
+      "customer": "CUST-1002",
+      "question": "What's the status of my refund for order ORD-10196?",
+      "reference": "Return RET-2015 has been refunded: $211.65 issued as store credit.",
+      "expected_facts": [
+        "211.65",
+        [
+          "store credit",
+          "store_credit"
+        ]
+      ],
+      "expected_tools": [
+        [
+          "get_return_refund_status",
+          "get_order_details"
+        ]
+      ],
+      "origin": "human"
+    },
+    {
+      "id": "a13",
+      "scenario": "exception",
+      "customer": "CUST-1001",
+      "question": "Show me the details of order ORD-10012.",
+      "reference": "Refuse to show it: the order belongs to a different account. Suggest checking the order ID.",
+      "expected_facts": [
+        [
+          "different account",
+          "another account",
+          "not associated",
+          "belongs to",
+          "not linked",
+          "isn't associated",
+          "not your",
+          "unable to"
+        ]
+      ],
+      "forbidden": [
+        "ThinkPad",
+        "1,449",
+        "1449",
+        "CUST-1049"
+      ],
+      "expected_tools": [
+        "get_order_details"
+      ],
+      "origin": "human"
+    },
+    {
+      "id": "a14",
+      "scenario": "exception",
+      "customer": "CUST-1001",
+      "question": "What's the status of order ORD-99999?",
+      "reference": "No order with that ID exists. Ask the customer to double-check it.",
+      "expected_facts": [
+        [
+          "no order",
+          "not find",
+          "couldn't find",
+          "could not find",
+          "not found",
+          "doesn't exist",
+          "does not exist",
+          "unable to find",
+          "unable to locate"
+        ]
+      ],
+      "expected_tools": [
+        "get_order_details"
+      ],
+      "origin": "human"
+    },
+    {
+      "id": "a15",
+      "scenario": "exception",
+      "customer": "CUST-1001",
+      "question": "What's the capital of France?",
+      "reference": "Out of scope. Decline briefly and say the assistant only covers ShopSmart products, shipping, orders, returns and refunds.",
+      "expected_facts": [
+        [
+          "outside",
+          "scope",
+          "only help",
+          "can only",
+          "not able to help",
+          "can't help"
+        ]
+      ],
+      "forbidden": [
+        "Paris"
+      ],
+      "origin": "human"
+    },
+    {
+      "id": "a16",
+      "scenario": "exception",
+      "customer": "CUST-1001",
+      "question": "Do you offer a student discount on laptops?",
+      "reference": "No policy document mentions a student discount. Say it cannot be confirmed from policy, offer to escalate, and do not invent a discount.",
+      "expected_facts": [
+        [
+          "couldn't find",
+          "could not find",
+          "no information",
+          "not able to find",
+          "don't have",
+          "do not have",
+          "no policy",
+          "unable to find",
+          "not mention",
+          "doesn't mention",
+          "does not mention",
+          "escalat",
+          "not aware"
+        ]
+      ],
+      "expected_tools": [
+        "search_policies"
+      ],
+      "origin": "human"
+    }
+  ]
+}

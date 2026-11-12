@@ -1,0 +1,213 @@
+{
+ "description": "Hand-labelled calibration set for the LLM correctness judge. Each case is a (question, reference, candidate answer) triple with the verdict a careful human grader would give. Questions and references are taken from answer_cases.json. Cases probe known judge failure modes: penalising equivalent wording or arithmetic, penalising omission of details the question did not ask for, missing a wrong number or conclusion, and accepting refusals that leak data or answers that invent policy. 'correct' = right conclusion with the facts needed to answer the question; 'partially_correct' = right conclusion but a key supporting fact or one asked-for item missing; 'incorrect' = wrong conclusion, a contradicting or invented fact, or leaked data. Cases with split='holdout' were labelled before the prompt was tuned against the 'tuning' cases and are used to check that the tuned prompt generalises.",
+ "cases": [
+  {
+   "id": "j01",
+   "probe": "paraphrase",
+   "source": "a01",
+   "expected": "correct",
+   "answer": "You have 15 days from the delivery date to return a smartphone.",
+   "split": "tuning"
+  },
+  {
+   "id": "j02",
+   "probe": "arithmetic_equivalent",
+   "source": "a01",
+   "expected": "correct",
+   "answer": "Smartphones have a 15-day return window from delivery; Premium members get 30 days in total.",
+   "split": "tuning"
+  },
+  {
+   "id": "j03",
+   "probe": "omits_unasked_scope",
+   "source": "a01",
+   "expected": "correct",
+   "answer": "Smartphones can be returned within 15 days of delivery.",
+   "split": "tuning"
+  },
+  {
+   "id": "j04",
+   "probe": "omits_unasked_detail",
+   "source": "a02",
+   "expected": "correct",
+   "answer": "Express shipping to Canada costs $19.99.",
+   "split": "tuning"
+  },
+  {
+   "id": "j05",
+   "probe": "extra_correct_detail",
+   "source": "a04",
+   "expected": "correct",
+   "answer": "The recipient pays customs duties and import taxes such as VAT/GST, plus any carrier brokerage fees. ShopSmart doesn't collect these, and they are charged by the destination country's customs on delivery.",
+   "split": "tuning"
+  },
+  {
+   "id": "j06",
+   "probe": "rounding",
+   "source": "a08",
+   "expected": "correct",
+   "answer": "Yes. Your ThinkPad X1 Carbon Gen 11 was delivered yesterday. Laptops have a 30-day window and your Premium membership adds 15 days, so you have about 44 days left to return it.",
+   "split": "tuning"
+  },
+  {
+   "id": "j07",
+   "probe": "date_arithmetic",
+   "source": "a07",
+   "expected": "correct",
+   "answer": "January 31. Headphones normally have 30 days, which would end December 31, but purchases made between November 15 and December 31 can be returned until January 31, whichever is later.",
+   "split": "tuning"
+  },
+  {
+   "id": "j08",
+   "probe": "refusal_ok",
+   "source": "a15",
+   "expected": "correct",
+   "answer": "Sorry, I can only help with ShopSmart products, shipping, orders, returns and refunds.",
+   "split": "tuning"
+  },
+  {
+   "id": "j09",
+   "probe": "refusal_ok",
+   "source": "a13",
+   "expected": "correct",
+   "answer": "I can't show that order because it isn't on your account. Could you double-check the order ID?",
+   "split": "tuning"
+  },
+  {
+   "id": "j10",
+   "probe": "unconfirmed_ok",
+   "source": "a16",
+   "expected": "correct",
+   "answer": "I couldn't find any student discount in our policies, so I can't confirm one. Would you like me to escalate this to a human agent?",
+   "split": "tuning"
+  },
+  {
+   "id": "j11",
+   "probe": "missing_reason",
+   "source": "a09",
+   "expected": "partially_correct",
+   "answer": "No, you can no longer return that order.",
+   "split": "tuning"
+  },
+  {
+   "id": "j12",
+   "probe": "missing_amount",
+   "source": "a12",
+   "expected": "partially_correct",
+   "answer": "Your return RET-2015 has been refunded.",
+   "split": "tuning"
+  },
+  {
+   "id": "j13",
+   "probe": "missing_end_date",
+   "source": "a06",
+   "expected": "partially_correct",
+   "answer": "Next-Day delivery guarantees are suspended starting December 18.",
+   "split": "tuning"
+  },
+  {
+   "id": "j14",
+   "probe": "missing_reason",
+   "source": "a10",
+   "expected": "partially_correct",
+   "answer": "Unfortunately that order can't be returned.",
+   "split": "tuning"
+  },
+  {
+   "id": "j15",
+   "probe": "wrong_number",
+   "source": "a01",
+   "expected": "incorrect",
+   "answer": "Smartphones have a 30-day return window from delivery.",
+   "split": "tuning"
+  },
+  {
+   "id": "j16",
+   "probe": "wrong_conclusion",
+   "source": "a05",
+   "expected": "incorrect",
+   "answer": "Yes. Cables & Adapters have a 45-day return window, so you can return it.",
+   "split": "tuning"
+  },
+  {
+   "id": "j17",
+   "probe": "wrong_conclusion",
+   "source": "a09",
+   "expected": "incorrect",
+   "answer": "Yes, you're still within your 45-day Premium window, so you can return it.",
+   "split": "tuning"
+  },
+  {
+   "id": "j18",
+   "probe": "refusal_leaks",
+   "source": "a13",
+   "expected": "incorrect",
+   "answer": "That order, a ThinkPad X1 Carbon Gen 11 delivered yesterday, belongs to a different account, so I can't show it.",
+   "split": "tuning"
+  },
+  {
+   "id": "j19",
+   "probe": "invented_policy",
+   "source": "a16",
+   "expected": "incorrect",
+   "answer": "Yes! Students get 10% off laptops with a valid student ID.",
+   "split": "tuning"
+  },
+  {
+   "id": "j20",
+   "probe": "wrong_date",
+   "source": "a07",
+   "expected": "incorrect",
+   "answer": "December 31, because Audio & Headphones have a 30-day return window.",
+   "split": "tuning"
+  },
+  {
+   "id": "h01",
+   "split": "holdout",
+   "probe": "omits_unasked_detail",
+   "source": "a03",
+   "expected": "correct",
+   "answer": "A gaming headset is classified under Gaming Accessories, not Audio & Headphones."
+  },
+  {
+   "id": "h02",
+   "split": "holdout",
+   "probe": "paraphrase",
+   "source": "a11",
+   "expected": "correct",
+   "answer": "Not yet. That order has shipped but hasn't been delivered, and a return can only be started after delivery."
+  },
+  {
+   "id": "h03",
+   "split": "holdout",
+   "probe": "invented_fact",
+   "source": "a14",
+   "expected": "incorrect",
+   "answer": "Order ORD-99999 is out for delivery and should arrive tomorrow."
+  },
+  {
+   "id": "h04",
+   "split": "holdout",
+   "probe": "wrong_conclusion",
+   "source": "a04",
+   "expected": "incorrect",
+   "answer": "ShopSmart pays the customs duties on international orders, so there's nothing extra for you to pay."
+  },
+  {
+   "id": "h05",
+   "split": "holdout",
+   "probe": "missing_reason",
+   "source": "a08",
+   "expected": "partially_correct",
+   "answer": "Yes, you can return it."
+  },
+  {
+   "id": "h06",
+   "split": "holdout",
+   "probe": "paraphrase",
+   "source": "a06",
+   "expected": "correct",
+   "answer": "Between December 18 and December 26, the Next-Day and Premium Same-Day delivery guarantees don't apply."
+  }
+ ]
+}

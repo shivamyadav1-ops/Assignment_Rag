@@ -1,0 +1,130 @@
+{
+  "source_report": "answer_eval_v2.json",
+  "agent_model": "nvidia/nemotron-3.5-bolt-e4b",
+  "judge_models": [
+    "nvidia/nemotron-3-ultra-550b-a55b"
+  ],
+  "overall": {
+    "cases": 28,
+    "input_tokens_mean": 4180,
+    "output_tokens_mean": 111,
+    "cached_input_share": 0.723,
+    "latency_ms": {
+      "n": 28,
+      "mean": 6129.6,
+      "p50": 4076.5,
+      "p95": 22865.6,
+      "max": 45780.0
+    }
+  },
+  "by_scenario": {
+    "exception": {
+      "cases": 8,
+      "input_tokens_mean": 2764,
+      "output_tokens_mean": 64,
+      "cached_input_share": 0.851,
+      "latency_ms": {
+        "n": 8,
+        "mean": 2602.7,
+        "p50": 2365.7,
+        "p95": 5996.0,
+        "max": 5996.0
+      }
+    },
+    "knowledge": {
+      "cases": 10,
+      "input_tokens_mean": 5497,
+      "output_tokens_mean": 159,
+      "cached_input_share": 0.534,
+      "latency_ms": {
+        "n": 10,
+        "mean": 11207.9,
+        "p50": 5499.6,
+        "p95": 45780.0,
+        "max": 45780.0
+      }
+    },
+    "multi_step": {
+      "cases": 10,
+      "input_tokens_mean": 3995,
+      "output_tokens_mean": 100,
+      "cached_input_share": 0.911,
+      "latency_ms": {
+        "n": 10,
+        "mean": 3872.7,
+        "p50": 3664.9,
+        "p95": 5419.2,
+        "max": 5419.2
+      }
+    }
+  },
+  "llm_turns_per_case": {
+    "n": 28,
+    "mean": 1.9,
+    "p50": 2.0,
+    "p95": 3,
+    "max": 3
+  },
+  "ttft_ms": {
+    "n": 53,
+    "mean": 503.1,
+    "p50": 496.6,
+    "p95": 707.3,
+    "max": 1249.4
+  },
+  "stage_latency_ms": {
+    "llm": {
+      "n": 28,
+      "mean": 1996.7,
+      "p50": 1942.7,
+      "p95": 3831.7,
+      "max": 4274.9
+    },
+    "search_policies (retrieval)": {
+      "n": 28,
+      "mean": 1021.6,
+      "p50": 0.0,
+      "p95": 7240.1,
+      "max": 8597.3
+    },
+    "MCP tools": {
+      "n": 28,
+      "mean": 275.7,
+      "p50": 0.1,
+      "p95": 873.5,
+      "max": 998.8
+    }
+  },
+  "configured_price": null,
+  "price_sensitivity": [
+    {
+      "input_per_m": 0.1,
+      "output_per_m": 0.4,
+      "usd_per_query": 0.00046,
+      "usd_per_1k_queries": 0.46
+    },
+    {
+      "input_per_m": 0.4,
+      "output_per_m": 1.6,
+      "usd_per_query": 0.00185,
+      "usd_per_1k_queries": 1.85
+    },
+    {
+      "input_per_m": 1.0,
+      "output_per_m": 4.0,
+      "usd_per_query": 0.00462,
+      "usd_per_1k_queries": 4.62
+    },
+    {
+      "input_per_m": 3.0,
+      "output_per_m": 15.0,
+      "usd_per_query": 0.01421,
+      "usd_per_1k_queries": 14.21
+    }
+  ],
+  "eval_judge_tokens": {
+    "input": 77537,
+    "output": 18956,
+    "calls": 84
+  }
+}

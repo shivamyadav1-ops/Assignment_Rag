@@ -54,10 +54,22 @@ dev = [
     "pytest-cov>=6.0.0",
     "ruff>=0.8.4",
     "mypy>=1.14.0",
+    "reportlab>=4.0",               # scripts/convert_policy_to_pdf.py
 ]
 
 [project.scripts]
 rsa = "retail_support_agent.cli:app"
+
+# The ML guardrails run on CPU: take torch/torchvision from PyTorch's CPU index so the
+# lock matches the environment (the default PyPI wheels pull CUDA + triton, ~GBs).
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu" }]
+torchvision = [{ index = "pytorch-cpu" }]
 
 [build-system]
 requires = ["hatchling"]

@@ -887,7 +887,88 @@ def test_build_index_summary_and_point_ids(tmp_path, fake_index_env):
     assert [str(p.id) for p in points] == [
         ix.point_id("a.md", 0), ix.point_id("a.md", 1), ix.point_id("b.md", 0)
     ]
-    assert points[0].payload == rows[0]
+    assert {k: v for k, v in points[0].payload.items() if k != ix.FINGERPRINT_KEY} == rows[0]
+    assert points[0].payload[ix.FINGERPRINT_KEY] == ix.file_fingerprints(rows)["a.md"]
+    assert stats["mode"] == "full" and stats["chunks_embedded"] == 3
+
+
+# ── incremental indexing against a real in-memory Qdrant ─────────────────────
+
+class _CountingEmbedder(_FakeEmbedder):
+    def __init__(self):
+        super().__init__()
+        self.texts: list[str] = []
+
+    def embed(self, texts, batch_size=32):
+        self.texts += list(texts)
+        return super().embed(texts, batch_size)
+
+
+@pytest.fixture
+def mem_index(monkeypatch):
+    from qdrant_client import QdrantClient
+    client = QdrantClient(location=":memory:")
+    dense = _CountingEmbedder()
+    monkeypatch.setattr(ix, "qdrant_client", lambda: client)
+    monkeypatch.setattr(ix, "dense_model", lambda: dense)
+    monkeypatch.setattr(ix, "bm25_model", lambda: _FakeSparseEmbedder())
+    return types.SimpleNamespace(client=client, dense=dense)
+
+
+def _row(f, i, text):
+    return {"text": text, "source_file": f, "chunk_index": i, "chunk_id": f"{f}-{i}"}
+
+
+BASE = [_row("a.md", 0, "alpha"), _row("a.md", 1, "beta"), _row("b.md", 0, "gamma")]
+
+
+def _stored(client):
+    pts, _ = client.scroll(ix.config.QDRANT_COLLECTION, limit=100, with_payload=True)
+    return sorted((p.payload["source_file"], p.payload["chunk_index"], p.payload["text"])
+                  for p in pts)
+
+
+def test_incremental_without_collection_falls_back_to_full(tmp_path, mem_index):
+    stats = ix.build_index(_chunks_file(tmp_path, BASE), incremental=True)
+    assert stats["mode"] == "full" and stats["points"] == 3
+
+
+def test_incremental_with_no_changes_embeds_nothing(tmp_path, mem_index):
+    ix.build_index(_chunks_file(tmp_path, BASE))
+    mem_index.dense.texts.clear()
+    stats = ix.build_index(_chunks_file(tmp_path, BASE), incremental=True)
+    assert stats["mode"] == "incremental" and stats["chunks_embedded"] == 0
+    assert stats["files"]["unchanged"] == 2 and mem_index.dense.texts == []
+    assert stats["points"] == 3
+
+
+def test_incremental_reembeds_only_the_changed_file(tmp_path, mem_index):
+    ix.build_index(_chunks_file(tmp_path, BASE))
+    mem_index.dense.texts.clear()
+    # a.md shrinks to one (edited) chunk: its stale chunk 1 must disappear.
+    rows = [_row("a.md", 0, "alpha v2"), _row("b.md", 0, "gamma")]
+    stats = ix.build_index(_chunks_file(tmp_path, rows), incremental=True)
+    assert stats["files"]["changed"] == ["a.md"] and stats["files"]["unchanged"] == 1
+    assert mem_index.dense.texts == ["alpha v2"]
+    assert _stored(mem_index.client) == [("a.md", 0, "alpha v2"), ("b.md", 0, "gamma")]
+
+
+def test_incremental_adds_new_and_drops_removed_files(tmp_path, mem_index):
+    ix.build_index(_chunks_file(tmp_path, BASE))
+    rows = [_row("a.md", 0, "alpha"), _row("a.md", 1, "beta"), _row("c.md", 0, "delta")]
+    stats = ix.build_index(_chunks_file(tmp_path, rows), incremental=True)
+    assert stats["files"]["added"] == ["c.md"] and stats["files"]["removed"] == ["b.md"]
+    assert [s[0] for s in _stored(mem_index.client)] == ["a.md", "a.md", "c.md"]
+
+
+def test_points_without_a_fingerprint_are_reindexed(tmp_path, mem_index):
+    ix.build_index(_chunks_file(tmp_path, BASE))
+    # Simulate an index built before fingerprints existed.
+    mem_index.client.delete_payload(ix.config.QDRANT_COLLECTION, keys=[ix.FINGERPRINT_KEY],
+                                    points=ix.models.Filter(must=[]))
+    stats = ix.build_index(_chunks_file(tmp_path, BASE), incremental=True)
+    assert sorted(stats["files"]["changed"]) == ["a.md", "b.md"]
+    assert stats["points"] == 3
 
 
 def test_build_index_missing_payload_key_raises(tmp_path, fake_index_env):

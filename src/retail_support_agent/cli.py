@@ -21,11 +21,15 @@ def ingest() -> None:
 
 
 @app.command()
-def index() -> None:
+def index(
+    incremental: bool = typer.Option(
+        False, "--incremental",
+        help="Re-embed only source files whose chunks changed; drop removed files"),
+) -> None:
     """Embed chunks (dense + BM25) and (re)build the Qdrant collection."""
     from .indexer import build_index
 
-    console.print_json(json.dumps(build_index()))
+    console.print_json(json.dumps(build_index(incremental=incremental)))
 
 
 @app.command()

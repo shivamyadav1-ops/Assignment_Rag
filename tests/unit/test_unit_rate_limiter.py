@@ -9,7 +9,7 @@ from retail_support_agent import guardrails
 
 
 def test_idle_requesters_are_pruned_once_the_log_is_large(monkeypatch):
-    monkeypatch.setattr(guardrails, "_PRUNE_AT", 5)
+    monkeypatch.setattr(guardrails.pre_input, "_PRUNE_AT", 5)
     stale = time.monotonic() - 3600          # far outside a 60 s window
     for i in range(10):
         guardrails._request_log[f"IDLE-{i}"] = [stale]
@@ -20,7 +20,7 @@ def test_idle_requesters_are_pruned_once_the_log_is_large(monkeypatch):
 
 
 def test_requesters_still_inside_the_window_are_not_pruned(monkeypatch):
-    monkeypatch.setattr(guardrails, "_PRUNE_AT", 2)
+    monkeypatch.setattr(guardrails.pre_input, "_PRUNE_AT", 2)
     for rid in ("A", "B", "C"):
         guardrails.check_rate_limit(rid)
     assert {"A", "B", "C"} <= set(guardrails._request_log)

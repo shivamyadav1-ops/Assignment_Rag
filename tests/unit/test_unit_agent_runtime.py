@@ -1271,6 +1271,17 @@ class TestAgentLoop:
         assert forced[0].detail["args"] == {"query": "What is the laptop return window?"}
         assert result.outcome == "refused_ungrounded"     # fake retriever found nothing
 
+    def test_forced_search_keeps_the_draft_visible_to_the_model(self, tmp_path):
+        # Regression (eval a25): the draft was dropped, so the model rewrote a correct
+        # "please send the full ORD- id" answer blind around an irrelevant search.
+        draft = "Order IDs look like ORD-10012; could you check the ID?"
+        agent, client = make_agent([final(draft), final(draft)], tmp_path)
+        result = agent.answer("Where is my order 12345?")
+        assistant = [m for m in client.seen[1]["messages"] if m["role"] == "assistant"][-1]
+        assert assistant["content"] == draft                     # draft kept ...
+        assert assistant["tool_calls"][0]["function"]["name"] == "search_policies"  # ... + search
+        assert result.answer == draft
+
     def test_conversation_recall_is_answered_without_a_search(self, tmp_path):
         agent, client = make_agent([final("This is the first message of our chat.")],
                                    tmp_path)

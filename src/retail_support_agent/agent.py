@@ -820,15 +820,18 @@ class SupportAgent:
             output=self._trim_result(forced_result), latency_ms=dt_forced,
             span_type="retriever", metadata={"ok": forced_result.get("ok"), "forced": True},
         )
-        # Feed the result back as a well-formed tool exchange: replace the draft answer
-        # with an assistant turn that *requests* the search, then the result. A tool
-        # result after a plain text answer is an invalid sequence on OpenAI-compatible
-        # APIs and made the model return an empty answer.
+        # Feed the result back as a well-formed tool exchange: the draft answer becomes
+        # an assistant turn that keeps the draft text AND requests the search, then the
+        # result. (A tool result after a plain text answer is an invalid sequence on
+        # OpenAI-compatible APIs and made the model return an empty answer.) Keeping the
+        # draft lets the model stand by a correct answer the evidence does not change —
+        # e.g. "order IDs look like ORD-#####, please check it" — instead of rewriting
+        # it blind around an irrelevant search result.
         forced_call = ToolCall(f"forced_{s['session_id']}_{s['llm_calls'] - 1}",
                                "search_policies", {"query": forced_query})
         messages.pop()
         messages.append(self.llm.assistant_message(
-            LLMTurn(text=None, tool_calls=[forced_call])))
+            LLMTurn(text=turn.text, tool_calls=[forced_call])))
         messages.extend(self.llm.tool_result_messages([(forced_call, forced_result)]))
         return {"draft_answer": turn.text or s["draft_answer"]}
 

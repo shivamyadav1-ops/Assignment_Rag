@@ -338,7 +338,9 @@ def test_chaos_agent_resilient_to_corrupt_cache_lookup(tmp_path: Path):
             stop_reason="end_turn",
         ),
     ]
-    llm = ScriptedClient(turns)
+    # Twice: the answer has no evidence, so the agent forces a policy search and the
+    # model answers again.
+    llm = ScriptedClient(turns * 2)
 
     agent = SupportAgent(
         requester_id="CUST-1001",

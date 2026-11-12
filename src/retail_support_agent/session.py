@@ -80,10 +80,18 @@ _SKIP_OUTCOMES = {"blocked", "blocked_output", "error"}
 def turn_relevance(turn: dict) -> tuple[bool, str]:
     """Is this turn worth summarising? Guardrail-blocked or failed turns, and turns
     that used no tool, hit no cache and mention no order/return/ticket ID (greetings,
-    thanks, off-topic questions), are dropped before the LLM sees them."""
+    thanks, off-topic questions), are dropped before the LLM sees them.
+
+    A turn whose only tool use was policy searches that found nothing counts as no
+    tool use: the agent searches before every answer it has no evidence for, so
+    greetings and off-topic questions carry such a search, and it adds no fact."""
     if turn.get("outcome") in _SKIP_OUTCOMES:
         return False, f"outcome {turn.get('outcome')}"
-    if turn.get("tool_calls"):
+    tools = turn.get("tool_calls") or []
+    if (turn.get("outcome") == "refused_ungrounded"
+            and all(t == "search_policies" for t in tools)):
+        tools = []
+    if tools:
         return True, "used tools"
     if (turn.get("cache") or {}).get("hit"):
         return True, "answered from cache"

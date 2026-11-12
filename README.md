@@ -144,7 +144,10 @@ Project_Rag/
 │   ├── llm.py             # NvidiaClient / AnthropicClient / ScriptedClient
 │   ├── ops.py             # order/return business logic + DB queries
 │   ├── policies.py        # return-window and eligibility rules
-│   ├── guardrails.py      # pre-input + tool + output safety checks
+│   ├── guardrails/        # safety checks, one module per layer (import from the package):
+│   │   ├── toxicity.py, injection.py, sanitize.py, pre_input.py   # input
+│   │   ├── tool_calls.py, tool_output.py                          # tool call / tool result
+│   │   └── output.py                                              # final answer
 │   ├── grounding.py       # live NLI faithfulness check on answers
 │   ├── tracing.py         # Langfuse v5 observability integration
 │   ├── eval_retrieval.py  # retrieval metrics: Hit@k, MRR, nDCG
@@ -157,6 +160,9 @@ Project_Rag/
 │   └── eval/
 │       ├── retrieval_questions.json   # 50 labelled queries, all with evidence labels
 │       └── answer_cases.json          # 28 end-to-end eval cases
+├── app/
+│   ├── streamlit_app.py   # dashboard entry point (tabs → app/dashboard/)
+│   └── dashboard/         # one module per tab + sidebar, cached resources, shared widgets
 ├── reports/               # eval JSON reports
 ├── traces/                # per-session JSONL traces
 ├── tests/                 # pytest: guardrails, agent loop, unit/, component/, chaos/
@@ -329,7 +335,9 @@ Verdict bands: ≥ 0.8 correct · ≥ 0.4 partially correct · < 0.4 incorrect. 
 | Layer | Checks |
 |---|---|
 | Pre-input | Toxicity regex + toxic-bert classifier, prompt injection regex + DeBERTa classifier, rate limit (10 req/60s per customer), empty/control-char inputs |
-| Tool call | Schema validation, return-before-lookup prevention, per-tool call budgets, order-ID format check |
+| Tool call | Schema validation, return-before-lookup prevention, per-tool call budgets (per customer message; a forced search is checked and charged too), order-ID format check. Read-only tools are retried in code on transient errors (`TOOL_UNAVAILABLE`, `INTERNAL_ERROR`; `RSA_TOOL_MAX_RETRIES`, default 1); writes are never retried |
+| Outcome label | Derived from tool state, never from the answer's wording: `refused_unauthorized` (every order lookup hit another account), `escalated` (an escalation ticket was actually created), `refused_ungrounded` (policy searched, nothing grounded, no other tool gave a result), else `answered` |
+| Evidence rule | The agent never answers without evidence: if the model answers without a policy search and no tool gave a definitive result, a policy search is forced first (questions about the chat itself are exempt) |
 | Tool output | Prompt-injection neutralisation, PII redaction (email/card/SSN), system-prompt-leak scan |
 | Output | System-prompt leak (shingle overlap) · Toxic/abusive output (regex + ML, stricter thresholds than input) · Off-scope content (medical/legal/financial advice, self-harm, extremism) · PII redaction + other-customer ID masking · Unverified order ID warning · Fabricated-number warning (quantities in answer absent from tool context) · Ungrounded policy-assertion warning (policy claims without retrieved evidence) |
 

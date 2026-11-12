@@ -118,6 +118,10 @@ MAX_TOKENS = 1024
 LLM_TIMEOUT_S = float(os.getenv("RSA_LLM_TIMEOUT_S", "90"))
 AGENT_MAX_STEPS = 8       # hard cap on agent tool-call iterations
 MCP_CALL_TIMEOUT = 30     # seconds per MCP tool call
+# Automatic retries of read-only tools on transient errors (TOOL_UNAVAILABLE,
+# INTERNAL_ERROR). Writes are never retried by code. Backoff grows linearly.
+TOOL_MAX_RETRIES = int(os.getenv("RSA_TOOL_MAX_RETRIES", "1"))
+TOOL_RETRY_BACKOFF_S = float(os.getenv("RSA_TOOL_RETRY_BACKOFF_S", "0.5"))
 
 # Grounding: a policy answer must rest on at least one chunk whose rerank score
 # clears this bar. Cross-encoder logits here run roughly -11..+11 for both

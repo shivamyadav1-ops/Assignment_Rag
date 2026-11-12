@@ -28,7 +28,6 @@ token usage is totalled for the cost/latency report.
 from __future__ import annotations
 
 import json
-import re
 import time
 import uuid
 from dataclasses import dataclass, field
@@ -239,15 +238,11 @@ conditions for <category>"), cite the policy file, and end with the concrete nex
 (start the return, what to pack or bring, the deadline, or a warranty claim / escalation \
 if it is not returnable). Skip the search only when the order was not found or belongs \
 to another account.
-- Returns depend on the product category's window (e.g. Laptops & Computers is 30 days, \
-Smartphones & Tablets is 15 days) and a 15-day extension for Premium members. When \
-asked about any product's return window or eligibility with or without Premium (including \
-questions asserting or asking if a claimed window or extension is correct, e.g. "a laptop \
-gets 60 days total?"), always verify BOTH: (1) the specific product's standard category window \
-in policy documents, and (2) the Premium extension. Always state the category's standard \
-window and the exact combined total (e.g. 30 + 15 = 45 days for laptops) directly. Never \
-hedge with hypotheticals like "if a laptop has a standard 45-day window" — look up the \
-real category window. Directly reject false premises (e.g. Premium adds 15 days, not 30).
+- Return windows depend on the product category, and Premium membership extends them. \
+For any return-window or eligibility question, look up both the product's category window \
+and the Premium extension in policy — never assume either — and state each figure and the \
+combined total explicitly. If the question asserts a window, extension or other fact, \
+check it against the policy and correct it plainly when it is wrong.
 - get_order_details includes return_eligibility, computed by the same rules that \
 enforce returns (delivery status, window, Premium extension, holiday policy, existing \
 returns). Relay its verdict (eligible_now, code, message, deadline) — do not recompute \
@@ -265,27 +260,29 @@ one. Never call it for an order that get_order_details reported as not eligible.
 - To actually start a return, call create_return_request. It enforces eligibility and \
 returns a typed error (e.g. RETURN_WINDOW_EXPIRED, NON_RETURNABLE) if the order does not \
 qualify — relay that outcome plainly.
-- If a tool returns an error with retryable=true, you may try once more; otherwise explain \
-the problem. Never invent order data or policy terms.
+- Transient tool failures are already retried for you. If a tool still returns an error, \
+do not call it again with the same arguments: explain the problem. Never invent order data \
+or policy terms.
+- When the customer asks for a human, or the issue cannot be resolved with the tools and \
+policy, call create_escalation_ticket and tell the customer it was created. Never say a \
+case was escalated unless that call succeeded; merely offering escalation is fine.
 
 Be concise and factual. Always ground claims in tool results.""".replace(
     "{year}", str(config.AS_OF_DATE.year))
 
 
-# Phrases that signal the LLM is declining on scope without having searched.
-# These are distinct enough to not appear in normal answers or scripted test responses.
-_SCOPE_DECLINE_RE = re.compile(
-    r"\b("
-    r"don'?t (offer|provide|cover|handle)|"
-    r"do not (offer|provide|cover|handle)|"
-    r"unable to (assist|help)|can'?t (assist|help) with|"
-    r"not (something we|a service|offered by|part of our)|"
-    r"outside (our|the) scope|"
-    r"not in a position to|"
-    r"doesn'?t fall within"
-    r")\b",
-    re.IGNORECASE,
-)
+# Read-only tools are safe to retry automatically on a transient failure. Writes
+# (create_return_request, create_escalation_ticket) are never retried by code: a
+# timeout does not prove the write did not happen.
+_IDEMPOTENT_TOOLS = frozenset({"search_policies", "calculate_return_deadline",
+                               "get_order_details", "get_return_refund_status"})
+# Error codes that describe the transport/server, not the request: retrying the same
+# arguments can succeed. (VALIDATION_ERROR is retryable=true for the model — it can fix
+# its arguments — but repeating identical arguments cannot help.)
+_TRANSIENT_CODES = frozenset({"TOOL_UNAVAILABLE", "INTERNAL_ERROR"})
+# Tool errors that say nothing about the customer's question.
+_NOT_AN_ANSWER_CODES = _TRANSIENT_CODES | {"GUARDRAIL_BLOCKED", "VALIDATION_ERROR",
+                                           "BAD_TOOL_OUTPUT"}
 
 MEMORY_HEADER = """
 
@@ -673,14 +670,7 @@ class SupportAgent:
         if turn.wants_tools:
             return {**update, "route": "tools"}
 
-        # Hard rule: if the LLM declines a question on scope without having searched,
-        # force a search so policy evidence is always checked. The gate is narrow: only
-        # explicit scope-refusal language AND search_policies never called. Same for a
-        # computed deadline: the date comes from code, but the answer must still cite
-        # (and be grounded in) the policy behind it.
-        deadline_used = any(c["tool"] == "calculate_return_deadline" for c in s["context"])
-        if ("search_policies" not in s["tool_calls"]
-                and (_SCOPE_DECLINE_RE.search(turn.text or "") or deadline_used)):
+        if self._needs_evidence(s):
             return {**update, "route": "forced_search"}
 
         answer, outcome = turn.text or "", s["outcome"]
@@ -695,10 +685,70 @@ class SupportAgent:
                       "Please try again or contact support.")
             outcome = "error"
         else:
-            outcome = self._classify_outcome(answer, s["evidence"], s["tool_calls"],
-                                             s["context"])
+            outcome = self._classify_outcome(s["evidence"], s["tool_calls"], s["context"])
         return {**update, "answer": answer, "outcome": outcome,
                 "final_ttft_ms": turn.ttft_ms, "route": "output_guard"}
+
+    def _needs_evidence(self, s: AgentState) -> bool:
+        """Hard rule: no final answer without evidence, whatever the model's wording.
+
+        Forces a policy search when the model answers without ever calling
+        search_policies and either
+          - no tool returned data this turn (an answer — or a refusal — from the model's
+            own knowledge), or
+          - it used calculate_return_deadline (the date comes from code, but the answer
+            must still cite the policy behind it).
+        Exempt: questions about the conversation itself, answered from the chat history.
+        A forced search that the tool guardrail would block is skipped.
+        """
+        if "search_policies" in s["tool_calls"]:
+            return False
+        context = s["context"]
+        deadline_used = any(c["tool"] == "calculate_return_deadline" for c in context)
+        if not deadline_used and (self._has_tool_data(context)
+                                  or is_conversation_recall(s["question"])):
+            return False
+        check = check_tool_call("search_policies", {"query": self._forced_query(s)},
+                                s["tool_schemas"], s["guard_state"])
+        return check.passed
+
+    @staticmethod
+    def _forced_query(s: AgentState) -> str:
+        deadline_args = [c["args"] for c in s["context"]
+                         if c["tool"] == "calculate_return_deadline"]
+        if deadline_args:
+            return ("Holiday return policy and standard return window for "
+                    f"{deadline_args[-1].get('category', 'the product')}")
+        return s["question"][:300]
+
+    @staticmethod
+    def _has_tool_data(context: list[dict]) -> bool:
+        """Did any non-search tool give a definitive answer this turn? Data, or a
+        domain error such as UNAUTHORIZED / ORDER_NOT_FOUND / RETURN_WINDOW_EXPIRED,
+        counts; a guardrail block, an argument error or a transient failure does not."""
+        for c in context:
+            if c["tool"] == "search_policies":
+                continue
+            result = c.get("result") or {}
+            code = (result.get("error") or {}).get("code")
+            if result.get("ok") or (code and code not in _NOT_AN_ANSWER_CODES):
+                return True
+        return False
+
+    def _call_with_retry(self, name: str, args: dict, evidence: list[dict],
+                         registry: dict[str, BaseTool]) -> tuple[dict, int]:
+        """Run a tool; retry read-only tools on transient failures. Returns
+        (result, attempts). The model sees only the final result."""
+        attempts = 0
+        while True:
+            attempts += 1
+            result = self._run_tool(name, args, evidence, registry)
+            err = result.get("error") or {}
+            if (result.get("ok") or name not in _IDEMPOTENT_TOOLS
+                    or not err.get("retryable") or err.get("code") not in _TRANSIENT_CODES
+                    or attempts > config.TOOL_MAX_RETRIES):
+                return result, attempts
+            time.sleep(config.TOOL_RETRY_BACKOFF_S * attempts)
 
     def _node_tools(self, s: AgentState) -> dict:
         """Run every tool the model asked for, each behind the tool-call guardrail."""
@@ -707,6 +757,7 @@ class SupportAgent:
         for call in s["last_turn"].tool_calls:
             tool_calls.append(call.name)
             tt0 = time.perf_counter()
+            attempts = 0
             check = check_tool_call(call.name, call.input, s["tool_schemas"],
                                     s["guard_state"])
             if not check.passed:
@@ -716,7 +767,9 @@ class SupportAgent:
                     {"tool": call.name, "args": call.input, "detail": check.detail},
                     check.latency_ms))
             else:
-                raw = self._run_tool(call.name, call.input, s["evidence"], s["registry"])
+                # Retries are one logical call: the budget is charged once.
+                raw, attempts = self._call_with_retry(call.name, call.input,
+                                                      s["evidence"], s["registry"])
                 record_tool_call(s["guard_state"], call.name, call.input, raw)
                 result, findings = sanitize_tool_output(raw)
                 if findings:
@@ -725,11 +778,11 @@ class SupportAgent:
                         {"tool": call.name, "findings": findings[:20]}, 0.0))
             dt = (time.perf_counter() - tt0) * 1000
             error_code = result.get("error", {}).get("code") if not result.get("ok") else None
-            steps.append(TraceStep(
-                len(steps), "tool", call.name,
-                {"args": call.input, "ok": result.get("ok"), "error": error_code,
-                 "result": self._trim_result(result)},
-                dt))
+            detail = {"args": call.input, "ok": result.get("ok"), "error": error_code,
+                      "result": self._trim_result(result)}
+            if attempts > 1:
+                detail["attempts"] = attempts
+            steps.append(TraceStep(len(steps), "tool", call.name, detail, dt))
             # Langfuse span: retriever for policy search, tool for MCP calls
             tracing.add_span(
                 s["lf_trace"], name=call.name, input=call.input,
@@ -745,17 +798,14 @@ class SupportAgent:
     def _node_forced_search(self, s: AgentState) -> dict:
         turn: LLMTurn = s["last_turn"]
         steps, messages = s["steps"], s["messages"]
-        deadline_args = [c["args"] for c in s["context"]
-                         if c["tool"] == "calculate_return_deadline"]
-        forced_query = (
-            f"Holiday return policy and standard return window for "
-            f"{deadline_args[-1].get('category', 'the product')}"
-            if deadline_args else s["question"][:300])
+        # Already passed check_tool_call in _needs_evidence, so it is budget-checked
+        # and charged like any other call.
+        forced_query = self._forced_query(s)
         t_forced = time.perf_counter()
-        forced_result = self._run_tool("search_policies", {"query": forced_query},
+        raw, _ = self._call_with_retry("search_policies", {"query": forced_query},
                                        s["evidence"], s["registry"])
-        record_tool_call(s["guard_state"], "search_policies",
-                         {"query": forced_query}, forced_result)
+        record_tool_call(s["guard_state"], "search_policies", {"query": forced_query}, raw)
+        forced_result, _ = sanitize_tool_output(raw)
         dt_forced = (time.perf_counter() - t_forced) * 1000
         s["tool_calls"].append("search_policies")
         steps.append(TraceStep(
@@ -888,36 +938,29 @@ class SupportAgent:
         return {k: v for k, v in data.items() if k != "return_history"}
 
     @staticmethod
-    def _classify_outcome(answer: str, evidence: list[dict], tool_calls: list[str],
+    def _classify_outcome(evidence: list[dict], tool_calls: list[str],
                           context: list[dict] | None = None) -> str:
-        # Every order lookup this turn hit another customer's order: the server
-        # refused it, so this is a refusal whatever wording the model chose.
-        order_results = [c["result"] for c in (context or [])
+        """Outcome of a completed turn, from what the tools did — never from the
+        wording of the answer, so the label (and what the semantic cache may store)
+        cannot depend on how the model phrased itself.
+
+        refused_unauthorized  every order lookup hit another customer's order
+        escalated             an escalation ticket was actually created
+        refused_ungrounded    policy was searched, nothing cleared the grounding
+                              threshold, and no other tool gave a definitive answer
+        answered              otherwise
+        """
+        context = context or []
+        order_results = [c["result"] for c in context
                          if c.get("tool") in _ORDER_TOOLS and isinstance(c.get("result"), dict)]
         if order_results and all(
                 (r.get("error") or {}).get("code") == "UNAUTHORIZED" for r in order_results):
             return "refused_unauthorized"
-        low = answer.lower()
-        # Explicit escalation / hand-off signals
-        escalation_phrases = (
-            "escalate", "human agent", "support team", "contact us",
-            "reach out to", "get in touch", "not covered by", "outside our",
-        )
-        # Signals that the agent found no grounding and is explicitly saying so.
-        # Keep these narrow — broad phrases like "not covered by" appear inside the
-        # SYSTEM_PROMPT text and would cause false positives.
-        ungrounded_phrases = (
-            "could not find supporting policy",
-            "couldn't find supporting policy",
-            "no supporting policy",
-            "grounded=false",
-        )
-        if any(p in low for p in escalation_phrases):
+        if any(c.get("tool") == "create_escalation_ticket"
+               and (c.get("result") or {}).get("ok") for c in context):
             return "escalated"
-        if any(p in low for p in ungrounded_phrases):
-            return "refused_ungrounded"
-        # Searched but all chunks scored below the grounding threshold
-        if "search_policies" in tool_calls and not evidence:
+        if ("search_policies" in tool_calls and not evidence
+                and not SupportAgent._has_tool_data(context)):
             return "refused_ungrounded"
         return "answered"
 

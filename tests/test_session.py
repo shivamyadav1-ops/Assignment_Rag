@@ -84,9 +84,18 @@ def unit(v):
     return v / np.linalg.norm(v)
 
 
+class TopicalRetriever(FakeRetriever):
+    """Returns the shipping chunk only for queries about shipping, as a real reranker
+    would: the agent's forced search on "hi there" must come back ungrounded."""
+
+    def retrieve(self, query, mode="full", top_k=5):
+        hit = any(w in query.lower() for w in ("shipping", "express", "canada"))
+        return FakeRetriever(self._chunks if hit else []).retrieve(query, mode, top_k)
+
+
 def session(tmp_path, llm, sid="sess01", customer="CUST-1001", **kw):
     return ChatSession(customer, sid, llm=llm, mcp=FakeMCP({}),
-                       retriever=FakeRetriever(CHUNKS), base_dir=tmp_path / "sessions",
+                       retriever=TopicalRetriever(CHUNKS), base_dir=tmp_path / "sessions",
                        trace_dir=tmp_path / "traces", **kw)
 
 

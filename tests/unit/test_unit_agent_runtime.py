@@ -116,6 +116,12 @@ def final(text, usage=None, ttft=None):
     return LLMTurn(text=text, stop_reason="end_turn", usage=usage or {}, ttft_ms=ttft)
 
 
+def unevidenced(text, **kw):
+    """A model that answers without evidence: the agent forces a policy search, then
+    the model answers again (here: the same text)."""
+    return [final(text, **kw), final(text, **kw)]
+
+
 def trace_lines(result):
     with open(result.trace_path, encoding="utf-8") as f:
         return [json.loads(x) for x in f]
@@ -1159,25 +1165,51 @@ class TestTrimResult:
 
 
 class TestClassifyOutcome:
-    @pytest.mark.parametrize("answer,expected", [
-        ("Let me hand this to a human agent.", "escalated"),
-        ("I'll escalate this for you.", "escalated"),
-        ("Please contact us for help.", "escalated"),
-        ("I could not find supporting policy for that.", "refused_ungrounded"),
-        ("Search returned grounded=false.", "refused_ungrounded"),
-        ("Your laptop has a 15-day return window.", "answered"),
-    ])
-    def test_phrase_classification(self, answer, expected):
-        assert SupportAgent._classify_outcome(answer, [{"source": "p.md"}],
-                                              ["search_policies"]) == expected
+    """Outcomes come from what the tools did, never from the answer's wording."""
+
+    EV = [{"source": "p.md"}]
+
+    def test_grounded_search_is_answered(self):
+        assert SupportAgent._classify_outcome(self.EV, ["search_policies"]) == "answered"
 
     def test_search_without_evidence_is_ungrounded(self):
-        assert SupportAgent._classify_outcome("Here you go.", [], ["search_policies"]) \
+        assert SupportAgent._classify_outcome([], ["search_policies"]) \
             == "refused_ungrounded"
 
     def test_no_search_and_no_evidence_is_answered(self):
-        assert SupportAgent._classify_outcome("Order ORD-1 shipped.", [],
-                                              ["get_order_details"]) == "answered"
+        assert SupportAgent._classify_outcome([], ["get_order_details"]) == "answered"
+
+    def test_created_escalation_ticket_is_escalated(self):
+        ctx = [{"tool": "create_escalation_ticket", "args": {},
+                "result": {"ok": True, "data": {"ticket_id": "ESC-1"}}}]
+        assert SupportAgent._classify_outcome(
+            [], ["search_policies", "create_escalation_ticket"], ctx) == "escalated"
+
+    def test_failed_escalation_is_not_escalated(self):
+        ctx = [{"tool": "create_escalation_ticket", "args": {},
+                "result": {"ok": False, "error": {"code": "INTERNAL_ERROR"}}}]
+        assert SupportAgent._classify_outcome(
+            self.EV, ["search_policies", "create_escalation_ticket"], ctx) == "answered"
+
+    def test_ungrounded_search_with_order_data_is_answered(self):
+        ctx = [{"tool": "get_order_details", "args": {},
+                "result": {"ok": True, "data": {"order_id": "ORD-1"}}},
+               {"tool": "search_policies", "args": {}, "result": {"ok": True}}]
+        assert SupportAgent._classify_outcome(
+            [], ["get_order_details", "search_policies"], ctx) == "answered"
+
+    def test_ungrounded_search_after_blocked_tool_is_ungrounded(self):
+        ctx = [{"tool": "get_order_details", "args": {},
+                "result": {"ok": False, "error": {"code": "GUARDRAIL_BLOCKED"}}}]
+        assert SupportAgent._classify_outcome(
+            [], ["get_order_details", "search_policies"], ctx) == "refused_ungrounded"
+
+    @pytest.mark.parametrize("wording", [
+        "Let me hand this to a human agent.", "Please contact us for help.",
+        "I could not find supporting policy for that."])
+    def test_wording_does_not_change_the_outcome(self, wording):
+        # Same state, different wording: same label (formerly phrase-matched).
+        assert SupportAgent._classify_outcome(self.EV, ["search_policies"]) == "answered"
 
 
 class TestUnauthorizedOutcome:
@@ -1190,25 +1222,25 @@ class TestUnauthorizedOutcome:
 
     def test_all_order_lookups_unauthorized_is_a_refusal(self):
         assert SupportAgent._classify_outcome(
-            "I could not find that order.", [], ["get_order_details"],
+            [], ["get_order_details"],
             self._ctx(self.UNAUTH)) == "refused_unauthorized"
 
     def test_one_authorized_lookup_keeps_normal_classification(self):
         ok = {"ok": True, "data": {"order_id": "ORD-1"}}
         assert SupportAgent._classify_outcome(
-            "Your order shipped.", [], ["get_order_details"] * 2,
+            [], ["get_order_details"] * 2,
             self._ctx(self.UNAUTH, ok)) == "answered"
 
     def test_order_not_found_is_not_an_ownership_refusal(self):
         missing = {"ok": False, "error": {"code": "ORDER_NOT_FOUND", "message": "x"}}
         assert SupportAgent._classify_outcome(
-            "No such order.", [], ["get_order_details"],
+            [], ["get_order_details"],
             self._ctx(missing)) == "answered"
 
     def test_search_only_context_is_unaffected(self):
         ctx = [{"tool": "search_policies", "result": {"ok": True}}]
         assert SupportAgent._classify_outcome(
-            "30 days.", [{"source": "p.md"}], ["search_policies"], ctx) == "answered"
+            [{"source": "p.md"}], ["search_policies"], ctx) == "answered"
 
     def test_end_to_end_through_the_agent_loop(self, tmp_path):
         mcp = FakeMCP({"get_order_details": self.UNAUTH})
@@ -1227,14 +1259,40 @@ class TestUnauthorizedOutcome:
 # ══════════════════════════════════════════════════════════════════════════════
 
 class TestAgentLoop:
-    def test_plain_answer_makes_one_llm_call_and_no_tools(self, tmp_path):
+    def test_unevidenced_answer_forces_one_policy_search(self, tmp_path):
         mcp = FakeMCP()
-        agent, client = make_agent([final("Laptops have a 15-day window.")], tmp_path, mcp=mcp)
+        agent, client = make_agent(unevidenced("Laptops have a 15-day window."), tmp_path,
+                                   mcp=mcp)
         result = agent.answer("What is the laptop return window?")
-        assert result.outcome in ("answered", "refused_ungrounded")
-        assert len(client.seen) == 1 and mcp.calls == []
-        assert result.tool_calls == []
-        assert [s.kind for s in result.steps][0] == "llm"
+        assert len(client.seen) == 2 and mcp.calls == []
+        assert result.tool_calls == ["search_policies"]
+        forced = [s for s in result.steps if s.kind == "tool"]
+        assert len(forced) == 1 and forced[0].detail["forced"] is True
+        assert forced[0].detail["args"] == {"query": "What is the laptop return window?"}
+        assert result.outcome == "refused_ungrounded"     # fake retriever found nothing
+
+    def test_conversation_recall_is_answered_without_a_search(self, tmp_path):
+        agent, client = make_agent([final("This is the first message of our chat.")],
+                                   tmp_path)
+        result = agent.answer("What did I ask earlier?")
+        assert len(client.seen) == 1 and result.tool_calls == []
+
+    def test_definitive_order_error_needs_no_policy_search(self, tmp_path):
+        mcp = FakeMCP({"get_order_details": {"ok": False, "error": {
+            "code": "ORDER_NOT_FOUND", "message": "x", "retryable": False}}})
+        agent, client = make_agent([
+            tool_turn(("get_order_details", {"order_id": "ORD-99999"})),
+            final("I couldn't find ORD-99999; please double-check the ID."),
+        ], tmp_path, mcp=mcp)
+        result = agent.answer("Where is ORD-99999?")
+        assert result.tool_calls == ["get_order_details"] and len(client.seen) == 2
+
+    def test_forced_search_is_skipped_when_its_budget_is_spent(self, tmp_path, monkeypatch):
+        from retail_support_agent import guardrails
+        monkeypatch.setitem(guardrails.TOOL_CALL_BUDGET, "search_policies", 0)
+        agent, client = make_agent([final("Hello! How can I help?")], tmp_path)
+        result = agent.answer("hello")
+        assert len(client.seen) == 1 and result.tool_calls == []
 
     def test_multi_tool_turn_runs_every_call_in_order(self, tmp_path):
         mcp = FakeMCP({"get_order_details": {"ok": True, "data": {"order_id": "ORD-10012"}},
@@ -1388,6 +1446,85 @@ class TestAgentLoop:
         assert "Holiday return policy" in retriever.queries[0]
 
 
+class SequenceMCP(FakeMCP):
+    """Replays a list of envelopes per tool, one per call (last one repeats)."""
+
+    def call_tool(self, name, args):
+        self.calls.append((name, args))
+        seq = self.responses[name]
+        return seq[min(len([c for c in self.calls if c[0] == name]), len(seq)) - 1]
+
+
+class TestToolRetry:
+    """Transient failures of read-only tools are retried in code, not by the model."""
+
+    DOWN = {"ok": False, "error": {"code": "TOOL_UNAVAILABLE", "message": "timeout",
+                                   "retryable": True}}
+    ORDER = {"ok": True, "data": {"order_id": "ORD-10012"}}
+
+    @pytest.fixture(autouse=True)
+    def _no_backoff(self, monkeypatch):
+        monkeypatch.setattr(config, "TOOL_RETRY_BACKOFF_S", 0.0)
+
+    def test_transient_read_failure_is_retried_once_and_hidden(self, tmp_path):
+        mcp = SequenceMCP({"get_order_details": [self.DOWN, self.ORDER]})
+        agent, client = make_agent([
+            tool_turn(("get_order_details", {"order_id": "ORD-10012"})),
+            final("Order ORD-10012 was delivered."),
+        ], tmp_path, mcp=mcp)
+        result = agent.answer("Status of ORD-10012?")
+        assert len(mcp.calls) == 2
+        assert tool_messages(client)[0]["ok"] is True     # the model saw only success
+        step = next(s for s in result.steps if s.kind == "tool")
+        assert step.detail["attempts"] == 2
+
+    def test_retries_stop_at_the_limit(self, tmp_path):
+        mcp = SequenceMCP({"get_order_details": [self.DOWN]})
+        agent, client = make_agent([
+            tool_turn(("get_order_details", {"order_id": "ORD-10012"})),
+            *unevidenced("Our order system is unavailable right now."),
+        ], tmp_path, mcp=mcp)
+        agent.answer("Status of ORD-10012?")
+        assert len(mcp.calls) == 1 + config.TOOL_MAX_RETRIES
+        assert tool_messages(client)[0]["error"]["code"] == "TOOL_UNAVAILABLE"
+
+    def test_retry_counts_once_against_the_budget(self, tmp_path, monkeypatch):
+        from retail_support_agent import guardrails
+        monkeypatch.setitem(guardrails.TOOL_CALL_BUDGET, "get_order_details", 1)
+        mcp = SequenceMCP({"get_order_details": [self.DOWN, self.ORDER]})
+        agent, client = make_agent([
+            tool_turn(("get_order_details", {"order_id": "ORD-10012"})),
+            final("Delivered."),
+        ], tmp_path, mcp=mcp)
+        agent.answer("Status of ORD-10012?")
+        # Budget 1: the server was hit twice, but the retried call was allowed and
+        # charged once.
+        assert len(mcp.calls) == 2 and tool_messages(client)[0]["ok"] is True
+
+    def test_writes_are_never_retried(self, tmp_path):
+        mcp = SequenceMCP({"get_order_details": [self.ORDER],
+                           "create_return_request": [self.DOWN, {"ok": True, "data": {}}]})
+        agent, _ = make_agent([
+            tool_turn(("get_order_details", {"order_id": "ORD-10012"})),
+            tool_turn(("create_return_request", {"order_id": "ORD-10012",
+                                                 "reason": "damaged"})),
+            final("I couldn't start the return just now."),
+        ], tmp_path, mcp=mcp)
+        agent.answer("Please start a return for ORD-10012, it arrived damaged")
+        assert [c[0] for c in mcp.calls].count("create_return_request") == 1
+
+    def test_non_transient_errors_are_not_retried(self, tmp_path):
+        missing = {"ok": False, "error": {"code": "ORDER_NOT_FOUND", "message": "x",
+                                          "retryable": False}}
+        mcp = SequenceMCP({"get_order_details": [missing]})
+        agent, _ = make_agent([
+            tool_turn(("get_order_details", {"order_id": "ORD-99999"})),
+            final("No such order."),
+        ], tmp_path, mcp=mcp)
+        agent.answer("Where is ORD-99999?")
+        assert len(mcp.calls) == 1
+
+
 class TestAccounting:
     def test_token_usage_is_summed_across_turns(self, tmp_path):
         agent, _ = make_agent([
@@ -1409,8 +1546,8 @@ class TestAccounting:
                                 "cached_input_tokens": 0, "cache_write_input_tokens": 0}
 
     def test_per_step_usage_and_ttft_are_recorded(self, tmp_path):
-        agent, _ = make_agent([final("ok", usage={"input_tokens": 7, "output_tokens": 2},
-                                     ttft=42.0)], tmp_path)
+        agent, _ = make_agent(unevidenced("ok", usage={"input_tokens": 7, "output_tokens": 2},
+                                          ttft=42.0), tmp_path)
         result = agent.answer("What are your shipping options?")
         llm_step = result.steps[0]
         assert llm_step.usage == {"input_tokens": 7, "output_tokens": 2}
@@ -1574,17 +1711,17 @@ class TestSemanticCacheIntegration:
     def test_hit_rejected_by_the_output_guardrail_falls_through(self, tmp_path):
         # A cached answer naming another customer must not be replayed.
         cache = FakeCache(hit=cache_hit("That order belongs to CUST-1002."))
-        agent, client = make_agent([final("Let me look that up for you.")], tmp_path,
+        agent, client = make_agent(unevidenced("Let me look that up for you."), tmp_path,
                                    semantic_cache=cache)
         result = agent.answer("Whose order is ORD-10001?")
-        assert len(client.seen) == 1                   # fell through to a live answer
+        assert len(client.seen) == 2       # fell through to a live answer (+ forced search)
         assert result.cache["hit"] is False
         assert result.cache["rejected_by"] == "output_guardrail"
         assert result.cache["entry_id"] == "entry-1"
 
     def test_lookup_error_never_breaks_answering(self, tmp_path):
         cache = FakeCache(lookup_error=RuntimeError("sqlite is locked"))
-        agent, _ = make_agent([final("Returns take 30 days.")], tmp_path,
+        agent, _ = make_agent(unevidenced("Returns take 30 days."), tmp_path,
                               semantic_cache=cache)
         result = agent.answer("How long do returns take?")
         assert result.answer.startswith("Returns take 30 days")

@@ -70,6 +70,16 @@ class FakeRetriever:
         return FakeRetrieval(self._chunks)
 
 
+def unevidenced(text):
+    """A model that answers without evidence: the agent forces a policy search, then
+    the model answers again (here: the same text)."""
+    return [final(text), final(text)]
+
+
+POLICY_CHUNK = FakeChunk("p" * 16, "privacy_policy.md", "Orders",
+                         "Order details are shared only with the account holder.")
+
+
 def make_agent(turns, tmp_path, mcp=None, chunks=None):
     llm = ScriptedClient(turns)
     agent = SupportAgent(
@@ -146,12 +156,15 @@ def test_hallucinated_tool_and_bad_args_blocked(tmp_path):
     agent, llm = make_agent([
         tool_turn(("refund_everything", {}),
                   ("get_order_details", {"order_id": "' OR 1=1 --"})),
-        final("Sorry, I couldn't look that up."),
+        *unevidenced("Sorry, I couldn't look that up."),
     ], tmp_path, mcp=mcp)
-    agent.answer("where is my order")
+    result = agent.answer("where is my order")
     assert mcp.calls == []
-    codes = [m["error"]["message"].split(":")[0] for m in tool_messages(llm)]
+    codes = [m["error"]["message"].split(":")[0] for m in tool_messages(llm)
+             if not m.get("ok")]
     assert codes == ["tool_not_allowed", "invalid_tool_args"]
+    # Both calls blocked, so no tool supplied data: a policy search was forced.
+    assert result.tool_calls[-1] == "search_policies"
 
 
 # ── tool output ───────────────────────────────────────────────────────────────
@@ -189,7 +202,7 @@ def test_customer_email_masked_in_tool_result(tmp_path):
 # ── output ────────────────────────────────────────────────────────────────────
 
 def test_system_prompt_leak_replaced(tmp_path):
-    agent, _ = make_agent([final("Here are my rules: " + SYSTEM_PROMPT)], tmp_path)
+    agent, _ = make_agent(unevidenced("Here are my rules: " + SYSTEM_PROMPT), tmp_path)
     result = agent.answer("How do you decide what to answer?")
     assert result.outcome == "blocked_output"
     assert result.answer == OUTPUT_BLOCK_MESSAGE
@@ -197,8 +210,9 @@ def test_system_prompt_leak_replaced(tmp_path):
 
 
 def test_other_account_and_pii_redacted_from_answer(tmp_path):
-    agent, _ = make_agent([final(
-        "That order belongs to CUST-1002 (priya.ortiz@example.com).")], tmp_path)
+    agent, _ = make_agent(unevidenced(
+        "That order belongs to CUST-1002 (priya.ortiz@example.com)."), tmp_path,
+        chunks=[POLICY_CHUNK])
     result = agent.answer("Whose order is ORD-10001?")
     assert "CUST-1002" not in result.answer
     assert "priya.ortiz@" not in result.answer
@@ -209,7 +223,7 @@ def test_other_account_and_pii_redacted_from_answer(tmp_path):
 
 
 def test_invented_order_id_flagged_in_trace(tmp_path):
-    agent, _ = make_agent([final("Your order ORD-77777 shipped yesterday.")], tmp_path)
+    agent, _ = make_agent(unevidenced("Your order ORD-77777 shipped yesterday."), tmp_path)
     result = agent.answer("Has my order shipped?")
     g = [s for s in result.steps if s.kind == "guardrail"]
     assert g and g[0].detail["warnings"] == ["unverified order id ORD-77777"]

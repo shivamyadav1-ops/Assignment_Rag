@@ -481,7 +481,30 @@ def test_grounding_top_k_limits_the_number_of_nli_pairs(monkeypatch):
     passages = [f"Passage number {i} about returns." for i in range(10)]
     grounding_mod.grounding_metrics("Laptops have a 30 day return window.",
                                     passages, top_k=2)
-    assert seen[0] == 2          # 1 claim x top_k=2 passages, not 10
+    assert seen[0] == 3          # 1 claim x (top_k=2 passages + their join), not 10
+
+
+def test_compound_claim_is_not_contradicted_by_one_half_of_its_evidence(monkeypatch):
+    # Each passage alone "contradicts" the claim (it lacks the other half); the joined
+    # premise does not, so the claim is neutral, not contradicted.
+    def nli(pairs):
+        return [{"entailment": 0.3, "neutral": 0.6, "contradiction": 0.05}
+                if "Premium" in prem and "30 days" in prem else
+                {"entailment": 0.0, "neutral": 0.01, "contradiction": 0.99}
+                for prem, _ in pairs]
+    monkeypatch.setattr(grounding_mod, "nli", nli)
+    g = grounding_mod.grounding_metrics(
+        "Laptops get 30 days and standard members get no Premium extension.",
+        ["Laptops return window: 30 days.", "Order tier is standard, not Premium."])
+    assert g["claims"][0]["label"] == "neutral" and g["contradiction_source"] == 0.0
+
+
+def test_claim_contradicted_by_the_combined_evidence_is_still_flagged(monkeypatch):
+    monkeypatch.setattr(grounding_mod, "nli", lambda pairs: [
+        {"entailment": 0.0, "neutral": 0.01, "contradiction": 0.99} for _ in pairs])
+    g = grounding_mod.grounding_metrics("Laptops get 90 days.",
+                                        ["Laptops return window: 30 days.", "Other text."])
+    assert g["claims"][0]["label"] == "contradicted"
 
 
 def test_grounding_self_contradiction_zero_when_claims_are_unrelated(stub_nli):
@@ -532,13 +555,16 @@ def test_evidence_passages_drops_empty_and_handles_no_order_id():
     assert p == ["The record tier is premium."]
 
 
-def test_evidence_passages_ignores_nested_dicts_but_expands_lists():
+def test_evidence_passages_flattens_nested_dicts_and_expands_lists():
     ctx = [{"tool": "get_order_details", "result": {"ok": True, "data": {
-        "order_id": "ORD-1", "nested": {"a": 1},
+        "order_id": "ORD-1",
+        "return_eligibility": {"eligible_now": True, "deadline": "November 9, 2024"},
         "items": [{"sku": "S1", "qty": 2}]}}}]
     p = grounding_mod.evidence_passages(ctx)
     joined = " ".join(p)
-    assert "nested" not in joined
+    # The verdict the agent relays must be a premise (eval a20 false contradiction).
+    assert ("Order ORD-1 return eligibility: eligible now is True; "
+            "deadline is November 9, 2024.") in joined
     assert "sku: S1; qty: 2." in joined
 
 

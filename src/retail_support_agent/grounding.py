@@ -31,6 +31,7 @@ from .classifiers import nli, split_claims
 ENTAIL_THRESHOLD = 0.5
 CONTRADICT_THRESHOLD = 0.9      # high: NLI over-calls contradiction on loosely related text
 TOP_K_PASSAGES = 3
+JOINED = -1                     # owner index of the joined top-k premise
 MAX_SELF_PAIRS = 20
 _WORD = re.compile(r"[a-z0-9]+")
 _STOP = {"the", "a", "an", "and", "or", "of", "to", "in", "is", "are", "for", "on", "your",
@@ -67,7 +68,14 @@ def evidence_passages(context: list[dict], window: int = 2) -> list[str]:
                      if k != "order_id" and not isinstance(v, (dict, list))]
             if data.get("status"):
                 facts.insert(0, f"{subj} was {data['status']}.")
-            for v in data.values():
+            for k, v in data.items():
+                # Nested records (e.g. return_eligibility: eligible_now, code,
+                # deadline, message) carry the verdicts the agent relays; dropping
+                # them made correct answers look contradicted.
+                if isinstance(v, dict) and v:
+                    facts.append(f"{subj} {k.replace('_', ' ')}: " + "; ".join(
+                        f"{a.replace('_', ' ')} is {b}" for a, b in v.items()
+                        if not isinstance(b, (dict, list))) + ".")
                 if isinstance(v, list):
                     for rec in v:
                         if isinstance(rec, dict):
@@ -98,16 +106,34 @@ def grounding_metrics(answer: str, passages: list[str], top_k: int = TOP_K_PASSA
         for ci, c in enumerate(claims):
             cw = _words(c)
             ranked = sorted(range(len(passages)), key=lambda i: -_overlap(cw, pw[i]))
-            for pi in ranked[:top_k]:
+            top = ranked[:top_k]
+            for pi in top:
                 pairs.append((passages[pi], c))
                 owner.append((ci, pi))
+            if len(top) > 1:
+                # A claim that combines facts from several sources ("30-day window,
+                # and as a standard member no Premium extension") cannot be entailed
+                # by any single passage, and NLI calls such pairs contradictions. The
+                # joined top-k passages are one more premise.
+                pairs.append((" ".join(passages[pi] for pi in top), c))
+                owner.append((ci, JOINED))
         probs = nli(pairs)
         best: dict[int, dict] = {}
         for (ci, pi), p in zip(owner, probs, strict=True):
-            b = best.setdefault(ci, {"entail": 0.0, "contra": 0.0, "passage": None})
+            b = best.setdefault(ci, {"entail": 0.0, "contra": 0.0, "joined_contra": None,
+                                     "passage": None})
             if p["entailment"] > b["entail"]:
-                b["entail"], b["passage"] = p["entailment"], passages[pi]
-            b["contra"] = max(b["contra"], p["contradiction"])
+                b["entail"] = p["entailment"]
+                b["passage"] = "(combined top passages)" if pi == JOINED else passages[pi]
+            if pi == JOINED:
+                b["joined_contra"] = p["contradiction"]
+            else:
+                b["contra"] = max(b["contra"], p["contradiction"])
+        for b in best.values():
+            # Contradicted only if the combined evidence contradicts the claim too: one
+            # passage lacking half of a compound claim is not a contradiction.
+            if b["joined_contra"] is not None:
+                b["contra"] = min(b["contra"], b["joined_contra"])
         supported = contradicted = 0
         for ci, c in enumerate(claims):
             b = best[ci]

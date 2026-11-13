@@ -432,3 +432,4 @@ test, so results do not depend on test order.
   header, `<meta name="synthetic">`, or a `synthetic` column/field) and in `data/sources.json`.
   No real customer data, real orders or confidential information is included.
 - The full inventory, with hashes, licences and chunk counts, is [data/MANIFEST.md](data/MANIFEST.md).
+# Assignment_Rag

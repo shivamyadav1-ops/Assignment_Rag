@@ -6,16 +6,37 @@ __pycache__/
 .mypy_cache/
 .ruff_cache/
 .coverage
+.coverage.*
+coverage.xml
 htmlcov/
+dist/
+build/
 
 # Environments and model downloads
 .venv/
 venv/
+env/
 .cache/
 .deepeval/
 
 # Secrets — copy .env.example to .env
 .env
+.env.*
+!.env.example
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Jupyter (none committed today, but a notebook opened here shouldn't leak checkpoints)
+.ipynb_checkpoints/
 
 # Regenerable local stores (rebuilt by `rsa ingest` / `rsa index` / use)
 data/vectorstore/

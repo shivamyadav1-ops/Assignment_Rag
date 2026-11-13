@@ -136,7 +136,7 @@
   <text x="364" y="748" class="s">dense vs BM25 vs hybrid vs +rerank</text>
   <text x="364" y="764" class="s">doc + evidence Hit@k, MRR, nDCG</text>
   <rect x="668" y="704" width="300" height="66" rx="8" fill="#ffffff" stroke="#94a3b8"/>
-  <text x="682" y="728" class="t">Agent eval (28 cases)</text>
+  <text x="682" y="728" class="t">Agent eval (29 cases)</text>
   <text x="682" y="748" class="s">facts · tools · safety (deterministic)</text>
   <text x="682" y="764" class="s">+ G-Eval judge, faithfulness</text>
   <rect x="986" y="704" width="262" height="66" rx="8" fill="#ffffff" stroke="#94a3b8"/>

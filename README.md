@@ -108,6 +108,7 @@ LANGFUSE_BASE_URL=https://us.cloud.langfuse.com
 uv run python scripts/fetch_public_sources.py --check   # verify the public source (re-fetch: drop --check)
 uv run rsa ingest    # chunk policy docs + load operational DB
 uv run rsa index     # embed chunks and build Qdrant collection
+uv run rsa index --incremental   # after edits: re-embed only changed files, drop removed ones
 uv run python scripts/generate_manifest.py              # refresh data/manifest.json + MANIFEST.md
 ```
 
@@ -125,6 +126,7 @@ uv run rsa ask "Can I return my laptop?" --customer CUST-1049 --trace
 ```bash
 uv run rsa eval-retrieval --modes dense,bm25,hybrid,full --label baseline
 uv run rsa eval-answers --label baseline
+uv run rsa cost-report --label baseline   # tokens, stage latency, cost sensitivity
 ```
 
 ---
@@ -235,21 +237,44 @@ How to read it:
   refund question (q40) ranks its section 5th because "billing cycle" sits in a long
   definitions chunk.
 
-### Answer Evaluation (16 cases: 7 knowledge, 5 multi-step, 4 exception)
+### Answer Evaluation (29 cases: 10 knowledge, 11 multi-step, 8 exception) — `reports/answer_eval_final.json`
 
-| Metric | Score |
-|---|---|
-| Fact accuracy | 93.8% |
-| Judge correctness (nemotron-ultra-550B) | 81.2% |
-| Faithfulness | 96.4% |
-| Tool selection accuracy | 93.8% |
-| **Safety pass rate** | **100%** |
-| Latency mean / p95 | 26.6s / 104s |
-| Avg tokens per case | 4,983 |
+Run on the submitted code (`uv run rsa eval-answers --label final`). Fact, tool and safety
+checks are deterministic (expected facts present, required/forbidden tools, no leaked
+data); correctness and faithfulness come from a G-Eval judge.
+
+| Metric | All | Knowledge | Multi-step | Exception |
+|---|---|---|---|---|
+| Fact accuracy (deterministic) | **100%** (29/29) | 100% | 100% | 100% |
+| Tool selection accuracy | **100%** | 100% | 100% | 100% |
+| **Safety pass rate** | **100%** | 100% | 100% | 100% |
+| Judge correctness (nemotron-ultra-550B) | 98.3% | 100% | 95.5% | 100% |
+| Faithfulness (judge) | 98.6% | 100% | 98.7% | 96.0% |
+| Latency mean / p95 | 5.7 s / 11.9 s | 7.9 s / 23.6 s | 5.9 s / 8.2 s | 2.7 s / 6.6 s |
+
+Cost and latency for this run (`reports/cost_latency_final.md`): 5,434 input / 148 output
+tokens per query, 97% of input served from the provider's prompt cache, 2.2 LLM turns
+per query, time to first token p50 557 ms. Per-stage mean: LLM 2.8 s, retrieval 0.9 s,
+MCP tools 0.1 s.
+
+Representative traces for each scenario, with what to look for in each:
+[`traces/representative/`](traces/representative/README.md).
+
+**How to read these numbers:**
+- **Run-to-run variance is real.** The run before it (`answer_eval_v3_before_forced_draft_fix.json`)
+  scored 93.1% fact accuracy: it caught a regression in the forced policy search (case
+  a25: a correct "please send the full ORD- id" answer was rewritten after an irrelevant
+  search), which was fixed before this run. Case a29 ("original packaging" in the next
+  step) passed here but missed in two earlier runs; treat it as flaky, not fixed.
+- **The judge is noisy.** The blocked prompt-injection answer (a24) is a fixed message,
+  identical in every run; the judge rated it correct here and incorrect in
+  `answer_eval_representative.json`. The deterministic checks are the primary metrics.
+- 29 cases is a small set: one case is 3.4 points.
 
 **Known limitations:**
-- Latency is dominated by the cross-encoder reranker (~12s on 20 candidates) and the NVIDIA NIM cold-start. Not a latency-SLA service.
-- The LLM judge shares model family with the agent (both NVIDIA nemotron). Self-preference risk exists; deterministic fact/safety/tool checks are the primary model-free metrics.
+- The cross-encoder reranker is the slowest retrieval stage and its gain over plain hybrid is not significant (see Retrieval); knowledge queries have the longest tail (p95 23.6 s).
+- The LLM judge shares a model family with the agent (both NVIDIA nemotron). Self-preference risk exists; deterministic fact/safety/tool checks are the primary model-free metrics.
+- The evidence rule (no answer without a policy search or a definitive tool result) costs one extra retrieval and LLM call on small talk.
 - Qdrant runs in embedded mode (file lock): only one process can hold the collection at a time.
 
 ---
@@ -349,7 +374,11 @@ Every `rsa ask` produces:
 - **JSONL trace** in `traces/` — per-step kind, name, latency_ms, TTFT, token usage
 - **Langfuse trace** (when configured) — root agent span → LLM generations (model, tokens, cost) + retriever/tool child spans
 
-Cost note: at nemotron-3.5-super pricing (~$0.40/M input, ~$0.40/M output), the 4,983-token average per case costs roughly **$0.004 per query**. See `reports/answer_eval_*.json` for per-case token counts.
+Cost note: the final run averages 5,434 input + 148 output tokens per query, so at
+$0.40/M input and $1.60/M output a query costs about **$0.0024 ($2.41 per 1,000
+queries)**; `reports/cost_latency_final.md` has the full price-sensitivity table. Judge
+calls are evaluation overhead, not per-query cost. Representative traces:
+[`traces/representative/`](traces/representative/README.md).
 
 ---
 

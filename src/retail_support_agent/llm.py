@@ -95,7 +95,7 @@ def _openai_tool_results(pairs: list[tuple[ToolCall, dict]]) -> list[dict]:
 class NvidiaClient:
     def __init__(self, model: str | None = None, max_tokens: int = config.MAX_TOKENS,
                  api_key: str | None = None, base_url: str | None = None,
-                 temperature: float = 0.2, enable_thinking: bool = False):
+                 temperature: float = 0.2, enable_thinking: bool = config.ENABLE_THINKING):
         import os
 
         from openai import OpenAI

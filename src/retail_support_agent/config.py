@@ -112,7 +112,16 @@ NVIDIA_MODEL = os.getenv("NVIDIA_MODEL", "nvidia/nemotron-3.5-bolt-e4b")
 # Anthropic
 LLM_MODEL = "claude-sonnet-5-5"
 
-MAX_TOKENS = 1024
+# Raised from 1024: with ENABLE_THINKING on, the nemotron reasoning trace shares this
+# same output budget with the final answer, so the old 1024 ceiling risked truncating
+# the answer mid-sentence after a long thinking block.
+MAX_TOKENS = 4096
+# Nemotron "detailed thinking": the model reasons over the retrieved evidence before
+# writing the final answer, instead of answering directly off the first pass. On by
+# default so the answer is actually grounded in the chunks search_policies returned,
+# not just a plausible-sounding completion. Costs more output tokens and latency per
+# call — set RSA_ENABLE_THINKING=0 to go back to direct answering.
+ENABLE_THINKING = os.getenv("RSA_ENABLE_THINKING", "1").strip() == "1"
 # Per-request timeout for the agent's LLM calls. The OpenAI client's default is 600 s,
 # so one stalled stream froze a whole eval run for 10 minutes.
 LLM_TIMEOUT_S = float(os.getenv("RSA_LLM_TIMEOUT_S", "90"))

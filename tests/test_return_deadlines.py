@@ -146,5 +146,8 @@ def test_forced_search_sends_a_valid_tool_exchange_and_never_returns_empty(tmp_p
     assert roles[-2:] == ["assistant", "tool"]
     assert last_call[-2]["tool_calls"][0]["function"]["name"] == "search_policies"
     assert last_call[-1]["tool_call_id"] == last_call[-2]["tool_calls"][0]["id"]
-    assert not any(m["role"] == "assistant" and m.get("content", "").startswith("The last")
-                   for m in last_call)                      # draft replaced, not kept
+    # The draft rides in the same assistant turn that requests the search (valid on
+    # both wire formats), never as a separate text answer before the tool result.
+    assert last_call[-2]["content"] == "The last day is January 31, 2025."
+    assert not any(m["role"] == "assistant" and not m.get("tool_calls")
+                   and (m.get("content") or "").startswith("The last") for m in last_call)

@@ -140,7 +140,8 @@ def render_md(r: dict) -> str:
     for name, b in [*r["by_scenario"].items(), ("**all**", o)]:
         lines.append(f"| {name} | {b['cases']} | {b['input_tokens_mean']:,} | "
                      f"{b['output_tokens_mean']:,} | {b['cached_input_share']:.0%} | "
-                     f"{b['latency_ms']['p50'] / 1000:.1f}s | {b['latency_ms']['p95'] / 1000:.1f}s |")
+                     f"{b['latency_ms']['p50'] / 1000:.1f}s | "
+                     f"{b['latency_ms']['p95'] / 1000:.1f}s |")
     lines += ["", "## Where the time goes (per case, from traces)", "",
               "| Stage | Mean | p50 | p95 |", "|---|---|---|---|"]
     for name, s in r["stage_latency_ms"].items():
